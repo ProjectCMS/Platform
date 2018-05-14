@@ -1,0 +1,25 @@
+{
+    "name": "michelvieira/admin",
+    "description": "",
+    "authors": [
+        {
+            "name": "Michel",
+            "email": "michelvieira@outlook.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Admin\\Providers\\AdminServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Admin\\": ""
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "name": "michelvieira/pages",
+    "description": "",
+    "authors": [
+        {
+            "name": "Michel",
+            "email": "michelvieira@outlook.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Pages\\Providers\\PagesServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Pages\\": ""
+        }
+    }
+}

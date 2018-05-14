@@ -1,0 +1,25 @@
+{
+    "name": "michelvieira/posts",
+    "description": "",
+    "authors": [
+        {
+            "name": "Michel",
+            "email": "michelvieira@outlook.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Posts\\Providers\\PostsServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Posts\\": ""
+        }
+    }
+}

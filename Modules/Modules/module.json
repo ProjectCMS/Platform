@@ -1,0 +1,17 @@
+{
+    "name": "Modules",
+    "alias": "modules",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "permission": 0,
+    "providers": [
+        "Modules\\Modules\\Providers\\ModulesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

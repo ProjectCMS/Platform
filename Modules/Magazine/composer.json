@@ -1,0 +1,25 @@
+{
+    "name": "michelvieira/magazine",
+    "description": "",
+    "authors": [
+        {
+            "name": "Michel",
+            "email": "michelvieira@outlook.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Magazine\\Providers\\MagazineServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Magazine\\": ""
+        }
+    }
+}
