@@ -1,0 +1,24 @@
+/***** TINYMCE *****/
+.mce-content-body p, .mce-content-body div, .mce-content-body h1, .mce-content-body h2, .mce-content-body h3, .mce-content-body h4, .mce-content-body h5, .mce-content-body h6 {
+    font-family:            Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+    font-size:              16px;
+    line-height:            1.5 !important;
+    color:                  #333;
+    overflow-wrap:          break-word;
+    word-wrap:              break-word;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+div.mce-fullscreen{
+    z-index: 9999;
+}
+
+.mce-toolbar .mce-btn-group .mce-btn.mce-listbox {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    direction: ltr;
+    background: #fff;
+    border: 1px solid #ddd;
+    -webkit-box-shadow: inset 0 1px 1px -1px rgba(0,0,0,.2);
+    box-shadow: inset 0 1px 1px -1px rgba(0,0,0,.2);
+}

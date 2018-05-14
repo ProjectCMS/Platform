@@ -1,0 +1,523 @@
+.ui-input {
+    margin-bottom: 10px;
+}
+
+.ui-input label {
+    cursor:         pointer;
+    padding:        0 10px 10px 5px;
+    padding:        0 0.83333rem 0.83333rem 0.41667rem;
+    margin:         0;
+    margin:         0;
+    padding-bottom: 0;
+    font-weight:    600;
+    text-transform: uppercase;
+    color:          #7D7D7D;
+    font-size:      12px;
+}
+
+/* line 10, ../scss/plugins/_ui.scss */
+.ui-input input[type="radio"],
+.ui-input input[type="checkbox"] {
+    opacity:        0;
+    width:          20px;
+    height:         20px;
+    display:        inline-block;
+    vertical-align: middle;
+    cursor:         pointer;
+    margin-top:     -1px;
+    margin-top:     -0.08333rem;
+}
+
+/* line 21, ../scss/plugins/_ui.scss */
+.ui-input input[type="radio"] + span:after,
+.ui-input input[type="checkbox"] + span:after {
+    content:            '';
+    background:         #FFF;
+    border:             1px solid #E6E8EB;
+    display:            inline-block;
+    vertical-align:     middle;
+    width:              20px;
+    height:             20px;
+    padding:            0;
+    text-align:         center;
+    margin-left:        -20px;
+    margin-left:        -1.66667rem;
+    -moz-transition:    all 0.2s linear;
+    -o-transition:      all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    transition:         all 0.2s linear;
+}
+
+/* line 36, ../scss/plugins/_ui.scss */
+.ui-input input[type="checkbox"]:not(:disabled):hover + span:after,
+.ui-input input[type="radio"]:not(:disabled):hover + span:after {
+    color:        #10CFBD;
+    border-color: #10CFBD;
+}
+
+/* line 42, ../scss/plugins/_ui.scss */
+.ui-input input[type="radio"] + span:after {
+    border-radius: 50%;
+}
+
+/* line 46, ../scss/plugins/_ui.scss */
+.ui-input input[type="checkbox"]:checked + span:after,
+.ui-input input[type="radio"]:checked + span:after {
+    background:         #10CFBD;
+    border-color:       #10CFBD;
+    box-shadow:         inset 0px 0px 0px 5px #FFF;
+    -moz-transition:    all 0.2s linear;
+    -o-transition:      all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    transition:         all 0.2s linear;
+}
+
+/* line 54, ../scss/plugins/_ui.scss */
+.ui-input input[type="checkbox"][disabled] + span:after,
+.ui-input input[type="radio"][disabled] + span:after,
+.ui-input input[type="checkbox"][disabled] ~ label,
+.ui-input input[type="radio"][disabled] ~ label {
+    cursor:  not-allowed;
+    filter:  progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    opacity: 0.5;
+}
+
+/* line 65, ../scss/plugins/_ui.scss */
+.ui-switch input[type="radio"],
+.ui-switch input[type="checkbox"] {
+    display: none;
+}
+
+/* line 70, ../scss/plugins/_ui.scss */
+.ui-switch label {
+    position:           relative;
+    width:              52px;
+    height:             26px;
+    border:             1px solid #E6E8EB;
+    display:            inline-block;
+    vertical-align:     middle;
+    cursor:             pointer;
+    margin-bottom:      0;
+    -moz-transition:    all 0.15s linear;
+    -o-transition:      all 0.15s linear;
+    -webkit-transition: all 0.15s linear;
+    transition:         all 0.15s linear;
+}
+
+/* line 82, ../scss/plugins/_ui.scss */
+.ui-switch label:after {
+    content:            '';
+    position:           absolute;
+    top:                2px;
+    left:               2px;
+    background-color:   #E6E8EB;
+    width:              20px;
+    height:             20px;
+    -moz-transition:    all 0.15s linear;
+    -o-transition:      all 0.15s linear;
+    -webkit-transition: all 0.15s linear;
+    transition:         all 0.15s linear;
+}
+
+/* line 92, ../scss/plugins/_ui.scss */
+.ui-switch label:before {
+    content:           'off';
+    position:          absolute;
+    top:               50%;
+    right:             4px;
+    display:           none;
+    font-size:         11px;
+    font-size:         0.91667rem;
+    -moz-transform:    translateY(-50%);
+    -ms-transform:     translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform:         translateY(-50%);
+}
+
+/* line 102, ../scss/plugins/_ui.scss */
+.ui-switch.ui-switch-caption label:before {
+    display: block;
+}
+
+/* line 106, ../scss/plugins/_ui.scss */
+.ui-switch input[type="radio"]:checked + label,
+.ui-switch input[type="checkbox"]:checked + label {
+    border-color: #10CFBD;
+}
+
+/* line 109, ../scss/plugins/_ui.scss */
+.ui-switch input[type="radio"]:checked + label:after,
+.ui-switch input[type="checkbox"]:checked + label:after {
+    background-color: #10CFBD;
+    left:             28px;
+    content:          '';
+}
+
+/* line 114, ../scss/plugins/_ui.scss */
+.ui-switch input[type="radio"]:checked + label:before,
+.ui-switch input[type="checkbox"]:checked + label:before {
+    content: 'on';
+    left:    5.5px;
+    color:   #10CFBD;
+}
+
+/* line 121, ../scss/plugins/_ui.scss */
+.ui-switch input[type="checkbox"][disabled] + label,
+.ui-switch input[type="radio"][disabled] + label {
+    cursor:  not-allowed;
+    filter:  progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    opacity: 0.5;
+}
+
+/* line 128, ../scss/plugins/_ui.scss */
+.ui-switch.ui-switch-round label, .ui-switch.ui-switch-round label:after {
+    -moz-border-radius:    26px;
+    -webkit-border-radius: 26px;
+    border-radius:         26px;
+}
+
+/* line 135, ../scss/plugins/_ui.scss */
+.ui-switch-lg label {
+    width:  62px;
+    height: 29px;
+}
+
+/* line 138, ../scss/plugins/_ui.scss */
+.ui-switch-lg label:after {
+    width:  23px;
+    height: 23px;
+}
+
+/* line 142, ../scss/plugins/_ui.scss */
+.ui-switch-lg label:before {
+    right: 7px;
+}
+
+/* line 148, ../scss/plugins/_ui.scss */
+.ui-switch-lg input[type="radio"]:checked + label:after,
+.ui-switch-lg input[type="checkbox"]:checked + label:after {
+    left: 35px;
+}
+
+/* line 151, ../scss/plugins/_ui.scss */
+.ui-switch-lg input[type="radio"]:checked + label:before,
+.ui-switch-lg input[type="checkbox"]:checked + label:before {
+    left: 8px;
+}
+
+/* line 158, ../scss/plugins/_ui.scss */
+.ui-switch-sm label {
+    width:  45px;
+    height: 22px;
+}
+
+/* line 161, ../scss/plugins/_ui.scss */
+.ui-switch-sm label:after {
+    width:  16px;
+    height: 16px;
+}
+
+/* line 165, ../scss/plugins/_ui.scss */
+.ui-switch-sm label:before {
+    font-size: 10px;
+    font-size: 0.83333rem;
+}
+
+/* line 171, ../scss/plugins/_ui.scss */
+.ui-switch-sm input[type="radio"]:checked + label:after,
+.ui-switch-sm input[type="checkbox"]:checked + label:after {
+    left: 25px;
+}
+
+/* line 177, ../scss/plugins/_ui.scss */
+.ui-inline {
+    display: inline-block;
+}
+
+/* line 184, ../scss/plugins/_ui.scss */
+.ui-input.ui-default input[type="checkbox"]:not(:disabled):hover + span:after,
+.ui-input.ui-default input[type="radio"]:not(:disabled):hover + span:after {
+    color:        #D2D4D6;
+    border-color: #D2D4D6;
+}
+
+/* line 190, ../scss/plugins/_ui.scss */
+.ui-input.ui-default input[type="checkbox"]:checked + span:after,
+.ui-input.ui-default input[type="radio"]:checked + span:after {
+    background:   #D2D4D6;
+    border-color: #D2D4D6;
+}
+
+/* line 198, ../scss/plugins/_ui.scss */
+.ui-switch.ui-default input[type="radio"]:checked + label,
+.ui-switch.ui-default input[type="checkbox"]:checked + label {
+    border-color: #D2D4D6;
+}
+
+/* line 201, ../scss/plugins/_ui.scss */
+.ui-switch.ui-default input[type="radio"]:checked + label:after,
+.ui-switch.ui-default input[type="checkbox"]:checked + label:after {
+    background-color: #D2D4D6;
+}
+
+/* line 204, ../scss/plugins/_ui.scss */
+.ui-switch.ui-default input[type="radio"]:checked + label:before,
+.ui-switch.ui-default input[type="checkbox"]:checked + label:before {
+    color: #D2D4D6;
+}
+
+/* line 184, ../scss/plugins/_ui.scss */
+.ui-input.ui-primary input[type="checkbox"]:not(:disabled):hover + span:after,
+.ui-input.ui-primary input[type="radio"]:not(:disabled):hover + span:after {
+    color:        #AB8CE4;
+    border-color: #AB8CE4;
+}
+
+/* line 190, ../scss/plugins/_ui.scss */
+.ui-input.ui-primary input[type="checkbox"]:checked + span:after,
+.ui-input.ui-primary input[type="radio"]:checked + span:after {
+    background:   #AB8CE4;
+    border-color: #AB8CE4;
+}
+
+/* line 198, ../scss/plugins/_ui.scss */
+.ui-switch.ui-primary input[type="radio"]:checked + label,
+.ui-switch.ui-primary input[type="checkbox"]:checked + label {
+    border-color: #AB8CE4;
+}
+
+/* line 201, ../scss/plugins/_ui.scss */
+.ui-switch.ui-primary input[type="radio"]:checked + label:after,
+.ui-switch.ui-primary input[type="checkbox"]:checked + label:after {
+    background-color: #AB8CE4;
+}
+
+/* line 204, ../scss/plugins/_ui.scss */
+.ui-switch.ui-primary input[type="radio"]:checked + label:before,
+.ui-switch.ui-primary input[type="checkbox"]:checked + label:before {
+    color: #AB8CE4;
+}
+
+/* line 184, ../scss/plugins/_ui.scss */
+.ui-input.ui-secondary input[type="checkbox"]:not(:disabled):hover + span:after,
+.ui-input.ui-secondary input[type="radio"]:not(:disabled):hover + span:after {
+    color:        #2F343D;
+    border-color: #2F343D;
+}
+
+/* line 190, ../scss/plugins/_ui.scss */
+.ui-input.ui-secondary input[type="checkbox"]:checked + span:after,
+.ui-input.ui-secondary input[type="radio"]:checked + span:after {
+    background:   #2F343D;
+    border-color: #2F343D;
+}
+
+/* line 198, ../scss/plugins/_ui.scss */
+.ui-switch.ui-secondary input[type="radio"]:checked + label,
+.ui-switch.ui-secondary input[type="checkbox"]:checked + label {
+    border-color: #2F343D;
+}
+
+/* line 201, ../scss/plugins/_ui.scss */
+.ui-switch.ui-secondary input[type="radio"]:checked + label:after,
+.ui-switch.ui-secondary input[type="checkbox"]:checked + label:after {
+    background-color: #2F343D;
+}
+
+/* line 204, ../scss/plugins/_ui.scss */
+.ui-switch.ui-secondary input[type="radio"]:checked + label:before,
+.ui-switch.ui-secondary input[type="checkbox"]:checked + label:before {
+    color: #2F343D;
+}
+
+/* line 184, ../scss/plugins/_ui.scss */
+.ui-input.ui-warning input[type="checkbox"]:not(:disabled):hover + span:after,
+.ui-input.ui-warning input[type="radio"]:not(:disabled):hover + span:after {
+    color:        #FEC107;
+    border-color: #FEC107;
+}
+
+/* line 190, ../scss/plugins/_ui.scss */
+.ui-input.ui-warning input[type="checkbox"]:checked + span:after,
+.ui-input.ui-warning input[type="radio"]:checked + span:after {
+    background:   #FEC107;
+    border-color: #FEC107;
+}
+
+/* line 198, ../scss/plugins/_ui.scss */
+.ui-switch.ui-warning input[type="radio"]:checked + label,
+.ui-switch.ui-warning input[type="checkbox"]:checked + label {
+    border-color: #FEC107;
+}
+
+/* line 201, ../scss/plugins/_ui.scss */
+.ui-switch.ui-warning input[type="radio"]:checked + label:after,
+.ui-switch.ui-warning input[type="checkbox"]:checked + label:after {
+    background-color: #FEC107;
+}
+
+/* line 204, ../scss/plugins/_ui.scss */
+.ui-switch.ui-warning input[type="radio"]:checked + label:before,
+.ui-switch.ui-warning input[type="checkbox"]:checked + label:before {
+    color: #FEC107;
+}
+
+/* line 184, ../scss/plugins/_ui.scss */
+.ui-input.ui-success input[type="checkbox"]:not(:disabled):hover + span:after,
+.ui-input.ui-success input[type="radio"]:not(:disabled):hover + span:after {
+    color:        #00C292;
+    border-color: #00C292;
+}
+
+/* line 190, ../scss/plugins/_ui.scss */
+.ui-input.ui-success input[type="checkbox"]:checked + span:after,
+.ui-input.ui-success input[type="radio"]:checked + span:after {
+    background:   #00C292;
+    border-color: #00C292;
+}
+
+/* line 198, ../scss/plugins/_ui.scss */
+.ui-switch.ui-success input[type="radio"]:checked + label,
+.ui-switch.ui-success input[type="checkbox"]:checked + label {
+    border-color: #00C292;
+}
+
+/* line 201, ../scss/plugins/_ui.scss */
+.ui-switch.ui-success input[type="radio"]:checked + label:after,
+.ui-switch.ui-success input[type="checkbox"]:checked + label:after {
+    background-color: #00C292;
+}
+
+/* line 204, ../scss/plugins/_ui.scss */
+.ui-switch.ui-success input[type="radio"]:checked + label:before,
+.ui-switch.ui-success input[type="checkbox"]:checked + label:before {
+    color: #00C292;
+}
+
+/* line 184, ../scss/plugins/_ui.scss */
+.ui-input.ui-info input[type="checkbox"]:not(:disabled):hover + span:after,
+.ui-input.ui-info input[type="radio"]:not(:disabled):hover + span:after {
+    color:        #35BAF5;
+    border-color: #35BAF5;
+}
+
+/* line 190, ../scss/plugins/_ui.scss */
+.ui-input.ui-info input[type="checkbox"]:checked + span:after,
+.ui-input.ui-info input[type="radio"]:checked + span:after {
+    background:   #35BAF5;
+    border-color: #35BAF5;
+}
+
+/* line 198, ../scss/plugins/_ui.scss */
+.ui-switch.ui-info input[type="radio"]:checked + label,
+.ui-switch.ui-info input[type="checkbox"]:checked + label {
+    border-color: #35BAF5;
+}
+
+/* line 201, ../scss/plugins/_ui.scss */
+.ui-switch.ui-info input[type="radio"]:checked + label:after,
+.ui-switch.ui-info input[type="checkbox"]:checked + label:after {
+    background-color: #35BAF5;
+}
+
+/* line 204, ../scss/plugins/_ui.scss */
+.ui-switch.ui-info input[type="radio"]:checked + label:before,
+.ui-switch.ui-info input[type="checkbox"]:checked + label:before {
+    color: #35BAF5;
+}
+
+/* line 184, ../scss/plugins/_ui.scss */
+.ui-input.ui-danger input[type="checkbox"]:not(:disabled):hover + span:after,
+.ui-input.ui-danger input[type="radio"]:not(:disabled):hover + span:after {
+    color:        #FB9678;
+    border-color: #FB9678;
+}
+
+/* line 190, ../scss/plugins/_ui.scss */
+.ui-input.ui-danger input[type="checkbox"]:checked + span:after,
+.ui-input.ui-danger input[type="radio"]:checked + span:after {
+    background:   #FB9678;
+    border-color: #FB9678;
+}
+
+/* line 198, ../scss/plugins/_ui.scss */
+.ui-switch.ui-danger input[type="radio"]:checked + label,
+.ui-switch.ui-danger input[type="checkbox"]:checked + label {
+    border-color: #FB9678;
+}
+
+/* line 201, ../scss/plugins/_ui.scss */
+.ui-switch.ui-danger input[type="radio"]:checked + label:after,
+.ui-switch.ui-danger input[type="checkbox"]:checked + label:after {
+    background-color: #FB9678;
+}
+
+/* line 204, ../scss/plugins/_ui.scss */
+.ui-switch.ui-danger input[type="radio"]:checked + label:before,
+.ui-switch.ui-danger input[type="checkbox"]:checked + label:before {
+    color: #FB9678;
+}
+
+/* line 184, ../scss/plugins/_ui.scss */
+.ui-input.ui-error input[type="checkbox"]:not(:disabled):hover + span:after,
+.ui-input.ui-error input[type="radio"]:not(:disabled):hover + span:after {
+    color:        #FB9678;
+    border-color: #FB9678;
+}
+
+/* line 190, ../scss/plugins/_ui.scss */
+.ui-input.ui-error input[type="checkbox"]:checked + span:after,
+.ui-input.ui-error input[type="radio"]:checked + span:after {
+    background:   #FB9678;
+    border-color: #FB9678;
+}
+
+/* line 198, ../scss/plugins/_ui.scss */
+.ui-switch.ui-error input[type="radio"]:checked + label,
+.ui-switch.ui-error input[type="checkbox"]:checked + label {
+    border-color: #FB9678;
+}
+
+/* line 201, ../scss/plugins/_ui.scss */
+.ui-switch.ui-error input[type="radio"]:checked + label:after,
+.ui-switch.ui-error input[type="checkbox"]:checked + label:after {
+    background-color: #FB9678;
+}
+
+/* line 204, ../scss/plugins/_ui.scss */
+.ui-switch.ui-error input[type="radio"]:checked + label:before,
+.ui-switch.ui-error input[type="checkbox"]:checked + label:before {
+    color: #FB9678;
+}
+
+/* line 184, ../scss/plugins/_ui.scss */
+.ui-input.ui-main input[type="checkbox"]:not(:disabled):hover + span:after,
+.ui-input.ui-main input[type="radio"]:not(:disabled):hover + span:after {
+    color:        #10CFBD;
+    border-color: #10CFBD;
+}
+
+/* line 190, ../scss/plugins/_ui.scss */
+.ui-input.ui-main input[type="checkbox"]:checked + span:after,
+.ui-input.ui-main input[type="radio"]:checked + span:after {
+    background:   #10CFBD;
+    border-color: #10CFBD;
+}
+
+/* line 198, ../scss/plugins/_ui.scss */
+.ui-switch.ui-main input[type="radio"]:checked + label,
+.ui-switch.ui-main input[type="checkbox"]:checked + label {
+    border-color: #10CFBD;
+}
+
+/* line 201, ../scss/plugins/_ui.scss */
+.ui-switch.ui-main input[type="radio"]:checked + label:after,
+.ui-switch.ui-main input[type="checkbox"]:checked + label:after {
+    background-color: #10CFBD;
+}
+
+/* line 204, ../scss/plugins/_ui.scss */
+.ui-switch.ui-main input[type="radio"]:checked + label:before,
+.ui-switch.ui-main input[type="checkbox"]:checked + label:before {
+    color: #10CFBD;
+}
