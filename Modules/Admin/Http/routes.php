@@ -21,15 +21,6 @@
         'namespace'  => 'Modules\Admin\Http\Controllers'
     ], function() {
         Route::get('/login', 'LoginController@showLoginForm')->name('login');
-    });
-
-    Route::group([
-        'middleware' => 'web',
-        'prefix'     => 'admin',
-        'as'         => 'admin.',
-        'namespace'  => 'Modules\Admin\Http\Controllers'
-    ], function() {
-        //** Auth **//
         Route::post('/login', 'LoginController@login');
         Route::post('/logout', 'LoginController@logout')->name('logout');
 
@@ -37,7 +28,14 @@
         Route::post('/password/reset', 'ResetPasswordController@reset')->name('password.email');
         Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.reset');
         Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm');
+    });
 
+    Route::group([
+        'middleware' => ['web', 'admin', 'auth:admin'],
+        'prefix'     => 'admin',
+        'as'         => 'admin.',
+        'namespace'  => 'Modules\Admin\Http\Controllers'
+    ], function() {
         //** Manager **//
         Route::get('/manager', 'AdminController@index')->name('manager');
         Route::get('/create', 'AdminController@create')->name('manager.create');

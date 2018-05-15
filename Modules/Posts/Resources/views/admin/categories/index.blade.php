@@ -37,7 +37,7 @@
                                 <td>{{ $data->posts_count }}</td>
                                 <td>
                                     @if($data->created_at == $data->updated_at)
-                                        Publicado
+                                        Criado
                                         <br>
                                         <abbr title="{{ Date::parse($data->created_at)->format('d F, Y H:i') }}">{{ Date::parse($data->created_at)->format('d F, Y') }}</abbr>
                                     @else

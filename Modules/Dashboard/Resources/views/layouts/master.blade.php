@@ -20,10 +20,6 @@
         var manager = app.urlManager;
 
     </script>
-
-    <script type="text/javascript" src="{{ Module::asset('media:js/plugin.js') }}"></script>
-    <script type="text/javascript" src="{{ Module::asset('dashboard:js/app.js') }}"></script>
-
     @yield('dashboard_js')
 
 @stop

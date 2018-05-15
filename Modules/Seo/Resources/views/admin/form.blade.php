@@ -26,5 +26,5 @@
             <span class="text-danger">{{ $errors->first('seo_content') }}</span>
         </div>
     </div>
-    
+
 </div>

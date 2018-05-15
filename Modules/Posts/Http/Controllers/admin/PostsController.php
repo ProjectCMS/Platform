@@ -14,6 +14,8 @@
     use Modules\Posts\Entities\PostImage;
     use Modules\Posts\Entities\PostTag;
     use Modules\Posts\Entities\Tag;
+    use Modules\Posts\Http\Requests\Posts\CreateRequest;
+    use Modules\Posts\Http\Requests\Posts\UpdateRequest;
     use Modules\Seo\Entities\Seo;
 
     class PostsController extends Controller {
@@ -24,10 +26,10 @@
          * Display a listing of the resource.
          * @return Response
          */
-        public function index (Request $request, Post $post, Category $category)
+        public function index (Post $post, Category $category, Request $request)
         {
-            $dates      = $post->dates()->prepend('Todas as datas', '');
             $categories = $category->pluck('name', 'id')->prepend('Todas as categorias', '');
+            $dates      = $post->dates()->prepend('Todas as datas', '');
             $data       = $post->search($request->all());
             $paginate   = $data->paginate($this->perPages);
 
@@ -38,9 +40,9 @@
          * Show the form for creating a new resource.
          * @return Response
          */
-        public function create ()
+        public function create (Status $status)
         {
-            $status = Status::pluck('name', 'id');
+            $status = $status->pluck('name', 'id');
 
             return view('posts::admin.posts.create', compact('status'));
         }
@@ -52,15 +54,15 @@
          *
          * @return Response
          */
-        public function store (Request $request)
+        public function store (Post $post, Seo $seo, CreateRequest $request)
         {
-            $validation              = $this->validation($request);
-            $validation["seo_token"] = bcrypt(date('Y-m-d H:i:s'));
+            $request->request->add(['author_id' => auth()->user()->id]);
+            $request->request->add(['seo_token' => bcrypt(date('Y-m-d H:i:s'))]);
 
-            $insert = Post::create($validation);
-            $seo    = Seo::create([
-                'seo_token'    => $validation["seo_token"],
-                'seo_title'    => $request->seo_title ? $request->seo_title : $validation["title"],
+            $insert = $post->create($request->all());
+            $seo->create([
+                'seo_token'    => $request->seo_token,
+                'seo_title'    => $request->seo_title ? $request->seo_title : $request->title,
                 'seo_keywords' => $request->seo_keywords,
                 'seo_content'  => $request->seo_content,
             ]);
@@ -85,10 +87,10 @@
          * Show the form for editing the specified resource.
          * @return Response
          */
-        public function edit ($id)
+        public function edit (Post $post, Status $status, $id)
         {
-            $data   = Post::withTrashed()->with(['categories', 'tags', 'images'])->find($id);
-            $status = Status::pluck('name', 'id');
+            $data   = $post->withTrashed()->with(['categories', 'tags', 'images'])->find($id);
+            $status = $status->pluck('name', 'id');
 
             if (!$data) {
                 return redirect()->route('admin.posts');
@@ -104,17 +106,16 @@
          *
          * @return Response
          */
-        public function update (Request $request, $id)
+        public function update (Post $post, Seo $seo, UpdateRequest $request, $id)
         {
-            $data       = Post::withTrashed()->findOrFail($id);
-            $validation = $this->validation($request, $id);
+            $data = $post->withTrashed()->findOrFail($id);
 
-            $data->update($validation);
+            $data->update($request->all());
 
-            Seo::updateOrCreate([
+            $seo->updateOrCreate([
                 'seo_token' => $data->seo_token,
             ], [
-                'seo_title'       => $request->seo_title ? $request->seo_title : $validation["title"],
+                'seo_title'       => $request->seo_title ? $request->seo_title : $request->title,
                 'seo_keywords'    => $request->seo_keywords,
                 'seo_description' => $request->seo_description,
             ]);
@@ -159,27 +160,6 @@
             back()->with('status-info', 'Publicação restaurada da lixeira');
         }
 
-        /**
-         * Pages Validation
-         * @return Response
-         */
-        public function validation ($request, $id = NULL)
-        {
-            $validation = $request->validate([
-                'status_id' => 'required',
-                'title'     => 'required|unique:posts,title,' . $id,
-                'content'   => 'required|min:1'
-            ]);
-
-            $content = preg_replace("/<p[^>]*?>/", "", $request->input('content'));
-            $content = str_replace("</p>", "\r\n", $content);
-
-            $validation["slug"]      = str_slug($validation["title"], '-');
-            $validation["content"]   = $content;
-            $validation["author_id"] = auth()->user()->id;
-
-            return $validation;
-        }
 
         public function post_category ($post_id, $category)
         {

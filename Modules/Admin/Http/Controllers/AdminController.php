@@ -6,6 +6,8 @@
     use Illuminate\Http\Response;
     use Illuminate\Routing\Controller;
     use Modules\Admin\Entities\Admin;
+    use Modules\Admin\Http\Requests\CreateRequest;
+    use Modules\Admin\Http\Requests\UpdateRequest;
 
     class AdminController extends Controller {
 
@@ -15,9 +17,9 @@
          * Display a listing of the resource.
          * @return Response
          */
-        public function index ()
+        public function index (Admin $admin)
         {
-            $paginate = Admin::with('roles')->paginate($this->perPages);
+            $paginate = $admin->with('roles')->paginate($this->perPages);
 
             return view('admin::index', compact('paginate'));
         }
@@ -38,10 +40,9 @@
          *
          * @return Response
          */
-        public function store (Request $request)
+        public function store (Admin $admin, CreateRequest $request)
         {
-            $validation = $this->validation($request);
-            $insert     = Admin::create($validation);
+            $insert = $admin->create($request->all());
 
             return redirect(route('admin.manager.edit', $insert->id))->with('status-success', 'Tag criada com sucesso');
         }
@@ -59,9 +60,9 @@
          * Show the form for editing the specified resource.
          * @return Response
          */
-        public function edit ($id)
+        public function edit (Admin $admin, $id)
         {
-            $data = Admin::find($id);
+            $data = $admin->find($id);
             if (!$data) {
                 return redirect()->route('admin.manager');
             }
@@ -76,12 +77,11 @@
          *
          * @return Response
          */
-        public function update (Request $request, $id)
+        public function update (Admin $admin, UpdateRequest $request, $id)
         {
-            $data       = Admin::findOrFail($id);
-            $validation = $this->validation($request, $id);
+            $data       = $admin->findOrFail($id);
 
-            $data->update($validation);
+            $data->update($request->all());
 
             return back()->with('status-success', 'Dados atualizado com sucesso');
         }
@@ -92,23 +92,5 @@
          */
         public function destroy ()
         {
-        }
-
-        /**
-         * Pages Validation
-         * @return Response
-         */
-        public function validation ($request, $id = NULL)
-        {
-            $validation = $request->validate([
-                'name'     => 'required',
-                'email'    => 'required|string|email|max:255|unique:admins,email,' . $id,
-                'password' => 'required|string|min:6|confirmed'
-            ]);
-
-            $validation["password"] = bcrypt($validation["password"]);
-
-            return $validation;
-
         }
     }

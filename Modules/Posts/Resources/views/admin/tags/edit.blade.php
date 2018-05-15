@@ -1,6 +1,6 @@
 @extends('posts::admin.layouts.master')
 
-@section('title_prefix', trans('dashboard::dashboard.page.create'))
+@section('title_prefix', trans('dashboard::dashboard.page.edit'))
 
 @section('content')
 

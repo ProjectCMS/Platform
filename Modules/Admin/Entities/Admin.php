@@ -30,6 +30,11 @@
             'remember_token',
         ];
 
+        public function setPasswordAttribute ($value)
+        {
+            $this->attributes["password"] = bcrypt($value);
+        }
+
         /**
          * Send the password reset notification.
          *

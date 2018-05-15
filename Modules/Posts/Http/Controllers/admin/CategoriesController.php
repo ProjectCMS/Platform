@@ -6,13 +6,15 @@
     use Illuminate\Http\Response;
     use Illuminate\Routing\Controller;
     use Modules\Posts\Entities\Category;
+    use Modules\Posts\Http\Requests\Categories\CreateRequest;
+    use Modules\Posts\Http\Requests\Categories\UpdateRequest;
 
     class CategoriesController extends Controller {
         /**
          * Display a listing of the resource.
          * @return Response
          */
-        public function index (Request $request, Category $category)
+        public function index (Category $category, Request $request)
         {
             $paginate = $category->search($request->all())->paginate(10);
 
@@ -23,11 +25,11 @@
          * Show the form for creating a new resource.
          * @return Response
          */
-        public function create ()
+        public function create (Category $category)
         {
-            $parent = Category::where([["parent_id", "=", 0]])
-                                  ->pluck('name', 'id')
-                                  ->prepend('# Categoria Principal', 0);
+            $parent = $category->where([["parent_id", "=", 0]])
+                               ->pluck('name', 'id')
+                               ->prepend('# Categoria Principal', 0);
 
             return view('posts::admin.categories.create', compact('parent'));
         }
@@ -39,10 +41,9 @@
          *
          * @return Response
          */
-        public function store (Request $request)
+        public function store (Category $category, CreateRequest $request)
         {
-            $validation = $this->validation($request);
-            $insert     = Category::create($validation);
+            $insert = $category->create($request->all());
 
             return redirect(route('admin.categories.edit', $insert->id))->with('status-success', 'Categoria criada com sucesso');
         }
@@ -60,12 +61,12 @@
          * Show the form for editing the specified resource.
          * @return Response
          */
-        public function edit ($id)
+        public function edit (Category $category, $id)
         {
-            $data   = Category::find($id);
-            $parent = Category::where([["id", "!=", $id], ["parent_id", "=", 0]])
-                              ->pluck('name', 'id')
-                              ->prepend('# Categoria Principal', 0);
+            $data   = $category->find($id);
+            $parent = $category->where([["id", "!=", $id], ["parent_id", "=", 0]])
+                               ->pluck('name', 'id')
+                               ->prepend('# Categoria Principal', 0);
             if (!$data) {
                 return redirect()->route('admin.categories');
             }
@@ -80,12 +81,11 @@
          *
          * @return Response
          */
-        public function update (Request $request, $id)
+        public function update (Category $category, UpdateRequest $request, $id)
         {
-            $data       = Category::findOrFail($id);
-            $validation = $this->validation($request, $id);
+            $data = $category->findOrFail($id);
 
-            $data->update($validation);
+            $data->update($request->all());
 
             return back()->with('status-success', 'Dados atualizado com sucesso');
         }
@@ -94,9 +94,9 @@
          * Remove the specified resource from storage.
          * @return Response
          */
-        public function destroy (Request $request)
+        public function destroy (Category $category, Request $request)
         {
-            $data = Category::find($request->id);
+            $data = $category->find($request->id);
 
             if ($data->posts()->count() == 0) {
                 $data->forceDelete();
@@ -105,19 +105,4 @@
             }
         }
 
-        /**
-         * Categories Validation
-         * @return Response
-         */
-        public function validation ($request, $id = NULL)
-        {
-            $validation = $request->validate([
-                'name'      => 'required|unique:categories,name,' . $id,
-                'parent_id' => 'required'
-            ]);
-
-            $validation["slug"] = str_slug($validation["name"], '-');
-
-            return $validation;
-        }
     }

@@ -7,6 +7,12 @@
     class Tag extends Model {
         protected $fillable = ['name', 'slug'];
 
+        public function setNameAttribute ($value)
+        {
+            $this->attributes["name"] = $value;
+            $this->attributes["slug"] = str_slug($value, '-');
+        }
+
         public function posts ()
         {
             return $this->belongsTo('Modules\Posts\Entities\PostTag', 'id', 'tag_id');

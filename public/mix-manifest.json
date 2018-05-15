@@ -1,5 +1,4 @@
 {
-    "/Themes/fonik/assets/css/theme.css": "/Themes/fonik/assets/css/theme.css?id=f437530572480cad32a3",
-    "/admin/js/libs.min.js": "/admin/js/libs.min.js?id=1d93ce691fd6abda8ea4",
-    "/admin/css/libs.min.css": "/admin/css/libs.min.css?id=b4bd7529eeb8072c4410"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css"
 }

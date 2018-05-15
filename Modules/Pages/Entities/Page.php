@@ -11,9 +11,23 @@
         protected $fillable = ['parent_id', 'title', 'slug', 'order', 'content', 'seo_token', 'status_id'];
         protected $dates    = ['deleted_at'];
 
+        public function setTitleAttribute ($value)
+        {
+            $this->attributes["title"] = $value;
+            $this->attributes["slug"]  = str_slug($value, '-');
+        }
+
+        public function setContentAttribute ($value)
+        {
+            $content = preg_replace("/<p[^>]*?>/", "", $value);
+            $content = str_replace("</p>", "\r\n", $content);
+
+            $this->attributes["content"] = $content;
+        }
+
         public function parent ()
         {
-            return $this->belongsTo('Modules\Pages\Entities\Page', 'parent_id');
+            return $this->belongsTo('Modules\Pages\Entities\Page', 'parent_id')->withDefault(['title' => 'Página principal']);
         }
 
         public function children ()
@@ -31,20 +45,41 @@
             return $this->belongsTo('Modules\Core\Entities\Status');
         }
 
-        public function search (Array $data)
+        public function search (Array $request)
         {
-            $pages = $this->where("parent_id", 0)->orderBy('order', 'asc');
+            $pages = $this->with('parent', 'children')->when($request, function($query) use ($request) {
 
-            if(isset($data["status"])){
+                    if (isset($request["status"]) && $request["status"] != NULL) {
+                        switch ($request["status"]) {
+                            case 0:
+                                $query->onlyTrashed();
+                                break;
+                            default:
+                                $query->where("status_id", $request["status"]);
+                                break;
+                        }
+                    }
 
-                if($data["status"] == 0){
-                    $pages = $pages->onlyTrashed();
-                }else{
-                    $pages = $pages->where("status_id", $data["status"]);
-                }
-            }
+                    if (isset($request["sort"]) && $request["sort"] != NULL) {
+                        switch ($request["sort"]) {
+                            default:
+                                $query->orderBy($request["sort"], $request["order"]);
+                                break;
+                        }
+                    } else {
+                        $query->orderBy('order', 'asc');
+                    }
+
+                    if (isset($request["parent"]) && $request["parent"] != NULL) {
+                        $query->where('parent_id', $request["parent"]);
+                    }
+
+                }, function($query) {
+                    $query->orderBy('order', 'asc');
+                });
 
             return $pages;
         }
 
     }
+

@@ -9,7 +9,30 @@
 
         use SoftDeletes;
 
-        protected $fillable = ['title', 'slug', 'content', 'author_id', 'status_id', 'seo_token', 'created_at', 'updated_at'];
+        protected $fillable = [
+            'title',
+            'slug',
+            'content',
+            'author_id',
+            'status_id',
+            'seo_token',
+            'created_at',
+            'updated_at'
+        ];
+
+        public function setTitleAttribute ($value)
+        {
+            $this->attributes["title"] = $value;
+            $this->attributes["slug"]  = str_slug($value, '-');
+        }
+
+        public function setContentAttribute ($value)
+        {
+            $content = preg_replace("/<p[^>]*?>/", "", $value);
+            $content = str_replace("</p>", "\r\n", $content);
+
+            $this->attributes["content"] = $content;
+        }
 
         public function seo ()
         {

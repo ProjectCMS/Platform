@@ -1,30 +1,90 @@
 @extends('pages::admin.layouts.master')
 
+@section('title_icon', 'dripicons-copy')
 @section('title_prefix', 'Páginas')
 
 @section('content')
 
-    @include ('core::status-messages')
+    <div class="wrapper">
+        <div class="container-fluid">
 
-    <div class="box">
+            <div class="card m-b-20">
+                <div class="card-body">
+                    <section class="d-flex align-items-center">
+                        @include('core::status', ['route' => 'pages'])
+                    </section>
 
-        <div class="box-header with-border">
-            <a href="{{ route('admin.pages.create') }}" class="btn btn-info"><i class="fa fa-plus"></i> {{ trans('dashboard::dashboard.form.create') }}
-            </a>
-        </div>
-
-        <div class="box-body">
-
-            @include('core::status', ['route' => 'pages'])
-
-            <div class="dd nestable" data-url="{{ route('admin.pages.order') }}">
-                @include('pages::admin.partials.nestable-item', ["item" => $paginate])
+                </div>
             </div>
 
-            {{ $paginate->appends(@$dataForm)->links() }}
+            <div class="card m-b-20">
+                <div class="card-body">
+
+                    <a href="{{ route('admin.pages.create') }}" class="btn btn-outline-secondary btn-round mb-3" role="button"><i class="fa fa-plus"></i> {{ trans('dashboard::dashboard.form.create') }}
+                    </a>
+
+                    @include ('core::status-messages')
+
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th data-sort="title">Título</th>
+                            <th data-sort="slug">Slug</th>
+                            <th width="200" data-sort="parent_id">Parente</th>
+                            <th data-sort="updated_at" width="150">Data</th>
+                            <th width="130">Opções</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($paginate as $data)
+                            <tr>
+                                <td><a href="{{ route('admin.pages.edit', $data->id) }}"><b>{{ $data->title }}</b></a>
+                                </td>
+                                <td>{{ $data->slug }}</td>
+                                <td>
+                                    @if($data->parent->id)
+                                        <a href="?parent={{ $data->parent->id }}" class="badge badge-outline-success">{{ $data->parent->title }}</a>
+                                    @else
+                                        <span class="badge badge-outline-secondary">{{ $data->parent->title }}</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($data->created_at == $data->updated_at)
+                                        Criado
+                                        <br>
+                                        <abbr title="{{ Date::parse($data->created_at)->format('d F, Y H:i') }}">{{ Date::parse($data->created_at)->format('d F, Y') }}</abbr>
+                                    @else
+                                        Atualizado
+                                        <br>
+                                        <abbr title="{{ Date::parse($data->updated_at)->format('d F, Y H:i') }}">{{ Date::parse($data->updated_at)->format('d F, Y') }}</abbr>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="btn-group-sm">
+                                        @if($data->deleted_at == NULL)
+                                            <a href="{{ route('admin.pages.trash') }}" title="{{ trans('dashboard::dashboard.form.trash') }}" class="btn btn-secondary ajax-action" data-method="delete" data-id="{{ $data->id }}"><i class="fa fa-trash"></i></a>
+                                        @else
+                                            <a href="{{ route('admin.pages.restore') }}" title="{{ trans('dashboard::dashboard.form.restore') }}" class="btn btn-warning ajax-action" data-method="put" data-id="{{ $data->id }}"><i class="fa fa-refresh"></i></a>
+                                        @endif
+                                        <a href="{{ route('admin.pages.edit', $data->id) }}" title="{{ trans('dashboard::dashboard.form.edit') }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('admin.pages.delete') }}" title="{{ trans('dashboard::dashboard.form.delete') }}" class="btn btn-danger ajax-action" data-method="delete" data-id="{{ $data->id }}"><i class="fa fa-close"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr class="no-items">
+                                <td class="colspanchange" colspan="7">Nenhuma página encontrada.</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+
+                    {{ $paginate->appends(Request::all())->links() }}
+
+                </div>
+            </div>
 
         </div>
-
     </div>
 
 @stop

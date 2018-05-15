@@ -12,8 +12,11 @@
         @yield('title_postfix', config('dashboard.title_postfix', ''))
     </title>
 
-    <link href="{{ asset('admin/css/libs.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ Theme::assets('css/libs.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ Theme::assets('css/theme.css') }}" rel="stylesheet" type="text/css"/>
+
+    <!-- Modules  -->
+    <link href="{{ Theme::assets('css/modules.min.css') }}" rel="stylesheet" type="text/css"/>
 
     <!-- Custom css -->
     @yield('css')
@@ -83,22 +86,14 @@
 <!-- End Footer -->
 
 <!-- jQuery  -->
-<script type="text/javascript" src="{{ asset('admin/js/libs.min.js') }}"></script>
-<script type="text/javascript" src="{{ Theme::assets('js/popper.min.js') }}"></script>
-<script type="text/javascript" src="{{ Theme::assets('js/bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{ Theme::assets('js/modernizr.min.js') }}"></script>
-<script type="text/javascript" src="{{ Theme::assets('js/waves.js') }}"></script>
-<script type="text/javascript" src="{{ Theme::assets('js/jquery.slimscroll.js') }}"></script>
-<script type="text/javascript" src="{{ Theme::assets('js/jquery.nicescroll.js') }}"></script>
-<script type="text/javascript" src="{{ Theme::assets('js/jquery.scrollTo.min.js') }}"></script>
-
+<script type="text/javascript" src="{{ Theme::assets('js/libs.min.js') }}"></script>
 <script type="text/javascript" src="{{ Theme::assets('plugins/tinymce/tinymce.min.js') }}"></script>
-
-<!-- App js -->
-<script type="text/javascript" src="{{ Theme::assets('js/app.js') }}"></script>
 
 <!-- Custom js -->
 @yield('js')
+
+<!-- Modules  -->
+<script type="text/javascript" src="{{ Theme::assets('js/modules.min.js') }}"></script>
 
 </body>
 </html>

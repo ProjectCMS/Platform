@@ -6,14 +6,15 @@
     use Illuminate\Http\Response;
     use Illuminate\Routing\Controller;
     use Modules\Posts\Entities\Tag;
-    use DataTables;
+    use Modules\Posts\Http\Requests\Tags\CreateRequest;
+    use Modules\Posts\Http\Requests\Tags\UpdateRequest;
 
     class TagsController extends Controller {
         /**
          * Display a listing of the resource.
          * @return Response
          */
-        public function index (Request $request, Tag $tag)
+        public function index (Tag $tag, Request $request)
         {
             $paginate = $tag->search($request->all())->paginate(10);
 
@@ -36,10 +37,9 @@
          *
          * @return Response
          */
-        public function store (Request $request)
+        public function store (Tag $tag, CreateRequest $request)
         {
-            $validation = $this->validation($request);
-            $insert     = Tag::create($validation);
+            $insert = $tag->create($request->all());
 
             return redirect(route('admin.tags.edit', $insert->id))->with('status-success', 'Tag criada com sucesso');
         }
@@ -57,9 +57,9 @@
          * Show the form for editing the specified resource.
          * @return Response
          */
-        public function edit ($id)
+        public function edit (Tag $tag, $id)
         {
-            $data = Tag::find($id);
+            $data = $tag->find($id);
             if (!$data) {
                 return redirect()->route('admin.tags');
             }
@@ -74,12 +74,11 @@
          *
          * @return Response
          */
-        public function update (Request $request, $id)
+        public function update (Tag $tag, UpdateRequest $request, $id)
         {
-            $data       = Tag::findOrFail($id);
-            $validation = $this->validation($request, $id);
+            $data = $tag->findOrFail($id);
 
-            $data->update($validation);
+            $data->update($request->all());
 
             return back()->with('status-success', 'Dados atualizado com sucesso');
         }
@@ -88,9 +87,9 @@
          * Remove the specified resource from storage.
          * @return Response
          */
-        public function destroy (Request $request)
+        public function destroy (Tag $tag, Request $request)
         {
-            $data = Tag::find($request->id);
+            $data = $tag->find($request->id);
 
             if ($data->posts()->count() == 0) {
                 $data->forceDelete();
@@ -99,18 +98,4 @@
             }
         }
 
-        /**
-         * Tags Validation
-         * @return Response
-         */
-        public function validation ($request, $id = NULL)
-        {
-            $validation = $request->validate([
-                'name' => 'required|unique:tags,name,' . $id
-            ]);
-
-            $validation["slug"] = str_slug($validation["name"], '-');
-
-            return $validation;
-        }
     }

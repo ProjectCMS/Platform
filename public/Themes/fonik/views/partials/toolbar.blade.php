@@ -51,7 +51,7 @@
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                aria-haspopup="false" aria-expanded="false">
                 {{--<img src="assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">--}}
-                <span class="ml-1">Denish J. <i class="mdi mdi-chevron-down"></i> </span>
+                <span class="ml-1">{{ auth()->user()->name }} <i class="mdi mdi-chevron-down"></i></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                 <a class="dropdown-item" href="#"><i class="dripicons-user text-muted"></i> Profile</a>
