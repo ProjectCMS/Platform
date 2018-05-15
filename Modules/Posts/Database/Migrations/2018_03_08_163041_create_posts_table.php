@@ -25,7 +25,7 @@
             });
 
             Schema::table('posts', function(Blueprint $table) {
-                $table->foreign('author_id')->references('id')->on('admins');
+                $table->foreign('author_id')->references('id')->on('users');
                 $table->foreign('status_id')->references('id')->on('status');
             });
 

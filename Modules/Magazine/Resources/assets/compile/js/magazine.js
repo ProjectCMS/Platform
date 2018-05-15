@@ -101,12 +101,3 @@ var listPDF  = $(".grid"),
         $.Magazine.init();
     }(window.jQuery);
 
-// // $(document).ready(function () {
-// //
-// //     //***** IMAGE MANAGER *****//
-
-//
-// function pdfToPNG (index, url) {
-//
-
-// }

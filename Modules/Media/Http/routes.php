@@ -5,7 +5,7 @@
     });
 
     Route::group([
-        'middleware' => ['web', 'admin', 'auth:admin'],
+        'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/media',
         'namespace'  => 'Modules\Media\Http\Controllers',
         'as'         => 'admin.',

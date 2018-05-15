@@ -51,7 +51,7 @@
 
     ///**** Posts ****///
     Route::group([
-        'middleware' => ['web', 'admin', 'auth:admin'],
+        'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/posts',
         'namespace'  => 'Modules\Posts\Http\Controllers\admin',
         'as'         => 'admin.',
@@ -75,7 +75,7 @@
 
     ///**** Catetories ****///
     Route::group([
-        'middleware' => ['web', 'admin', 'auth:admin'],
+        'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/categories',
         'namespace'  => 'Modules\Posts\Http\Controllers\admin',
         'as'         => 'admin.',
@@ -95,7 +95,7 @@
 
     ///**** Tags ****///
     Route::group([
-        'middleware' => ['web', 'admin', 'auth:admin'],
+        'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/tags',
         'namespace'  => 'Modules\Posts\Http\Controllers\admin',
         'as'         => 'admin.',
@@ -115,7 +115,7 @@
 
     ///**** Images ****///
     Route::group([
-    'middleware' => ['web', 'admin', 'auth:admin'],
+    'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/postimages',
         'namespace'  => 'Modules\Posts\Http\Controllers\admin',
         'as'         => 'admin.',

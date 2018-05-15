@@ -17,7 +17,7 @@
 
 
     Route::group([
-        'middleware' => ['web', 'admin', 'auth:admin'],
+        'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/magazine',
         'namespace'  => 'Modules\Magazine\Http\Controllers\admin',
         'as'         => 'admin.',

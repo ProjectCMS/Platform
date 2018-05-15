@@ -67,7 +67,7 @@ return [
      */
 
     'capture_ajax' => true,
-    'add_ajax_timing' => false,
+    'add_ajax_timing' => true,
 
     /*
      |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
      | in the Messages tab.
      |
      */
-    'error_handler' => false,
+    'error_handler' => true,
     
     /*
      |--------------------------------------------------------------------------
@@ -118,9 +118,9 @@ return [
         'laravel'         => false, // Laravel version and environment
         'events'          => false, // All events fired
         'default_request' => false, // Regular or special Symfony request logger
-        'logs'            => false, // Add the latest log messages
+        'logs'            => true, // Add the latest log messages
         'files'           => false, // Show the included files
-        'config'          => false, // Display config settings
+        'config'          => true, // Display config settings
         'cache'           => false, // Display cache events
     ],
 
@@ -140,10 +140,10 @@ return [
         'db' => [
             'with_params'       => true,   // Render SQL with the parameters substituted
             'backtrace'         => true,   // Use a backtrace to find the origin of the query in your files.
-            'timeline'          => false,  // Add the queries to the timeline
+            'timeline'          => true,  // Add the queries to the timeline
             'explain' => [                 // Show EXPLAIN output on queries
                 'enabled' => false,
-                'types' => ['SELECT'],     // ['SELECT', 'INSERT', 'UPDATE', 'DELETE']; for MySQL 5.6.3+
+                'types' => ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],     // ['SELECT', 'INSERT', 'UPDATE', 'DELETE']; for MySQL 5.6.3+
             ],
             'hints'             => true,    // Show hints for common mistakes
         ],

@@ -46,7 +46,7 @@
 
         public function author ()
         {
-            return $this->belongsTo('Modules\Admin\Entities\Admin');
+            return $this->belongsTo('Modules\Users\Entities\User');
         }
 
         public function categories ()

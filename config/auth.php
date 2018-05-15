@@ -36,9 +36,9 @@ return [
     */
 
     'guards' => [
-        'admin' => [
+        'users' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'users',
         ],
 
         'web' => [
@@ -77,7 +77,7 @@ return [
 
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => Modules\Users\Entities\User::class,
         ],
 
         // 'users' => [
@@ -102,12 +102,6 @@ return [
     */
 
     'passwords' => [
-        'admins' => [
-            'provider' => 'admins',
-            'table' => 'admin_password_resets',
-            'expire' => 60,
-        ],
-
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',

@@ -1,0 +1,25 @@
+{
+    "name": "michelvieira/clients",
+    "description": "",
+    "authors": [
+        {
+            "name": "Michel Vieira",
+            "email": "michelvieira@outlook.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Clients\\Providers\\ClientsServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Clients\\": ""
+        }
+    }
+}

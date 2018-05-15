@@ -54,7 +54,7 @@ return [
                 'MODULE_NAMESPACE',
             ],
         ],
-        'gitkeep' => true,
+        'gitkeep' => false,
     ],
     'paths' => [
         /*
@@ -98,7 +98,7 @@ return [
         */
         'generator' => [
             'config' => ['path' => 'Config', 'generate' => true],
-            'command' => ['path' => 'Console', 'generate' => true],
+            'command' => ['path' => 'Console', 'generate' => false],
             'migration' => ['path' => 'Database/Migrations', 'generate' => true],
             'seeder' => ['path' => 'Database/Seeders', 'generate' => true],
             'factory' => ['path' => 'Database/factories', 'generate' => true],
@@ -110,7 +110,7 @@ return [
             'assets' => ['path' => 'Resources/assets', 'generate' => true],
             'lang' => ['path' => 'Resources/lang', 'generate' => true],
             'views' => ['path' => 'Resources/views', 'generate' => true],
-            'test' => ['path' => 'Tests', 'generate' => true],
+            'test' => ['path' => 'Tests', 'generate' => false],
             'repository' => ['path' => 'Repositories', 'generate' => false],
             'event' => ['path' => 'Events', 'generate' => false],
             'listener' => ['path' => 'Listeners', 'generate' => false],
@@ -118,7 +118,7 @@ return [
             'rules' => ['path' => 'Rules', 'generate' => false],
             'jobs' => ['path' => 'Jobs', 'generate' => false],
             'emails' => ['path' => 'Emails', 'generate' => false],
-            'notifications' => ['path' => 'Notifications', 'generate' => false],
+            'notifications' => ['path' => 'Notifications', 'generate' => true],
             'resource' => ['path' => 'Transformers', 'generate' => false],
         ],
     ],
