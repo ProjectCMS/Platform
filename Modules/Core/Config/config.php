@@ -4,9 +4,8 @@
         'name' => 'Core',
 
         'coreModules' => [
-            'config',
-            'editor',
-            'admin',
+            'settings',
+            'users',
             'core',
             'dashboard',
             'seo',

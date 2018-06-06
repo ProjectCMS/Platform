@@ -1,11 +1,5 @@
 <?php
 
-
-    Breadcrumbs::register('admin.modules', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.home');
-        $breadcrumbs->push('Módulos', route('admin.modules'));
-    });
-
     Route::group([
         'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/modules',

@@ -40,7 +40,7 @@
             <div class="card m-b-20">
                 <div class="card-body">
 
-                    <a href="{{ route('admin.posts.create') }}" class="btn btn-outline-secondary btn-round mb-3" role="button"><i class="fa fa-plus"></i> {{ trans('dashboard::dashboard.form.create') }}
+                    <a href="{{ route('admin.posts.create') }}" class="btn btn-outline-secondary btn-round mb-3 waves-effect waves-light" role="button"><i class="fa fa-plus"></i> {{ trans('dashboard::dashboard.form.create') }}
                     </a>
 
                     @include ('core::status-messages')
@@ -69,7 +69,7 @@
                                     <a href="?author={{ $data->author->name }}">{{ $data->author->name }}</a></td>
                                 <td>
                                     @forelse($data->categories as $category)
-                                        <a href="?category_name={{ $category->name }}">{{ $category->name }}</a>
+                                        <a href="?category_title={{ $category->title }}">{{ $category->title }}</a>
                                         @if(!$loop->last),@endif
                                     @empty
                                         ----
@@ -77,7 +77,7 @@
                                 </td>
                                 <td>
                                     @forelse($data->tags as $tag)
-                                        <a href="?tag_name={{ $tag->name }}">{{ $tag->name }}</a>
+                                        <a href="?tag_title={{ $tag->title }}">{{ $tag->title }}</a>
                                         @if(!$loop->last),@endif
                                     @empty
                                         ----
@@ -87,22 +87,22 @@
                                     @if($data->created_at == $data->updated_at)
                                         Criado
                                         <br>
-                                        <abbr title="{{ Date::parse($data->created_at)->format('d F, Y H:i') }}">{{ Date::parse($data->created_at)->format('d F, Y') }}</abbr>
+                                        <abbr title="{{ $data->created_at_full }}">{{ $data->created_at }}</abbr>
                                     @else
                                         Atualizado
                                         <br>
-                                        <abbr title="{{ Date::parse($data->updated_at)->format('d F, Y H:i') }}">{{ Date::parse($data->updated_at)->format('d F, Y') }}</abbr>
+                                        <abbr title="{{ $data->updated_at_full }}">{{ $data->updated_at }}</abbr>
                                     @endif
                                 </td>
                                 <td>
                                     <div class="btn-group-sm">
                                         @if($data->deleted_at == NULL)
-                                            <a href="{{ route('admin.posts.trash') }}" title="{{ trans('dashboard::dashboard.form.trash') }}" class="btn btn-secondary ajax-action" data-method="delete" data-id="{{ $data->id }}"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('admin.posts.trash') }}" title="{{ trans('dashboard::dashboard.form.trash') }}" class="btn btn-secondary ajax-action waves-effect waves-light" data-method="delete" data-id="{{ $data->id }}"><i class="fa fa-trash"></i></a>
                                         @else
-                                            <a href="{{ route('admin.posts.restore') }}" title="{{ trans('dashboard::dashboard.form.restore') }}" class="btn btn-warning ajax-action" data-method="put" data-id="{{ $data->id }}"><i class="fa fa-refresh"></i></a>
+                                            <a href="{{ route('admin.posts.restore') }}" title="{{ trans('dashboard::dashboard.form.restore') }}" class="btn btn-warning ajax-action waves-effect waves-light" data-method="put" data-id="{{ $data->id }}"><i class="fa fa-refresh"></i></a>
                                         @endif
-                                        <a href="{{ route('admin.posts.edit', $data->id) }}" title="{{ trans('dashboard::dashboard.form.edit') }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('admin.posts.delete') }}" title="{{ trans('dashboard::dashboard.form.delete') }}" class="btn btn-danger ajax-action" data-method="delete" data-id="{{ $data->id }}"><i class="fa fa-close"></i></a>
+                                        <a href="{{ route('admin.posts.edit', $data->id) }}" title="{{ trans('dashboard::dashboard.form.edit') }}" class="btn btn-success waves-effect waves-light"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('admin.posts.delete') }}" title="{{ trans('dashboard::dashboard.form.delete') }}" class="btn btn-danger ajax-action waves-effect waves-light" data-method="delete" data-id="{{ $data->id }}"><i class="fa fa-close"></i></a>
                                     </div>
                                 </td>
                             </tr>

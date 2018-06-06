@@ -10,13 +10,19 @@
     use Modules\Posts\Http\Requests\Categories\UpdateRequest;
 
     class CategoriesController extends Controller {
+
+        public function __construct (Category $category)
+        {
+            $this->category = $category;
+        }
+
         /**
          * Display a listing of the resource.
          * @return Response
          */
-        public function index (Category $category, Request $request)
+        public function index (Request $request)
         {
-            $paginate = $category->search($request->all())->paginate(10);
+            $paginate = $this->category->search($request->all())->paginate(10);
 
             return view('posts::admin.categories.index', compact('paginate'));
         }
@@ -25,10 +31,10 @@
          * Show the form for creating a new resource.
          * @return Response
          */
-        public function create (Category $category)
+        public function create ()
         {
-            $parent = $category->where([["parent_id", "=", 0]])
-                               ->pluck('name', 'id')
+            $parent = $this->category->where([["parent_id", "=", 0]])
+                               ->pluck('title', 'id')
                                ->prepend('# Categoria Principal', 0);
 
             return view('posts::admin.categories.create', compact('parent'));
@@ -41,9 +47,9 @@
          *
          * @return Response
          */
-        public function store (Category $category, CreateRequest $request)
+        public function store (CreateRequest $request)
         {
-            $insert = $category->create($request->all());
+            $insert = $this->category->create($request->all());
 
             return redirect(route('admin.categories.edit', $insert->id))->with('status-success', 'Categoria criada com sucesso');
         }
@@ -61,11 +67,11 @@
          * Show the form for editing the specified resource.
          * @return Response
          */
-        public function edit (Category $category, $id)
+        public function edit ($id)
         {
-            $data   = $category->find($id);
-            $parent = $category->where([["id", "!=", $id], ["parent_id", "=", 0]])
-                               ->pluck('name', 'id')
+            $data   = $this->category->findOrFail($id);
+            $parent = $this->category->where([["id", "!=", $id], ["parent_id", "=", 0]])
+                               ->pluck('title', 'id')
                                ->prepend('# Categoria Principal', 0);
             if (!$data) {
                 return redirect()->route('admin.categories');
@@ -81,9 +87,9 @@
          *
          * @return Response
          */
-        public function update (Category $category, UpdateRequest $request, $id)
+        public function update (UpdateRequest $request, $id)
         {
-            $data = $category->findOrFail($id);
+            $data = $this->category->findOrFail($id);
 
             $data->update($request->all());
 
@@ -94,14 +100,14 @@
          * Remove the specified resource from storage.
          * @return Response
          */
-        public function destroy (Category $category, Request $request)
+        public function destroy (Request $request)
         {
-            $data = $category->find($request->id);
+            $data = $this->category->findOrFail($request->id);
 
             if ($data->posts()->count() == 0) {
                 $data->forceDelete();
             } else {
-                back()->with('status-danger', 'Não foi possivel deletar a categoria <b>' . $data->name . '</b>');
+                back()->with('status-danger', 'Não foi possivel deletar a categoria <b>' . $data->title . '</b>');
             }
         }
 

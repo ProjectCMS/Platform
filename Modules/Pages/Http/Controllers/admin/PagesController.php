@@ -8,22 +8,27 @@
 
     use Modules\Core\Entities\Status;
     use Modules\Pages\Entities\Page;
+    use Modules\Seo\Entities\Seo;
     use Modules\Pages\Http\Requests\CreateRequest;
     use Modules\Pages\Http\Requests\UpdateRequest;
-    use Modules\Seo\Entities\Seo;
 
     class PagesController extends Controller {
 
-        private $perPages = 10;
+        public function __construct (Page $page, Status $status, Seo $seo)
+        {
+            $this->page   = $page;
+            $this->status = $status;
+            $this->seo    = $seo;
+        }
 
         /**
          * Display a listing of the resource.
          * @return Response
          */
-        public function index (Page $page, Request $request)
+        public function index (Request $request)
         {
-            $data     = $page->search($request->all());
-            $paginate = $data->paginate($this->perPages);
+            $data     = $this->page->search($request->all());
+            $paginate = $data->paginate(10);
 
             return view('pages::admin.index', compact('paginate'));
         }
@@ -32,10 +37,12 @@
          * Show the form for creating a new resource.
          * @return Response
          */
-        public function create (Page $page, Status $status)
+        public function create ()
         {
-            $parent = $page->where([["parent_id", "=", 0]])->pluck('title', 'id')->prepend('# Página Principal', 0);
-            $status = $status->pluck('name', 'id');
+            $parent = $this->page->where('parent_id', 0)
+                                 ->pluck('title', 'id')
+                                 ->prepend('# Página Principal', 0);
+            $status = $this->status->pluck('title', 'id');
 
             return view('pages::admin.create', compact('parent', 'status'));
         }
@@ -47,13 +54,13 @@
          *
          * @return Response
          */
-        public function store (Page $page, Seo $seo, CreateRequest $request)
+        public function store (CreateRequest $request)
         {
             $request->request->add(['seo_token' => bcrypt(date('Y-m-d H:i:s'))]);
-            $request->request->add(['order' => $page->max('order') + 1]);
+            $request->request->add(['order' => $this->page->max('order') + 1]);
 
-            $insert = $page->create($request->all());
-            $seo    = $seo->create([
+            $insert = $this->page->create($request->all());
+            $this->seo->create([
                 'seo_token'    => $request->seo_token,
                 'seo_title'    => $request->seo_title ? $request->seo_title : $request->title,
                 'seo_keywords' => $request->seo_keywords,
@@ -77,13 +84,13 @@
          * Show the form for editing the specified resource.
          * @return Response
          */
-        public function edit (Page $page, Status $status, $id)
+        public function edit ($id)
         {
-            $data   = $page->withTrashed()->find($id);
-            $parent = $page->where([["id", "!=", $id], ["parent_id", "=", 0]])
-                           ->pluck('title', 'id')
-                           ->prepend('Página Principal', 0);
-            $status = $status->pluck('name', 'id');
+            $data   = $this->page->with(['seo'])->findOrFail($id);
+            $parent = $this->page->where([["id", "!=", $id], ["parent_id", "=", 0]])
+                                  ->pluck('title', 'id')
+                                  ->prepend('Página Principal', 0);
+            $status = $this->status->pluck('title', 'id');
 
             if (!$data) {
                 return redirect()->route('admin.pages');
@@ -99,13 +106,12 @@
          *
          * @return Response
          */
-        public function update (Page $page, Seo $seo, UpdateRequest $request, $id)
+        public function update (UpdateRequest $request, $id)
         {
-            $data = $page->withTrashed()->findOrFail($id);
-
+            $data = $this->page->findOrFail($id);
             $data->update($request->all());
 
-            $seo->updateOrCreate([
+            $this->seo->updateOrCreate([
                 'seo_token' => $data->seo_token,
             ], [
                 'seo_title'    => $request->seo_title ? $request->seo_title : $request->title,
@@ -120,9 +126,9 @@
          * Remove the specified resource from storage.
          * @return Response
          */
-        public function destroy (Page $page, Request $request)
+        public function destroy (Request $request)
         {
-            $data = $page->find($request->id);
+            $data = $this->page->withTrashed()->findOrFail($request->id);
             $data->children()->forceDelete();
             $data->seo()->forceDelete();
             $data->forceDelete();
@@ -134,50 +140,19 @@
         /**
          * @return Response
          */
-        public function trash (Page $page, Request $request)
+        public function trash (Request $request)
         {
-            $data = $page->find($request->id);
+            $data = $this->page->findOrFail($request->id);
             $data->delete();
         }
 
         /**
          * @return Response
          */
-        public function restore (Page $page, Request $request)
+        public function restore (Request $request)
         {
-            $data = $page->withTrashed()->findOrFail($request->id);
+            $data = $this->page->withTrashed()->findOrFail($request->id);
             $data->restore();
         }
 
-        /**
-         * @return Response
-         */
-        public function order (Page $page, Request $request)
-        {
-
-            $source          = (int)$request->source;
-            $destination     = (int)$request->destination != NULL ? $request->destination : 0;
-            $item            = $page->withTrashed()->find($source);
-            $item->parent_id = $destination;
-            $item->save();
-
-            $ordering     = json_decode($request->order);
-            $rootOrdering = json_decode($request->rootOrder);
-
-            if ($ordering) {
-                foreach ($ordering as $order => $item_id) {
-                    if ($itemToOrder = $page->find($item_id)) {
-                        $itemToOrder->order = $order;
-                        $itemToOrder->save();
-                    }
-                }
-            } else {
-                foreach ($rootOrdering as $order => $item_id) {
-                    if ($itemToOrder = $page->find($item_id)) {
-                        $itemToOrder->order = $order;
-                        $itemToOrder->save();
-                    }
-                }
-            }
-        }
     }

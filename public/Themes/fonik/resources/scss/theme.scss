@@ -6,6 +6,7 @@
 @import "partials/jquery";
 @import "partials/plugins";
 @import "partials/ui";
+@import "partials/media";
 
 /***** MENU ITEM *****/
 .menu-item {
@@ -129,5 +130,30 @@
             width: calc((100% / #{$i}) - 30px);
         }
     }
+}
 
+/***** LISTS CHECKBOXS *****/
+.list-checks {
+    max-height: 225px;
+    overflow:   auto;
+    margin: {
+        top:    -7px;
+        bottom: -7px;
+    }
+    padding:    0 5px;
+    li {
+        margin: {
+            top:    7px;
+            bottom: 7px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+    }
+}
+
+/***** MENUS *****/
+.link-original {
+    padding: 8px;
+    border:  1px solid #F1F1F1;
 }

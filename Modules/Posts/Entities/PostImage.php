@@ -2,18 +2,13 @@
 
     namespace Modules\Posts\Entities;
 
+    use GeneaLabs\LaravelModelCaching\Traits\Cachable;
     use Illuminate\Database\Eloquent\Model;
 
     class PostImage extends Model {
+
+        use Cachable;
+
         protected $fillable = ['post_id', 'name', 'order'];
 
-//        public function getNameAttribute ($value)
-//        {
-//            return str_replace('\\', '/', $value);
-//        }
-//
-//        public function setNameAttribute ($value)
-//        {
-//            $this->attributes['name'] = str_replace('/', '\\', $value);
-//        }
     }

@@ -21,7 +21,7 @@
 
         public function switch (Request $request)
         {
-            $module = Module::find($request->module);
+            $module = Module::findOrFail($request->module);
             $check  = core_module($module);
             $return = [];
 

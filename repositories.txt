@@ -1,0 +1,9 @@
+chumper/zipper
+hesto/multi-auth
+ilovepdf/ilovepdf-php
+jenssegers/date
+laravelcollective/html
+nwidart/laravel-modules
+shipu/themevel
+barryvdh/laravel-debugbar
+predis/predis

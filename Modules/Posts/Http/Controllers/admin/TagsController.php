@@ -10,13 +10,19 @@
     use Modules\Posts\Http\Requests\Tags\UpdateRequest;
 
     class TagsController extends Controller {
+
+        public function __construct (Tag $tag)
+        {
+            $this->tag = $tag;
+        }
+
         /**
          * Display a listing of the resource.
          * @return Response
          */
-        public function index (Tag $tag, Request $request)
+        public function index (Request $request)
         {
-            $paginate = $tag->search($request->all())->paginate(10);
+            $paginate = $this->tag->search($request->all())->paginate(10);
 
             return view('posts::admin.tags.index', compact('paginate'));
         }
@@ -37,9 +43,9 @@
          *
          * @return Response
          */
-        public function store (Tag $tag, CreateRequest $request)
+        public function store (CreateRequest $request)
         {
-            $insert = $tag->create($request->all());
+            $insert = $this->tag->create($request->all());
 
             return redirect(route('admin.tags.edit', $insert->id))->with('status-success', 'Tag criada com sucesso');
         }
@@ -57,9 +63,9 @@
          * Show the form for editing the specified resource.
          * @return Response
          */
-        public function edit (Tag $tag, $id)
+        public function edit ($id)
         {
-            $data = $tag->find($id);
+            $data = $this->tag->findOrFail($id);
             if (!$data) {
                 return redirect()->route('admin.tags');
             }
@@ -74,9 +80,9 @@
          *
          * @return Response
          */
-        public function update (Tag $tag, UpdateRequest $request, $id)
+        public function update (UpdateRequest $request, $id)
         {
-            $data = $tag->findOrFail($id);
+            $data = $this->tag->findOrFail($id);
 
             $data->update($request->all());
 
@@ -87,14 +93,14 @@
          * Remove the specified resource from storage.
          * @return Response
          */
-        public function destroy (Tag $tag, Request $request)
+        public function destroy (Request $request)
         {
-            $data = $tag->find($request->id);
+            $data = $this->tag->findOrFail($request->id);
 
             if ($data->posts()->count() == 0) {
                 $data->forceDelete();
             } else {
-                back()->with('status-danger', 'Não foi possivel deletar a tag <b>' . $data->name . '</b>');
+                back()->with('status-danger', 'Não foi possivel deletar a tag <b>' . $data->title . '</b>');
             }
         }
 

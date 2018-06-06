@@ -10,8 +10,8 @@
     "require": {
         "php": ">=7.1.3",
         "chumper/zipper": "^1.0",
-        "davejamesmiller/laravel-breadcrumbs": "^5.0",
         "fideloper/proxy": "~4.0",
+        "genealabs/laravel-model-caching": "^0.2.62",
         "hesto/multi-auth": "^2.0",
         "ilovepdf/ilovepdf-php": "^1.1",
         "jenssegers/date": "^3.3",
@@ -19,6 +19,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.6",
         "nwidart/laravel-modules": "^3.1",
+        "predis/predis": "^1.1",
         "shipu/themevel": "^1.6"
     },
     "require-dev": {
@@ -40,7 +41,8 @@
             "Modules\\": "Modules/"
         },
         "files": [
-            "Modules/Core/Helpers/modules.php"
+            "Modules/Core/Helpers/modules.php",
+            "Modules/Core/Helpers/nav-menus.php"
         ]
     },
     "autoload-dev": {

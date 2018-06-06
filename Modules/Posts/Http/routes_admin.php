@@ -1,55 +1,6 @@
 <?php
 
     ///**** Posts ****///
-    Breadcrumbs::register('admin.posts', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.home');
-        $breadcrumbs->push('Blog', route('admin.posts'));
-    });
-
-    Breadcrumbs::register('admin.posts.create', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.posts');
-        $breadcrumbs->push(trans('dashboard::dashboard.page.create'), route('admin.posts.create'));
-    });
-
-    Breadcrumbs::register('admin.posts.edit', function($breadcrumbs, $item) {
-        $breadcrumbs->parent('admin.posts');
-        $breadcrumbs->push($item->title, route('admin.posts.edit', $item->id));
-    });
-
-    ///**** Catetories ****///
-    Breadcrumbs::register('admin.categories', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.home');
-        $breadcrumbs->push('Categorias', route('admin.categories'));
-    });
-
-    Breadcrumbs::register('admin.categories.create', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.categories');
-        $breadcrumbs->push(trans('dashboard::dashboard.page.create'), route('admin.categories.create'));
-    });
-
-    Breadcrumbs::register('admin.categories.edit', function($breadcrumbs, $item) {
-        $breadcrumbs->parent('admin.categories');
-        $breadcrumbs->push($item->name, route('admin.categories.edit', $item->id));
-    });
-
-    ///**** Tags ****///
-    Breadcrumbs::register('admin.tags', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.home');
-        $breadcrumbs->push('Tags', route('admin.tags'));
-    });
-
-    Breadcrumbs::register('admin.tags.create', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.tags');
-        $breadcrumbs->push(trans('dashboard::dashboard.page.create'), route('admin.tags.create'));
-    });
-
-    Breadcrumbs::register('admin.tags.edit', function($breadcrumbs, $item) {
-        $breadcrumbs->parent('admin.tags');
-        $breadcrumbs->push($item->name, route('admin.tags.edit', $item->id));
-    });
-
-
-    ///**** Posts ****///
     Route::group([
         'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/posts',

@@ -1,145 +1,168 @@
 <?php
 
-namespace Modules\Users\Providers;
+    namespace Modules\Users\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
-use Illuminate\Contracts\Events\Dispatcher;
-use Modules\Dashboard\Events\BuildingMenu;
+    use Illuminate\Support\Facades\Gate;
+    use Illuminate\Support\ServiceProvider;
+    use Illuminate\Database\Eloquent\Factory;
+    use Illuminate\Contracts\Events\Dispatcher;
+    use Modules\Dashboard\Events\BuildingMenu;
+    use Modules\Users\Entities\User;
 
-class UsersServiceProvider extends ServiceProvider
-{
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
+    class UsersServiceProvider extends ServiceProvider {
+        /**
+         * Indicates if loading of the provider is deferred.
+         *
+         * @var bool
+         */
+        protected $defer = FALSE;
 
-    /**
-     * Menu admin
-     *
-     * @param $events
-     */
-    private function MenuAdmin ($events)
-    {
-        $events->listen(BuildingMenu::class, function(BuildingMenu $event) {
-            $event->menu->add([
-                'text'        => 'Usuários',
-                'icon'        => 'dripicons-user-group',
-                'url'         => route('admin.users'),
-                'order'       => 4,
-                'submenu'     => [
-                    [
-                        'text' => 'Listar tudo',
-                        'url'  => route('admin.users')
+        /**
+         * Menu admin
+         *
+         * @param $events
+         */
+        private function MenuAdmin ($events)
+        {
+            $events->listen(BuildingMenu::class, function(BuildingMenu $event) {
+                $event->menu->add([
+                    'text'    => 'Usuários',
+                    'icon'    => 'dripicons-user-group',
+                    'url'     => route('admin.users'),
+                    'order'   => 4,
+                    'submenu' => [
+                        [
+                            'text' => 'Listar tudo',
+                            'url'  => route('admin.users')
+                        ],
+                        [
+                            'text' => 'Adicionar novo',
+                            'url'  => route('admin.users.create'),
+                        ],
                     ],
-                    [
-                        'text' => 'Adicionar novo',
-                        'url'  => route('admin.users.create'),
-                    ],
-                ],
-            ]);
-        });
-    }
+                ]);
+            });
+        }
 
-    /**
-     * Boot the application events.
-     *
-     * @return void
-     */
-    public function boot(Dispatcher $events)
-    {
-        $this->registerTranslations();
-        $this->registerConfig();
-        $this->registerViews();
-        $this->registerFactories();
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        /**
+         * Boot the application events.
+         *
+         * @return void
+         */
+        public function boot (Dispatcher $events)
+        {
+            $this->registerTranslations();
+            $this->registerConfig();
+            $this->registerViews();
+            $this->registerFactories();
+            $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
-        /** Menu **/
-        $this->MenuAdmin($events);
-    }
+            $this->registerPolicies();
 
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
+            /** Menu **/
+            $this->MenuAdmin($events);
+        }
 
-    /**
-     * Register config.
-     *
-     * @return void
-     */
-    protected function registerConfig()
-    {
-        $this->publishes([
-            __DIR__.'/../Config/config.php' => config_path('users.php'),
-        ], 'config');
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'users'
-        );
-    }
+        /**
+         * Register the service provider.
+         *
+         * @return void
+         */
+        public function register ()
+        {
+            //
+        }
 
-    /**
-     * Register views.
-     *
-     * @return void
-     */
-    public function registerViews()
-    {
-        $viewPath = resource_path('views/modules/users');
+        /**
+         * Register config.
+         *
+         * @return void
+         */
+        protected function registerConfig ()
+        {
+            $this->publishes([
+                __DIR__ . '/../Config/config.php' => config_path('users.php'),
+            ], 'config');
+            $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'users');
+        }
 
-        $sourcePath = __DIR__.'/../Resources/views';
+        /**
+         * Register views.
+         *
+         * @return void
+         */
+        public function registerViews ()
+        {
+            $viewPath = resource_path('views/modules/users');
 
-        $this->publishes([
-            $sourcePath => $viewPath
-        ],'views');
+            $sourcePath = __DIR__ . '/../Resources/views';
 
-        $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/users';
-        }, \Config::get('view.paths')), [$sourcePath]), 'users');
-    }
+            $this->publishes([
+                $sourcePath => $viewPath
+            ], 'views');
 
-    /**
-     * Register translations.
-     *
-     * @return void
-     */
-    public function registerTranslations()
-    {
-        $langPath = resource_path('lang/modules/users');
+            $this->loadViewsFrom(array_merge(array_map(function($path) {
+                return $path . '/modules/users';
+            }, \Config::get('view.paths')), [$sourcePath]), 'users');
+        }
 
-        if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, 'users');
-        } else {
-            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'users');
+        /**
+         * Register translations.
+         *
+         * @return void
+         */
+        public function registerTranslations ()
+        {
+            $langPath = resource_path('lang/modules/users');
+
+            if (is_dir($langPath)) {
+                $this->loadTranslationsFrom($langPath, 'users');
+            } else {
+                $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'users');
+            }
+        }
+
+        /**
+         * Register an additional directory of factories.
+         *
+         * @return void
+         */
+        public function registerFactories ()
+        {
+            if (!app()->environment('production')) {
+                app(Factory::class)->load(__DIR__ . '/../Database/factories');
+            }
+        }
+
+        /**
+         * Register policies.
+         *
+         * @return void
+         */
+        public function registerPolicies ()
+        {
+            Gate::define('check.user', function ($user, $id) {
+                if($user->isAdmin() == false && ($id != $user->id)){
+                    return false;
+                }
+                return true;
+            });
+
+            Gate::define('check.delete.user', function ($user, $id) {
+                if($user->isAdmin() == false && ($id != $user->id)){
+                    return false;
+                }
+                return true;
+            });
+        }
+
+        /**
+         * Get the services provided by the provider.
+         *
+         * @return array
+         */
+        public function provides ()
+        {
+            return [];
         }
     }
-
-    /**
-     * Register an additional directory of factories.
-     * 
-     * @return void
-     */
-    public function registerFactories()
-    {
-        if (! app()->environment('production')) {
-            app(Factory::class)->load(__DIR__ . '/../Database/factories');
-        }
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [];
-    }
-}

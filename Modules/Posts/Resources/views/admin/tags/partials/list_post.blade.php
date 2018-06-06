@@ -9,9 +9,9 @@
 <ul class="tags list-inline">
     @if(isset($selected))
         @foreach($selected as $tag)
-            <li class="list-inline-item" data-name="{{ $tag->name }}">
+            <li class="list-inline-item" data-name="{{ $tag->title }}">
                 <span></span>
-                {{ $tag->name }}
+                {{ $tag->title }}
             </li>
         @endforeach
     @endif
@@ -21,5 +21,5 @@
     {{ Form::select('tag[]', [], '', ['class' => 'form-control tag-select', 'multiple' => 'multiple']) }}
 </div>
 
-<div class="d-none" data-tags="{{ $tags->pluck('name')->toJson() }}"></div>
+<div class="d-none" data-tags="{{ $tags->pluck('title')->toJson() }}"></div>
 

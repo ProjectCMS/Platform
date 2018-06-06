@@ -15,7 +15,7 @@
             Schema::create('categories', function(Blueprint $table) {
                 $table->increments('id');
                 $table->integer('parent_id');
-                $table->string('name');
+                $table->string('title');
                 $table->string('slug');
                 $table->string('image')->nullable();
                 $table->timestamps();

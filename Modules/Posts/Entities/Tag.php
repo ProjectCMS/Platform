@@ -2,14 +2,23 @@
 
     namespace Modules\Posts\Entities;
 
+    use GeneaLabs\LaravelModelCaching\Traits\Cachable;
     use Illuminate\Database\Eloquent\Model;
+    use Modules\Core\Traits\FormatDates;
 
     class Tag extends Model {
-        protected $fillable = ['name', 'slug'];
 
-        public function setNameAttribute ($value)
+        use FormatDates;
+        use Cachable;
+
+        protected static $logAttributes = ['title'];
+        protected static $logName       = 'Tags';
+
+        protected $fillable = ['title', 'slug'];
+
+        public function setTitleAttribute ($value)
         {
-            $this->attributes["name"] = $value;
+            $this->attributes["title"] = $value;
             $this->attributes["slug"] = str_slug($value, '-');
         }
 

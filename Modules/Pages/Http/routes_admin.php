@@ -1,21 +1,5 @@
 <?php
 
-    Breadcrumbs::register('admin.pages', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.home');
-        $breadcrumbs->push('Páginas', route('admin.pages'));
-    });
-
-    Breadcrumbs::register('admin.pages.create', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.pages');
-        $breadcrumbs->push(trans('dashboard::dashboard.page.create'), route('admin.pages.create'));
-    });
-
-    Breadcrumbs::register('admin.pages.edit', function($breadcrumbs, $page) {
-        $breadcrumbs->parent('admin.pages');
-        $breadcrumbs->push($page->title, route('admin.pages.edit', $page->id));
-    });
-
-
     Route::group([
         'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/pages',

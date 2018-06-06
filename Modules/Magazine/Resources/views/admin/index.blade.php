@@ -1,11 +1,7 @@
 @extends('magazine::admin.layouts.master')
 
-@section('title_prefix', 'Revistas'. ' - ')
-
-@section('content_header')
-    <h1>Revistas</h1>
-    {{ Breadcrumbs::render('admin.magazine') }}
-@stop
+@section('title_icon', 'dripicons-photo-group')
+@section('title_prefix', 'Revistas')
 
 @section('content')
 

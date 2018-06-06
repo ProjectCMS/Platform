@@ -6,7 +6,7 @@
     </li>
     @foreach($status->all() as $all)
         <li class="{{ Request::input('status') == $all->id ? 'active' : '' }}">
-            <a href="{{ route('admin.'.$route) }}?status={{ $all->id }}">{{ $all->name }}</a> ::
+            <a href="{{ route('admin.'.$route) }}?status={{ $all->id }}">{{ $all->title }}</a> ::
         </li>
     @endforeach
     <li class="{{ Request::input('status') == '0' ? 'active' : '' }}">

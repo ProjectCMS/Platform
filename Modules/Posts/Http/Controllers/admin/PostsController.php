@@ -20,18 +20,24 @@
 
     class PostsController extends Controller {
 
-        private $perPages = 10;
+        public function __construct (Post $post, Category $category, Seo $seo, Status $status)
+        {
+            $this->post     = $post;
+            $this->category = $category;
+            $this->seo      = $seo;
+            $this->status   = $status;
+        }
 
         /**
          * Display a listing of the resource.
          * @return Response
          */
-        public function index (Post $post, Category $category, Request $request)
+        public function index (Request $request)
         {
-            $categories = $category->pluck('name', 'id')->prepend('Todas as categorias', '');
-            $dates      = $post->dates()->prepend('Todas as datas', '');
-            $data       = $post->search($request->all());
-            $paginate   = $data->paginate($this->perPages);
+            $categories = $this->category->pluck('title', 'id')->prepend('Todas as categorias', '');
+            $dates      = $this->post->dates()->prepend('Todas as datas', '');
+            $data       = $this->post->search($request->all());
+            $paginate   = $data->paginate(10);
 
             return view('posts::admin.posts.index', compact('paginate', 'dates', 'categories'));
         }
@@ -40,9 +46,9 @@
          * Show the form for creating a new resource.
          * @return Response
          */
-        public function create (Status $status)
+        public function create ()
         {
-            $status = $status->pluck('name', 'id');
+            $status = $this->status->pluck('title', 'id');
 
             return view('posts::admin.posts.create', compact('status'));
         }
@@ -54,13 +60,13 @@
          *
          * @return Response
          */
-        public function store (Post $post, Seo $seo, CreateRequest $request)
+        public function store (CreateRequest $request)
         {
             $request->request->add(['author_id' => auth()->user()->id]);
             $request->request->add(['seo_token' => bcrypt(date('Y-m-d H:i:s'))]);
 
-            $insert = $post->create($request->all());
-            $seo->create([
+            $insert = $this->post->create($request->all());
+            $this->seo->create([
                 'seo_token'    => $request->seo_token,
                 'seo_title'    => $request->seo_title ? $request->seo_title : $request->title,
                 'seo_keywords' => $request->seo_keywords,
@@ -87,10 +93,10 @@
          * Show the form for editing the specified resource.
          * @return Response
          */
-        public function edit (Post $post, Status $status, $id)
+        public function edit ($id)
         {
-            $data   = $post->withTrashed()->with(['categories', 'tags', 'images'])->find($id);
-            $status = $status->pluck('name', 'id');
+            $data   = $this->post->withTrashed()->with(['categories', 'tags', 'images'])->findOrFail($id);
+            $status = $this->status->pluck('title', 'id');
 
             if (!$data) {
                 return redirect()->route('admin.posts');
@@ -106,13 +112,13 @@
          *
          * @return Response
          */
-        public function update (Post $post, Seo $seo, UpdateRequest $request, $id)
+        public function update (UpdateRequest $request, $id)
         {
-            $data = $post->withTrashed()->findOrFail($id);
+            $data = $this->post->withTrashed()->findOrFail($id);
 
             $data->update($request->all());
 
-            $seo->updateOrCreate([
+            $this->seo->updateOrCreate([
                 'seo_token' => $data->seo_token,
             ], [
                 'seo_title'       => $request->seo_title ? $request->seo_title : $request->title,
@@ -133,7 +139,7 @@
          */
         public function destroy (Request $request)
         {
-            $data = Post::find($request->id);
+            $data = $this->post->findOrFail($request->id);
             $data->categories()->forceDelete();
             $data->tags()->forceDelete();
             $data->images()->forceDelete();
@@ -145,7 +151,7 @@
          */
         public function trash (Request $request)
         {
-            $data = Post::find($request->id);
+            $data = $this->post->findOrFail($request->id);
             $data->delete();
             back()->with('status-info', 'Publicação enviada para lixeira');
         }
@@ -155,7 +161,7 @@
          */
         public function restore (Request $request)
         {
-            $data = Post::withTrashed()->findOrFail($request->id);
+            $data = $this->post->withTrashed()->findOrFail($request->id);
             $data->restore();
             back()->with('status-info', 'Publicação restaurada da lixeira');
         }
@@ -191,10 +197,10 @@
 
             // Create tag
             foreach ($tags as $tag) {
-                Tag::firstOrCreate(['name' => $tag], ['slug' => str_slug($tag, '-')]);
+                Tag::firstOrCreate(['title' => $tag], ['slug' => str_slug($tag, '-')]);
             }
 
-            $tags = Tag::whereIn('name', $tags)->pluck('id');
+            $tags = Tag::whereIn('title', $tags)->pluck('id');
 
             // Delete
             if ($postTag->diff($tags)->count()) {
@@ -284,7 +290,7 @@
                 ]);
 
                 foreach ($item->categories as $categories) {
-                    $category = Category::where("name", $categories);
+                    $category = Category::where("title", $categories);
                     if ($category->count()) {
                         PostCategory::create([
                             'category_id' => $category->first()->id,
@@ -294,7 +300,7 @@
                 }
 
                 foreach ($item->tags as $tags) {
-                    $tag = Tag::where("name", $tags);
+                    $tag = Tag::where("title", $tags);
                     if ($tag->count()) {
                         PostTag::create([
                             'tag_id'  => $tag->first()->id,
@@ -346,7 +352,7 @@
             foreach ($xml->post as $key => $item) {
                 Category::create([
                     'parent_id' => 0,
-                    'name'      => $item->name,
+                    'title'     => $item->name,
                     'slug'      => str_slug($item->name, '-'),
                     'image'     => ''
                 ]);
@@ -358,8 +364,8 @@
             $xml = simplexml_load_file('xml/tags.xml');
             foreach ($xml->post as $key => $item) {
                 Tag::create([
-                    'name' => $item->name,
-                    'slug' => $item->slug,
+                    'title' => $item->name,
+                    'slug'  => $item->slug,
                 ]);
             }
         }

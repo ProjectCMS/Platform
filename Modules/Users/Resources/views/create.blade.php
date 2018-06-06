@@ -1,15 +1,15 @@
-@extends('admin::layouts.master')
+@extends('users::layouts.master')
 
 @section('title_prefix', trans('dashboard::dashboard.page.create'))
 
 @section('content')
 
-    {!! Form::open(['route' => 'admin.manager.store', 'method' => 'post']) !!}
+    {!! Form::open(['route' => 'admin.users.store', 'method' => 'post']) !!}
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-9 col-lg-8 col-md-12">
-                    @include('admin::partials.form')
+                    @include('users::partials.form')
                 </div>
 
                 <div class="col-xl-3 col-lg-4 col-md-12">
@@ -20,7 +20,7 @@
                             <p><i class="fa fa-calendar"></i> Editado: <b class="pull-right">---</b></p>
                         </div>
                         <div class="card-footer">
-                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-outline-success pull-right', 'type' => 'submit']) }}
+                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-outline-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
                         </div>
                     </div>
                 </div>

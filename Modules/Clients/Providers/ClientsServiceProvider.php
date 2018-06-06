@@ -2,8 +2,10 @@
 
 namespace Modules\Clients\Providers;
 
+use Illuminate\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Dashboard\Events\BuildingMenu;
 
 class ClientsServiceProvider extends ServiceProvider
 {
@@ -15,17 +17,46 @@ class ClientsServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
+     * Menu admin
+     *
+     * @param $events
+     */
+    private function MenuAdmin ($events)
+    {
+        $events->listen(BuildingMenu::class, function(BuildingMenu $event) {
+            $event->menu->add([
+                'text'        => 'Clientes',
+                'icon'        => 'dripicons-user-group',
+                'order'       => 9,
+                'submenu'     => [
+                    [
+                        'text' => 'Listar tudo',
+                        'url'  => route('admin.pages'),
+                    ],
+                    [
+                        'text' => 'Adicionar nova',
+                        'url'  => route('admin.pages.create'),
+                    ],
+                ],
+            ]);
+        });
+    }
+
+    /**
      * Boot the application events.
      *
      * @return void
      */
-    public function boot()
+    public function boot(Dispatcher $events)
     {
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        /** Menu **/
+        $this->MenuAdmin($events);
     }
 
     /**

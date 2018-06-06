@@ -1,21 +1,5 @@
 <?php
 
-    Breadcrumbs::register('admin.magazine', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.home');
-        $breadcrumbs->push('Revistas', route('admin.pages'));
-    });
-
-    Breadcrumbs::register('admin.magazine.create', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.magazine');
-        $breadcrumbs->push(trans('dashboard::dashboard.page.create'), route('admin.pages.create'));
-    });
-
-    Breadcrumbs::register('admin.magazine.edit', function($breadcrumbs, $page) {
-        $breadcrumbs->parent('admin.magazine');
-        $breadcrumbs->push($page->title, route('admin.magazine.edit', $page->id));
-    });
-
-
     Route::group([
         'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/magazine',

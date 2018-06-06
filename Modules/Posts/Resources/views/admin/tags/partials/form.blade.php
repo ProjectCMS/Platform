@@ -8,17 +8,17 @@
         </h4>
 
         <div class="form-group row {{ $errors->has('parent_id') ? 'has-error' : '' }}">
-            {{ Form::label('name', 'Nome', ['class' => 'col-sm-3 col-form-label']) }}
+            {{ Form::label('title', 'Título', ['class' => 'col-sm-3 col-form-label']) }}
             <div class="col-sm-9">
-                {{ Form::text('name', NULL, ['class' => 'form-control']) }}
-                <span class="text-danger">{{ $errors->first('name') }}</span>
+                {{ Form::text('title', NULL, ['class' => 'form-control']) }}
+                <span class="text-danger">{{ $errors->first('title') }}</span>
             </div>
         </div>
 
     </div>
 
     <div class="card-footer">
-        {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right', 'type' => 'submit']) }}
+        {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
     </div>
 
 </div>

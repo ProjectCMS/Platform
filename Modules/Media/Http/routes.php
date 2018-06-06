@@ -1,9 +1,4 @@
 <?php
-    Breadcrumbs::register('admin.media', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.home');
-        $breadcrumbs->push('Biblioteca de mídia', route('admin.media'));
-    });
-
     Route::group([
         'middleware' => ['web', 'user', 'auth:users'],
         'prefix'     => 'admin/media',

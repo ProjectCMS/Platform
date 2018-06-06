@@ -1,20 +1,5 @@
 <?php
 
-    Breadcrumbs::register('admin.manager', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.home');
-        $breadcrumbs->push('Administradores', route('admin.users'));
-    });
-
-    Breadcrumbs::register('admin.manager.create', function($breadcrumbs) {
-        $breadcrumbs->parent('admin.home');
-        $breadcrumbs->push(trans('dashboard::dashboard.page.create'), route('admin.users'));
-    });
-
-    Breadcrumbs::register('admin.manager.edit', function($breadcrumbs, $item) {
-        $breadcrumbs->parent('admin.users');
-        $breadcrumbs->push($item->name, route('admin.manager.edit', $item->id));
-    });
-
     Route::group([
         'middleware' => 'web',
         'prefix'     => 'admin',

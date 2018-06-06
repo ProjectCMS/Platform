@@ -19,10 +19,10 @@
          */
         public function index (User $user)
         {
-            dd($user->all()->toArray());
+            dd($user);
             $paginate = $user->with('roles')->paginate($this->perPages);
 
-            return view('admin::index', compact('paginate'));
+            return view('users::index', compact('paginate'));
         }
 
         /**
@@ -31,7 +31,7 @@
          */
         public function create ()
         {
-            return view('admin::create');
+            return view('users::create');
         }
 
         /**
@@ -45,7 +45,7 @@
         {
             $insert = $user->create($request->all());
 
-            return redirect(route('admin.manager.edit', $insert->id))->with('status-success', 'Tag criada com sucesso');
+            return redirect(route('admin.users.edit', $insert->id))->with('status-success', 'Tag criada com sucesso');
         }
 
         /**
@@ -54,7 +54,7 @@
          */
         public function show ()
         {
-            return view('admin::show');
+            return view('users::show');
         }
 
         /**
@@ -63,12 +63,12 @@
          */
         public function edit (User $user, $id)
         {
-            $data = $user->find($id);
+            $data = $user->findOrFail($id);
             if (!$data) {
-                return redirect()->route('admin.manager');
+                return redirect()->route('admin.users');
             }
 
-            return view('admin::edit', compact('data'));
+            return view('users::edit', compact('data'));
         }
 
         /**

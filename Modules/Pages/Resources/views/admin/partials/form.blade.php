@@ -28,7 +28,7 @@
 
             <div class="col-md-6">
                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                    {{ Form::label('title', 'Nome da página') }}
+                    {{ Form::label('title', 'Título da página') }}
                     {{ Form::text('title', NULL, ['class' => 'form-control']) }}
                     <span class="text-danger">{{ $errors->first('title') }}</span>
                 </div>
@@ -53,6 +53,6 @@
         @include('seo::admin.form')
     </div>
     <div class="card-footer">
-        {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right', 'type' => 'submit']) }}
+        {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
     </div>
 </div>

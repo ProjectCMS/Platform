@@ -2,21 +2,29 @@
 
     namespace Modules\Posts\Entities;
 
+    use GeneaLabs\LaravelModelCaching\Traits\Cachable;
     use Illuminate\Database\Eloquent\Model;
-
+    use Modules\Core\Traits\FormatDates;
     class Category extends Model {
-        protected $fillable = ['name', 'slug', 'image', 'parent_id'];
 
-        public function setNameAttribute ($value)
+        use FormatDates;
+        use Cachable;
+
+        protected static $logAttributes = ['title', 'parent_id'];
+        protected static $logName       = 'Categorias';
+
+        protected $fillable = ['title', 'slug', 'image', 'parent_id'];
+
+        public function setTitleAttribute ($value)
         {
-            $this->attributes["name"] = $value;
-            $this->attributes["slug"] = str_slug($value, '-');
+            $this->attributes["title"] = $value;
+            $this->attributes["slug"]  = str_slug($value, '-');
         }
 
         public function parent ()
         {
             return $this->belongsTo('Modules\Posts\Entities\Category', 'parent_id')->withDefault([
-                'name' => '---',
+                'title' => '---',
             ]);
         }
 
@@ -32,16 +40,16 @@
 
         public function search (Array $request)
         {
-            $categories = $this->withCount('posts')->with('parent')->when($request, function($query) use ($request) {
+            $categories = $this->withCount('posts')->with(['parent', 'children'])->when($request, function($query) use ($request) {
 
-                    if (isset($request["sort"]) && $request["sort"] != NULL) {
-                        switch ($request["sort"]) {
-                            default:
-                                $query->orderBy($request["sort"], $request["order"]);
-                                break;
-                        }
+                if (isset($request["sort"]) && $request["sort"] != NULL) {
+                    switch ($request["sort"]) {
+                        default:
+                            $query->orderBy($request["sort"], $request["order"]);
+                            break;
                     }
-                });
+                }
+            });
 
             return $categories;
         }

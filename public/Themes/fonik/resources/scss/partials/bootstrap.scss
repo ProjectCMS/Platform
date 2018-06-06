@@ -47,12 +47,11 @@
 
 /***** FORM *****/
 .form-control {
-    background-color:   transparent;
     border:             1px solid #E3E3E3;
     border-radius:      30px;
     color:              #2C2C2C;
     line-height:        normal;
-    font-size:          .9571em;
+    font-size:          13px;
     transition:         color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
     -webkit-box-shadow: none;
     box-shadow:         none;
@@ -72,7 +71,6 @@
         box-shadow:         none;
         outline:            0 !important;
         color:              #2C2C2C;
-        background-color:   transparent
     }
 
     &:focus + .input-group-addon,
@@ -125,5 +123,35 @@
         }
     }
 
+}
+
+/***** ACCORDION *****/
+#accordion {
+    .card-header {
+        h6 {
+            font-weight:    700;
+            text-transform: uppercase;
+            font-size:      .8142em;
+        }
+        a {
+            display:  block;
+            position: relative;
+            &:after {
+                font:      normal normal normal 14px/1 FontAwesome;
+                content:   "\f0d8";
+                position:  absolute;
+                right:     0;
+                top:       50%;
+                color:     #999;
+                transform: translate(0, -50%);
+            }
+            &.collapsed:after {
+                content: "\f0d7";
+            }
+            &:hover:after {
+                color: #333;
+            }
+        }
+    }
 }
 

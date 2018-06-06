@@ -64,7 +64,7 @@
          */
         public function edit (Magazine $magazine, Status $status, $id)
         {
-            $data   = $magazine->find($id);
+            $data   = $magazine->findOrFail($id);
             $status = $status->pluck('name', 'id');
 
             if (!$data) {
@@ -96,7 +96,7 @@
          */
         public function destroy (Magazine $magazine, Request $request)
         {
-            $data = $magazine->find($request->id);
+            $data = $magazine->findOrFail($request->id);
             $data->forceDelete();
         }
 

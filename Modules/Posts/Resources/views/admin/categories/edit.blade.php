@@ -11,9 +11,9 @@
             <div class="card m-b-20">
                 <div class="card-body">
                     <div class="pull-right">
-                        <a href="{{ route('admin.categories.create') }}" title="{{ trans('dashboard::dashboard.form.create') }}" class="btn btn-outline-info btn-round"><i class="fa fa-plus"></i>
+                        <a href="{{ route('admin.categories.create') }}" title="{{ trans('dashboard::dashboard.form.create') }}" class="btn btn-outline-info btn-round waves-effect waves-light"><i class="fa fa-plus"></i>
                             {{ trans('dashboard::dashboard.form.create') }}</a>
-                        <a href="{{ route('admin.categories.delete') }}" title="{{ trans('dashboard::dashboard.form.delete') }}" class="btn btn-outline-danger btn-round ajax-action" data-method="delete" data-id="{{ $data->id }}"><i class="fa fa-close"></i> {{ trans('dashboard::dashboard.form.delete') }}
+                        <a href="{{ route('admin.categories.delete') }}" title="{{ trans('dashboard::dashboard.form.delete') }}" class="btn btn-outline-danger btn-round ajax-action waves-effect waves-light" data-method="delete" data-id="{{ $data->id }}"><i class="fa fa-close"></i> {{ trans('dashboard::dashboard.form.delete') }}
                         </a>
                     </div>
                 </div>
@@ -29,12 +29,12 @@
                         <div class="card-body">
                             <h4 class="mt-0 header-title">Informações</h4>
                             <p><i class="fa fa-calendar"></i> Criado:
-                                <b class="pull-right">{{ Date::parse($data->created_at)->format('d F, Y H:i') }}</b></p>
+                                <b class="pull-right">{{ $data->created_at }}</b></p>
                             <p><i class="fa fa-calendar"></i> Editado:
-                                <b class="pull-right">{{ Date::parse($data->updated_at)->format('d F, Y H:i') }}</b></p>
+                                <b class="pull-right">{{ $data->updated_at }}</b></p>
                         </div>
                         <div class="card-footer">
-                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-outline-success pull-right', 'type' => 'submit']) }}
+                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-outline-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
                         </div>
                     </div>
                 </div>

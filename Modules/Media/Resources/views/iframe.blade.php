@@ -18,7 +18,7 @@
     <div class="sidebar">
 
         <div class="upload">
-            <div class="btn btn-info btn-block btn-upload"><i class="fa fa-upload"></i> Upload files</div>
+            <div class="btn btn-info btn-block btn-upload waves-effect waves-light"><i class="fa fa-upload"></i> Upload files</div>
             <div class="uploading text-center d-none">
                 <h3>
                     <div class="spinner"></div>
@@ -85,7 +85,7 @@
         </div>
 
         <div class="toolbar text-right">
-            <button class="btn btn-info" id="insert-item" disabled><i class="fa fa-plus"></i> Inserir no post
+            <button class="btn btn-info waves-effect waves-light" id="insert-item" disabled><i class="fa fa-plus"></i> Inserir no post
             </button>
         </div>
 

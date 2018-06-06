@@ -9,12 +9,18 @@
 
     class PostImagesController extends Controller {
 
+        public function __construct (PostImage $postImage)
+        {
+            $this->postImage = $postImage;
+        }
+
+
         public function order (Request $request, $postId)
         {
             if($request->order && $postId){
                 foreach ($request->order as $key => $order){
-                    $postImage = PostImage::find($order);
-                    $postImage->update(['order' => $key]);
+                    $dd = $this->postImage->findOrFail($order);
+                    $dd->update(['order' => $key]);
                 }
             }
         }

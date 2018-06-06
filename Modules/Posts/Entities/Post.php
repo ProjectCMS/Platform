@@ -2,12 +2,20 @@
 
     namespace Modules\Posts\Entities;
 
+    use GeneaLabs\LaravelModelCaching\Traits\Cachable;
     use Illuminate\Database\Eloquent\Model;
+    use Cache;
     use Illuminate\Database\Eloquent\SoftDeletes;
+    use Modules\Core\Traits\FormatDates;
 
     class Post extends Model {
 
         use SoftDeletes;
+        use FormatDates;
+        use Cachable;
+
+        protected static $logAttributes = ['title', 'content'];
+        protected static $logName       = 'Posts';
 
         protected $fillable = [
             'title',
@@ -66,19 +74,18 @@
 
         public function dates ()
         {
-            //            $dates = $this->select('updated_at')->get()->groupBy(function ($item) {
-            //                return $item->updated_at->format('Y-m');
-            //            });
+            return Cache::remember('posts_dates', 1440, function() {
+                $dates = $this->select(\DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as date'))
+                              ->groupBy('date')
+                              ->orderBy('date', 'DESC')
+                              ->pluck('date', 'date')
+                              ->map(function($model) {
+                                  return \Date::parse($model)->format("F Y");
+                              });
 
-            $dates = $this->select(\DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as date'))
-                          ->groupBy('date')
-                          ->orderBy('date', 'DESC')
-                          ->pluck('date', 'date')
-                          ->map(function($model) {
-                              return \Date::parse($model)->format("F Y");
-                          });
+                return $dates;
 
-            return $dates;
+            });
         }
 
         public function search (Array $request)
@@ -118,9 +125,9 @@
                                   });
                               }
 
-                              if (isset($request["category_name"]) && $request["category_name"] != NULL) {
+                              if (isset($request["category_title"]) && $request["category_title"] != NULL) {
                                   $query->whereHas('categories', function($query) use ($request) {
-                                      $query->where('categories.name', $request["category_name"]);
+                                      $query->where('categories.title', $request["category_title"]);
                                   });
                               }
 
@@ -130,9 +137,9 @@
                                   });
                               }
 
-                              if (isset($request["tag_name"]) && $request["tag_name"] != NULL) {
+                              if (isset($request["tag_title"]) && $request["tag_title"] != NULL) {
                                   $query->whereHas('tags', function($query) use ($request) {
-                                      $query->where('tags.name', $request["tag_name"]);
+                                      $query->where('tags.title', $request["tag_title"]);
                                   });
                               }
 

@@ -8,6 +8,9 @@
     class User extends Authenticatable {
         use Notifiable;
 
+        protected static $logAttributes = ['name', 'email'];
+        protected static $logName       = 'Usuários';
+
         /**
          * The attributes that are mass assignable.
          *

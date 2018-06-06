@@ -2,11 +2,19 @@
 
     namespace Modules\Pages\Entities;
 
+    use GeneaLabs\LaravelModelCaching\Traits\Cachable;
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\SoftDeletes;
+    use Modules\Core\Traits\FormatDates;
 
     class Page extends Model {
+
         use SoftDeletes;
+        use FormatDates;
+        use Cachable;
+
+        protected static $logAttributes = ['title', 'content'];
+        protected static $logName       = 'Páginas';
 
         protected $fillable = ['parent_id', 'title', 'slug', 'order', 'content', 'seo_token', 'status_id'];
         protected $dates    = ['deleted_at'];
@@ -27,7 +35,8 @@
 
         public function parent ()
         {
-            return $this->belongsTo('Modules\Pages\Entities\Page', 'parent_id')->withDefault(['title' => 'Página principal']);
+            return $this->belongsTo('Modules\Pages\Entities\Page', 'parent_id')
+                        ->withDefault(['title' => 'Página principal']);
         }
 
         public function children ()
@@ -47,36 +56,35 @@
 
         public function search (Array $request)
         {
-            $pages = $this->with('parent', 'children')->when($request, function($query) use ($request) {
+            $pages = $this->with(['parent', 'children'])->when($request, function($query) use ($request) {
 
-                    if (isset($request["status"]) && $request["status"] != NULL) {
-                        switch ($request["status"]) {
-                            case 0:
-                                $query->onlyTrashed();
-                                break;
-                            default:
-                                $query->where("status_id", $request["status"]);
-                                break;
-                        }
+                if (isset($request["status"]) && $request["status"] != NULL) {
+                    switch ($request["status"]) {
+                        case 0:
+                            $query->onlyTrashed();
+                            break;
+                        default:
+                            $query->where("status_id", $request["status"]);
+                            break;
                     }
-
-                    if (isset($request["sort"]) && $request["sort"] != NULL) {
-                        switch ($request["sort"]) {
-                            default:
-                                $query->orderBy($request["sort"], $request["order"]);
-                                break;
-                        }
-                    } else {
-                        $query->orderBy('order', 'asc');
+                }
+                if (isset($request["sort"]) && $request["sort"] != NULL) {
+                    switch ($request["sort"]) {
+                        default:
+                            $query->orderBy($request["sort"], $request["order"]);
+                            break;
                     }
-
-                    if (isset($request["parent"]) && $request["parent"] != NULL) {
-                        $query->where('parent_id', $request["parent"]);
-                    }
-
-                }, function($query) {
+                } else {
                     $query->orderBy('order', 'asc');
-                });
+                }
+
+                if (isset($request["parent"]) && $request["parent"] != NULL) {
+                    $query->where('parent_id', $request["parent"]);
+                }
+
+            }, function($query) {
+                $query->orderBy('order', 'asc');
+            });
 
             return $pages;
         }
