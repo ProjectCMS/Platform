@@ -1,51 +1,33 @@
 @extends('magazine::admin.layouts.master')
 
-@section('title_prefix', trans('dashboard::dashboard.page.create'). ' - ')
-
-@section('content_header')
-    <h1>{{ trans('dashboard::dashboard.page.create') }}
-        <small>Criar nova revista</small>
-    </h1>
-    {{ Breadcrumbs::render('admin.magazine.create') }}
-@stop
+@section('title_icon', 'dripicons-photo-group')
+@section('title_prefix', trans('dashboard::dashboard.page.create'))
 
 @section('content')
-
     {!! Form::open(['route' => 'admin.magazine.store', 'method' => 'post']) !!}
+    <div class="wrapper">
+        <div class="container-fluid">
 
-    <div class="row">
-
-        <div class="col-lg-9 col-md-8">
-            <div class="box">
-
-                <div class="box-header with-border">
+            <div class="row">
+                <div class="col-xl-9 col-lg-8 col-md-12">
+                    @include('magazine::admin.partials.form')
                 </div>
 
-                @include('magazine::admin.partials.form')
-
+                <div class="col-xl-3 col-lg-4 col-md-12">
+                    <div class="card m-b-20">
+                        <div class="card-body">
+                            <h4 class="mt-0 header-title">Informações</h4>
+                            <p><i class="fa fa-eye"></i> Status: <b class="pull-right">---</b></p>
+                            <p><i class="fa fa-calendar"></i> Criado: <b class="pull-right">---</b></p>
+                            <p><i class="fa fa-calendar"></i> Editado: <b class="pull-right">---</b></p>
+                        </div>
+                        <div class="card-footer">
+                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="col-lg-3 col-md-4">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Informações</h3>
-                </div>
-
-                <div class="box-body">
-                    <p><i class="fa fa-eye"></i> Status: <b class="pull-right">---</b></p>
-                    <p><i class="fa fa-calendar"></i> Criado em: <b class="pull-right">---</b></p>
-                    <p><i class="fa fa-calendar"></i> Editado em: <b class="pull-right">---</b></p>
-                </div>
-
-                <div class="box-footer">
-                    {{ Form::button('<i class="fa fa-check"></i> '. trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
-                </div>
-
-            </div>
-        </div>
-
     </div>
-
     {!! Form::close() !!}
 @stop()

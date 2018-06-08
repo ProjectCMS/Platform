@@ -9,6 +9,6 @@
 
         use Cachable;
 
-        protected $fillable = ['post_id', 'name', 'order'];
+        protected $fillable = ['post_id', 'path', 'order'];
 
     }

@@ -9,6 +9,17 @@
     use DateTimeZone;
 
     class GeneralController extends Controller {
+
+        /**
+         * @var Setting
+         */
+        private $setting;
+
+        public function __construct (Setting $setting)
+        {
+            $this->setting = $setting;
+        }
+
         /**
          * Display a listing of the resource.
          * @return Response

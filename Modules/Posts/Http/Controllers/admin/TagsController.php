@@ -11,6 +11,11 @@
 
     class TagsController extends Controller {
 
+        /**
+         * @var Tag
+         */
+        private $tag;
+
         public function __construct (Tag $tag)
         {
             $this->tag = $tag;

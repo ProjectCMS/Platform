@@ -27,5 +27,5 @@
     @endif
 </div>
 
-{{ Form::select('images[]', (isset($images) ? $images->pluck('name', 'name') : []), '', ['class' => 'form-control images-input d-none', 'multiple' => 'multiple']) }}
+{{ Form::select('images[]', (isset($images) ? $images->pluck('name', 'name') : []), '', ['class' => 'form-control files-input d-none', 'multiple' => 'multiple']) }}
 

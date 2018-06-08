@@ -12,15 +12,25 @@
     class UsersController extends Controller {
 
         private $perPages = 15;
+        /**
+         * @var User
+         */
+        private $user;
+
+        public function __construct (User $user)
+        {
+            $this->user = $user;
+        }
+
 
         /**
          * Display a listing of the resource.
          * @return Response
          */
-        public function index (User $user)
+        public function index ()
         {
-            dd($user);
-            $paginate = $user->with('roles')->paginate($this->perPages);
+            dd($this->user);
+            $paginate = $this->user->with('roles')->paginate($this->perPages);
 
             return view('users::index', compact('paginate'));
         }
@@ -41,9 +51,9 @@
          *
          * @return Response
          */
-        public function store (User $user, CreateRequest $request)
+        public function store (CreateRequest $request)
         {
-            $insert = $user->create($request->all());
+            $insert = $this->user->create($request->all());
 
             return redirect(route('admin.users.edit', $insert->id))->with('status-success', 'Tag criada com sucesso');
         }
@@ -61,9 +71,9 @@
          * Show the form for editing the specified resource.
          * @return Response
          */
-        public function edit (User $user, $id)
+        public function edit ($id)
         {
-            $data = $user->findOrFail($id);
+            $data = $this->user->findOrFail($id);
             if (!$data) {
                 return redirect()->route('admin.users');
             }
@@ -78,9 +88,9 @@
          *
          * @return Response
          */
-        public function update (User $user, UpdateRequest $request, $id)
+        public function update (UpdateRequest $request, $id)
         {
-            $data = $user->findOrFail($id);
+            $data = $this->user->findOrFail($id);
 
             $data->update($request->all());
 

@@ -4,7 +4,6 @@
 @section('title_prefix', trans('dashboard::dashboard.page.create'))
 
 @section('content')
-
     {!! Form::open(['route' => 'admin.pages.store', 'method' => 'post']) !!}
     <div class="wrapper">
         <div class="container-fluid">
@@ -23,7 +22,7 @@
                             <p><i class="fa fa-calendar"></i> Editado: <b class="pull-right">---</b></p>
                         </div>
                         <div class="card-footer">
-                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-outline-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
+                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,19 @@
 
     class MenusController extends Controller {
 
+        /**
+         * @var Menu
+         */
+        private $menu;
+        /**
+         * @var MenuItem
+         */
+        private $menuItem;
+        /**
+         * @var MenuLocation
+         */
+        private $menuLocation;
+
         public function __construct (Menu $menu, MenuItem $menuItem, MenuLocation $menuLocation)
         {
             $this->menu         = $menu;

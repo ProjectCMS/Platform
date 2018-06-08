@@ -44,7 +44,7 @@
                                 <a href="{{ route('admin.posts.restore') }}" title="{{ trans('dashboard::dashboard.form.restore') }}" class="btn btn-link ajax-action waves-effect waves-light" data-method="put" data-id="{{ $data->id }}"><i class="fa fa-refresh"></i>
                                     Remover da lixeira</a>
                             @endif
-                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-outline-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
+                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
                         </div>
                     </div>
 

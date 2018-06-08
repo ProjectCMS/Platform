@@ -104,9 +104,9 @@
 
                 // Insert item
                 if ($insertItem->count()) {
-                    foreach ($insertItem as $item) {
+                    foreach ($insertItem as $key => $item) {
                         $item  = $items->where('id', $item)->first();
-                        $count = 1;
+                        $order = $key + 1;
 
                         $data = [
                             'menu_id'    => $menu_id,
@@ -116,7 +116,7 @@
                             'url'        => (isset($item->elements->url) ? $item->elements->url : NULL),
                             'model_type' => (isset($item->elements->model_type) ? $item->elements->model_type : NULL),
                             'model_id'   => (isset($item->elements->model_id) ? $item->elements->model_id : NULL),
-                            'order'      => $max + $count,
+                            'order'      => $max + $order,
 
                         ];
 
@@ -126,7 +126,6 @@
                             $item = MenuItem::where('tmp_id', $item->parent_id)->get()->first();
                             $insertItem->update(['parent_id' => $item->id]);
                         }
-                        $count++;
                     }
                 }
 

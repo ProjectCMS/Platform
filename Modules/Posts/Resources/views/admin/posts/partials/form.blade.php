@@ -40,7 +40,7 @@
 
 <div class="card m-b-20">
     <div class="card-body">
-        @include('posts::admin.images.list', ["images" => @$data->images])
+        @include('posts::admin.posts.partials.list_images', ["images" => @$data->images])
     </div>
 </div>
 

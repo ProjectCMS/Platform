@@ -1,5 +1,4 @@
-var listPDF  = $(".grid"),
-    pdfjsLib = window['pdfjs-dist/build/pdf'];
+var listPDF = $(".grid")
 !function ($) {
     "use strict";
     var Magazine = function () {
@@ -8,6 +7,17 @@ var listPDF  = $(".grid"),
         $app;
 
     Magazine.prototype.initImageManager = function () {
+
+        $app.jsonInput = $app.filesInput.val();
+        if ($app.jsonInput) {
+            $app.jsonInput = JSON.parse($app.filesInput.val());
+            $.each($app.jsonInput, function (index, value) {
+                $self.pngToPDF(index, value);
+            });
+        }
+    }
+
+    Magazine.prototype.managerPDF = function () {
         $('.manager-pdf').on("click", function (e) {
             e.preventDefault();
             $(this).manager(
@@ -27,32 +37,37 @@ var listPDF  = $(".grid"),
                             $app.initGrid();
 
                             $.each(data, function (index, value) {
-                                pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
                                 $self.pngToPDF(index, value);
                             });
-
+                            $self.actionItems();
+                            $app.gridItemsData();
                         });
-
-                        // swal({
-                        //          title: 'Auto close alert!',
-                        //          text: 'I will close in 5 seconds.',
-                        //          onOpen: function () {
-                        //              swal.showLoading();
-                        //          }
-                        //      });
                     }
                 }
             );
         });
     }
-    Magazine.prototype.pngToPDF         = function (index, url) {
-        var loadingTask = pdfjsLib.getDocument(url.url),
-            list        = $app.grid.append('<div class="item sortable" id="' + index + '">' +
-                '<div class="pdf-content">\n' +
-                '<div class="load"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i>\n' +
-                '<span>Carregando...</span></div>' +
-                '</div>' +
-                '</div>');
+
+    Magazine.prototype.pngToPDF = function (index, item) {
+
+        pdfjsLib.disableStream = true;
+        var loadingTask        = pdfjsLib.getDocument(item.url);
+
+        var list    = $app.grid.append('<div class="item sortable" id="' + item.id + '">' +
+            '<div class="pdf-content" data-id="' + item.id + '" data-path="' + item.path + '" data-subscriber="' + item.subscriber + '">\n' +
+            '<div id="dropdown" class="btn-group-sm">\n' +
+            '<button class="dripicons-gear btn btn-primary" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>\n' +
+            '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">\n' +
+            '<a class="dropdown-item text-muted item-subscriber" href="#"><i class="ti-medall text-warning"></i> Apenas inscritos</a>\n' +
+            '<div class="dropdown-divider"></div>\n' +
+            '<a class="dropdown-item text-muted item-delete" href="#"><i class="ti-trash text-danger"></i> Deletar</a>\n' +
+            '</div>\n' +
+            '</div>\n' +
+            '<div class="load"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i>\n' +
+            '<span>Carregando...</span></div>' +
+            '</div>' +
+            '</div>'),
+            content = list.find('#' + item.id);
 
         loadingTask.promise.then(function (pdf) {
 
@@ -71,10 +86,8 @@ var listPDF  = $(".grid"),
                     canvasContext: context,
                     viewport: viewport
                 };
-
                 page.render(renderContext).then(function () {
-                    var content = list.find('#' + index + ' .pdf-content');
-                    content.append('<img src="' + canvas.toDataURL('image/jpeg', 1.0) + '">');
+                    content.find('.pdf-content').append('<img src="' + canvas.toDataURL('image/jpeg', 1.0) + '">');
                 });
 
             });
@@ -82,12 +95,51 @@ var listPDF  = $(".grid"),
             console.error(reason);
         });
     }
-    Magazine.prototype.init             = function () {
+
+    Magazine.prototype.actionItems = function () {
+        var itemPremium = $app.grid.find('.item .item-subscriber'),
+            itemDelete  = $app.grid.find('.item .item-delete');
+
+        // Item Premium
+        itemPremium.on('click', function (e) {
+            e.preventDefault();
+            var item       = $(this).closest('.pdf-content'),
+                subscriber = item.attr('data-subscriber');
+
+            if (subscriber == 0) {
+                item.attr('data-subscriber', 1);
+            } else {
+                item.attr('data-subscriber', 0);
+            }
+
+            $app.gridItemsData();
+
+        });
+
+        // Item Delete
+        itemDelete.on('click', function (e) {
+            e.preventDefault();
+            var c = confirm('Tem certeza que deseja deletar está página?');
+
+            if(c == true){
+                $(this).closest('.item').remove();
+            }
+
+            $app.gridItemsData();
+
+        });
+
+
+    }
+
+    Magazine.prototype.init = function () {
 
         $self = this;
         $app  = $.App;
 
         this.initImageManager();
+        this.managerPDF();
+        this.actionItems();
     }
 
     //init

@@ -16,7 +16,7 @@ class CreateMagazineFilesTable extends Migration
         Schema::create('magazine_files', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('magazine_id')->unsigned();
-            $table->string('name');
+            $table->string('path');
             $table->integer('order');
             $table->integer('subscriber');
             $table->timestamps();

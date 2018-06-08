@@ -6,6 +6,10 @@
     max-width: 100%;
 }
 
+.list-pdf .item {
+    overflow: visible;
+}
+
 .list-pdf .load {
     position:   absolute;
     text-align: center;
@@ -18,9 +22,39 @@
     display: block;
 }
 
+.list-pdf .pdf-content {
+    position: absolute;
+    top:      0;
+    bottom:   0;
+    left:     0;
+    right:    0;
+}
+
 .list-pdf .pdf-content img {
     width:           100%;
     height:          100%;
     object-position: center;
     object-fit:      cover;
+}
+
+.list-pdf .pdf-content[data-subscriber='1']:before {
+    font-family: 'themify';
+    content:     "\E623";
+    position:    absolute;
+    top:         10px;
+    left:        10px;
+    font-size:   40px;
+    z-index:     10;
+    color:       #FB4;
+}
+
+.list-pdf .pdf-content[data-subscriber='1'] .item-subscriber {
+    text-decoration: line-through;
+}
+
+.list-pdf .pdf-content #dropdown {
+    position: absolute;
+    top:      10px;
+    right:    10px;
+    z-index:  10;
 }

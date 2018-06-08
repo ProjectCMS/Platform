@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -12,8 +12,8 @@
         @yield('title_postfix', config('dashboard.title_postfix', ''))
     </title>
 
-    <link href="{{ Theme::assets('css/libs.min.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ Theme::assets('css/theme.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ Theme::assets('css/libs.min.css') }}?v={{ time() }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ Theme::assets('css/theme.css') }}?v={{ time() }}" rel="stylesheet" type="text/css"/>
 
     <!-- Modules  -->
     <link href="{{ Theme::assets('css/modules.min.css') }}" rel="stylesheet" type="text/css"/>
@@ -86,14 +86,14 @@
 <!-- End Footer -->
 
 <!-- jQuery  -->
-<script type="text/javascript" src="{{ Theme::assets('js/libs.min.js') }}"></script>
-<script type="text/javascript" src="{{ Theme::assets('plugins/tinymce/tinymce.min.js') }}"></script>
+<script type="text/javascript" src="{{ Theme::assets('js/libs.min.js') }}?v={{ time() }}"></script>
+<script type="text/javascript" src="{{ Theme::assets('plugins/tinymce/tinymce.min.js') }}?v={{ time() }}"></script>
 
 <!-- Custom js -->
 @yield('js')
 
 <!-- Modules  -->
-<script type="text/javascript" src="{{ Theme::assets('js/modules.min.js') }}"></script>
+<script type="text/javascript" src="{{ Theme::assets('js/modules.min.js') }}?v={{ time() }}"></script>
 
 </body>
 </html>

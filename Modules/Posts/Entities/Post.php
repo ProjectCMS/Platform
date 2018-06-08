@@ -4,7 +4,6 @@
 
     use GeneaLabs\LaravelModelCaching\Traits\Cachable;
     use Illuminate\Database\Eloquent\Model;
-    use Cache;
     use Illuminate\Database\Eloquent\SoftDeletes;
     use Modules\Core\Traits\FormatDates;
 
@@ -74,18 +73,15 @@
 
         public function dates ()
         {
-            return Cache::remember('posts_dates', 1440, function() {
-                $dates = $this->select(\DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as date'))
-                              ->groupBy('date')
-                              ->orderBy('date', 'DESC')
-                              ->pluck('date', 'date')
-                              ->map(function($model) {
-                                  return \Date::parse($model)->format("F Y");
-                              });
+            $dates = $this->select(\DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as date'))
+                          ->groupBy('date')
+                          ->orderBy('date', 'DESC')
+                          ->pluck('date', 'date')
+                          ->map(function($model) {
+                              return \Date::parse($model)->format("F Y");
+                          });
 
-                return $dates;
-
-            });
+            return $dates;
         }
 
         public function search (Array $request)

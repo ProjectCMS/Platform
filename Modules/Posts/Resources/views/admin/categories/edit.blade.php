@@ -34,7 +34,7 @@
                                 <b class="pull-right">{{ $data->updated_at }}</b></p>
                         </div>
                         <div class="card-footer">
-                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-outline-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
+                            {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
                         </div>
                     </div>
                 </div>

@@ -14,11 +14,24 @@
 
     class PagesController extends Controller {
 
+        /**
+         * @var Page
+         */
+        private $page;
+        /**
+         * @var Status
+         */
+        private $status;
+        /**
+         * @var Seo
+         */
+        private $seo;
+
         public function __construct (Page $page, Status $status, Seo $seo)
         {
-            $this->page   = $page;
+            $this->page = $page;
             $this->status = $status;
-            $this->seo    = $seo;
+            $this->seo = $seo;
         }
 
         /**

@@ -20,6 +20,23 @@
 
     class PostsController extends Controller {
 
+        /**
+         * @var Post
+         */
+        private $post;
+        /**
+         * @var Category
+         */
+        private $category;
+        /**
+         * @var Seo
+         */
+        private $seo;
+        /**
+         * @var Status
+         */
+        private $status;
+
         public function __construct (Post $post, Category $category, Seo $seo, Status $status)
         {
             $this->post     = $post;
@@ -227,19 +244,19 @@
             $max        = $postImages->max('order');
 
             // Delete
-            if ($postImages->pluck('name')->diff($images)->count()) {
-                foreach ($postImages->pluck('name')->diff($images) as $delete) {
-                    $dd = PostImage::where('name', $delete);
+            if ($postImages->pluck('path')->diff($images)->count()) {
+                foreach ($postImages->pluck('path')->diff($images) as $delete) {
+                    $dd = PostImage::where('path', $delete);
                     $dd->forceDelete();
                 }
             }
             // Insert
-            if ($images->diff($postImages->pluck('name'))->count()) {
+            if ($images->diff($postImages->pluck('path'))->count()) {
                 $count = 1;
-                foreach ($images->diff($postImages->pluck('name')) as $insert) {
+                foreach ($images->diff($postImages->pluck('path')) as $insert) {
                     PostImage::create([
                         'post_id' => $post_id,
-                        'name'    => $insert,
+                        'path'    => $insert,
                         'order'   => $max + $count
                     ]);
                     $count++;

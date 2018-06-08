@@ -5,7 +5,7 @@
         },
         $self;
 
-    App.prototype.initEditor       = function () {
+    App.prototype.initEditor = function () {
         tinymce.init(
             {
                 selector: '.textarea',
@@ -51,7 +51,8 @@
 
             });
     }
-    App.prototype.initAjaxAciton   = function () {
+
+    App.prototype.initAjaxAciton = function () {
         $(".ajax-action").on("click", function (e) {
 
             e.preventDefault();
@@ -73,7 +74,8 @@
             }
         });
     }
-    App.prototype.initAjaxModules  = function () {
+
+    App.prototype.initAjaxModules = function () {
         $(".ajax-module").on("click", function (e) {
 
             e.preventDefault();
@@ -97,7 +99,8 @@
             });
         });
     }
-    App.prototype.initCustomTable  = function () {
+
+    App.prototype.initCustomTable = function () {
         var table = $('.table');
 
         $.each(table.find('th[data-sort]'), function (index, val) {
@@ -133,38 +136,20 @@
             e.preventDefault();
         });
     }
-    App.prototype.initGrid         = function () {
 
-        var grid        = $self.grid,
-            imagesInput = $self.imagesInput,
-            ordering    = $self.ordering,
-            order       = $self.order;
+    App.prototype.initGrid = function () {
 
-        imagesInput.find('option').attr('selected', 'selected');
+        var grid       = $self.grid,
+            filesInput = $self.filesInput,
+            ordering   = $self.ordering,
+            order      = $self.order;
+
+        filesInput.find('option').attr('selected', 'selected');
 
         grid.on('click', '.item .delete-image', function (e) {
             var image = $(this).closest('.item').data('image');
             $(this).closest('.item').remove();
-            imagesInput.find('option[value="' + image + '"]').remove();
-        });
-
-        $(window).on("resize load", function () {
-            var w = $('body').width();
-            if (w >= 1920) {
-                grid.attr('data-columns', 10);
-            } else if (w >= 1680 && w < 1920) {
-                grid.attr('data-columns', 6);
-            } else if (w >= 1480 && w < 1680) {
-                grid.attr('data-columns', 5);
-            } else if (w >= 1280 && w < 1460) {
-                grid.attr('data-columns', 4);
-            } else if (w >= 1080 && w < 1280) {
-                grid.attr('data-columns', 3);
-            } else if (w >= 880 && w < 1080) {
-                grid.attr('data-columns', 2);
-            } else {
-                grid.attr('data-columns', 1);
-            }
+            filesInput.find('option[value="' + image + '"]').remove();
         });
 
         grid.sortable(
@@ -173,6 +158,7 @@
                 update: function (event, ui) {
                     ordering.removeClass('disabled');
                     order = $(this).sortable('toArray');
+                    $self.gridItemsData();
                 }
             });
         grid.disableSelection();
@@ -192,13 +178,48 @@
             e.preventDefault();
 
         });
+
+        $self.gridResize();
+
     }
-    App.prototype.initCheckbox     = function () {
+
+    App.prototype.gridResize = function () {
+
+        var grid = $self.grid;
+
+        $(window).on("resize load", function () {
+            var w = $('body').width();
+            if (w >= 1920) {
+                grid.attr('data-columns', 6);
+            } else if (w >= 1780 && w < 1920) {
+                grid.attr('data-columns', 5);
+            } else if (w >= 1480 && w < 1780) {
+                grid.attr('data-columns', 4);
+            } else if (w >= 1080 && w < 1480) {
+                grid.attr('data-columns', 3);
+            } else if (w >= 880 && w < 1080) {
+                grid.attr('data-columns', 2);
+            } else {
+                grid.attr('data-columns', 1);
+            }
+        });
+    }
+
+    App.prototype.gridItemsData = function () {
+        $self.jsonInput = [];
+        $.each($self.grid.find('.item .pdf-content'), function (index, val) {
+            $self.jsonInput.push(this.dataset);
+        });
+        $self.filesInput.val(JSON.stringify($self.jsonInput));
+    }
+
+    App.prototype.initCheckbox = function () {
         $('[data-check="all"]').on("click", function () {
             $('[data-check="single"]').not(this).prop('checked', this.checked);
         });
     }
-    App.prototype.parseParamns     = function (str) {
+
+    App.prototype.parseParamns = function (str) {
         if (str) {
             return str.split('&').reduce(function (params, param) {
                 var paramSplit        = param.split('=').map(function (value) {
@@ -211,6 +232,7 @@
             return {};
         }
     }
+
     App.prototype.imageOrientation = function (src) {
         var orientation,
             img = new Image();
@@ -227,7 +249,8 @@
 
         return orientation;
     }
-    App.prototype.modalEditor      = function (type, callback, value, meta) {
+
+    App.prototype.modalEditor = function (type, callback, value, meta) {
         if (type == 'insert') {
 
             $(this).manager(
@@ -263,26 +286,34 @@
                 });
         }
     }
-    App.prototype.nl2br            = function (varTest) {
-        if (varTest)
-            return varTest.replace(/(\r\n|\n\r|\r|\n)/g, "<p>");
+
+    App.prototype.nl2br = function (value) {
+        if (value) {
+            value = value.trim();
+            return value.replace(/(\r\n|\n\r|\r|\n)/g, "<p>");
+        }
     }
-    App.prototype.br2nl            = function (varTest) {
-        if (varTest)
-            return varTest.replace(/<br>/g, "\r");
+
+    App.prototype.br2nl = function (value) {
+        if (value) {
+            value = value.trim();
+            return value.replace(/<br>/g, "\r");
+        }
     }
-    App.prototype.init             = function () {
+
+    App.prototype.init = function () {
 
         $(".textarea").val(this.br2nl($(".textarea").val()));
         $(".textarea").val(this.nl2br($(".textarea").val()));
 
         $self = this;
 
-        this.grid        = $(".grid");
-        this.ordering    = $('.ordering');
-        this.order       = [];
-        this.imagesInput = $(".images-input");
-        this.request     = app.request.replace(/&amp;/g, '&');
+        this.grid       = $('.grid');
+        this.ordering   = $('.ordering');
+        this.order      = [];
+        this.filesInput = $('.files-input');
+        this.jsonInput  = [];
+        this.request    = app.request.replace(/&amp;/g, '&');
 
         this.initEditor();
         this.initAjaxAciton();

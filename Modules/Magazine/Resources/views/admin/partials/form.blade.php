@@ -26,7 +26,7 @@
         <div class="form-group row {{ $errors->has('publish_at') ? 'has-error' : '' }}">
             {{ Form::label('publish_at', 'Data de publicação', ['class' => 'col-sm-3 col-form-label']) }}
             <div class="col-sm-9">
-                {{ Form::date('publish_at', \Carbon\Carbon::parse(@$data->publish_at), ['class' => 'form-control']) }}
+                {{ Form::date('publish_at', \Carbon\Carbon::parse()->format('Y-m-d'), ['class' => 'form-control']) }}
                 <span class="text-danger">{{ $errors->first('publish_at') }}</span>
             </div>
         </div>
@@ -35,7 +35,7 @@
 
 <div class="card m-b-20">
     <div class="card-body">
-        @include('magazine::admin.partials.list_images', ["images" => @$data->images])
+        @include('magazine::admin.partials.list_files', ["files" => @$data->files])
     </div>
 
     <div class="card-footer">

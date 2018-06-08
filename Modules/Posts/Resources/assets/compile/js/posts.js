@@ -82,7 +82,7 @@ var tags        = $('.tags'),
                         if (data.length) {
                             $.each(data, function (index, val) {
                                 var orientation = $app.imageOrientation(val.url);
-                                $app.imagesInput.append('<option value="' + val.path + '" selected>' + val.path + '</option>');
+                                $app.filesInput.append('<option value="' + val.path + '" selected>' + val.path + '</option>');
                                 $app.grid.append('<div class="item new"><img src="' + val.url + '" data-orientation="' + orientation + '"></div>');
                             });
                         }

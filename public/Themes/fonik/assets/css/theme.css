@@ -9490,6 +9490,9 @@ html {
   overflow-x: hidden;
   position: relative;
   min-height: 100%;
+}
+
+html.bg {
   background: #F5F5F5;
 }
 

@@ -9,6 +9,11 @@
 
     class PostImagesController extends Controller {
 
+        /**
+         * @var PostImage
+         */
+        private $postImage;
+
         public function __construct (PostImage $postImage)
         {
             $this->postImage = $postImage;
