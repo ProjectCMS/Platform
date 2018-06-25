@@ -20,8 +20,8 @@
                 $table->string('title');
                 $table->string('icon')->nullable();
                 $table->string('url')->nullable();
-                $table->string('model_type')->nullable();
-                $table->integer('model_id')->nullable();
+                $table->string('provider_model')->nullable();
+                $table->integer('provider_id')->nullable();
                 $table->integer('order')->nullable();
                 $table->timestamps();
             });

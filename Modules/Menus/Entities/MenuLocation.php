@@ -21,4 +21,9 @@
 
             return $locations;
         }
+
+        public function items ()
+        {
+            return $this->hasMany('Modules\Menus\Entities\MenuItem', 'menu_id', 'menu_id')->where('parent_id', 0)->orderBy('order', 'asc');
+        }
     }

@@ -49,6 +49,13 @@
             return $this->belongsTo('Modules\Seo\Entities\Seo', 'seo_token', 'seo_token');
         }
 
+        public function menuItem ()
+        {
+            return $this->belongsTo('Modules\Menus\Entities\MenuItem', 'id', 'provider_id')->where(function ($query) {
+                return $query->whereProviderModel('\Modules\Pages\Entities\Page');
+            });
+        }
+
         public function status ()
         {
             return $this->belongsTo('Modules\Core\Entities\Status');

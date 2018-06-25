@@ -2,7 +2,6 @@
 
     namespace Modules\Core\Providers;
 
-    use Illuminate\Routing\Router;
     use Illuminate\Support\ServiceProvider;
     use Illuminate\Database\Eloquent\Factory;
 
@@ -13,17 +12,6 @@
          * @var bool
          */
         protected $defer = FALSE;
-
-        /**
-         * The filters base class name.
-         *
-         * @var array
-         */
-        protected $middleware = [
-            'user'       => \Modules\Users\Http\Middleware\RedirectIfNotUser::class,
-            'user.guest' => \Modules\Users\Http\Middleware\RedirectIfUser::class,
-        ];
-
 
         /**
          * Boot the application events.
@@ -37,7 +25,6 @@
             $this->registerViews();
             $this->registerFactories();
             $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-            $this->registerMiddleware($this->app['router']);
 
         }
 
@@ -107,20 +94,6 @@
         {
             if (!app()->environment('production')) {
                 app(Factory::class)->load(__DIR__ . '/../Database/Factories');
-            }
-        }
-
-        /**
-         * Register the filters.
-         *
-         * @param  Router $router
-         *
-         * @return void
-         */
-        public function registerMiddleware (Router $router)
-        {
-            foreach ($this->middleware as $name => $class) {
-                $router->aliasMiddleware($name, $class);
             }
         }
 

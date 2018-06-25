@@ -3,10 +3,12 @@
     $pages = \Modules\Pages\Entities\Page::all();
 
     Route::group([
-        'middleware' => ['web'],
-        'namespace'  => 'Modules\Pages\Http\Controllers\web',
+        'middleware' => ['web', 'theme_web'],
+        'namespace'  => 'Modules\Pages\Http\Controllers\Web',
         'as'         => 'web.'
     ], function() use ($pages) {
+
+        Route::get('/', 'PagesController@index');
 
         $pages->each(function($page) {
 

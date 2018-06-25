@@ -37,11 +37,11 @@
                                     @if($data->created_at == $data->updated_at)
                                         Criado
                                         <br>
-                                        <abbr title="{{ $data->created_at_full }}">{{ $data->created_at }}</abbr>
+                                        <abbr title="{{ $data->created_at_full }}">{{ $data->created_at_cm }}</abbr>
                                     @else
                                         Atualizado
                                         <br>
-                                        <abbr title="{{ $data->updated_at_full }}">{{ $data->updated_at }}</abbr>
+                                        <abbr title="{{ $data->updated_at_full }}">{{ $data->updated_at_cm }}</abbr>
                                     @endif
                                 </td>
                                 <td>

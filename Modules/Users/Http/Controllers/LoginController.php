@@ -57,6 +57,6 @@
          */
         protected function guard ()
         {
-            return Auth::guard('users');
+            return Auth::guard('user');
         }
     }

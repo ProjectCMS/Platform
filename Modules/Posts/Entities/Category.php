@@ -35,7 +35,14 @@
 
         public function posts ()
         {
-            return $this->belongsTo('Modules\Posts\Entities\PostCategory', 'id', 'category_id');
+            return $this->belongsToMany('Modules\Posts\Entities\Post', 'post_categories', 'category_id', 'post_id');
+        }
+
+        public function menuItem ()
+        {
+            return $this->belongsTo('Modules\Menus\Entities\MenuItem', 'id', 'provider_id')->where(function ($query) {
+                return $query->whereProviderModel('\Modules\Posts\Entities\Category');
+            });
         }
 
         public function search (Array $request)
@@ -52,6 +59,11 @@
             });
 
             return $categories;
+        }
+
+        public function getRouteKeyName()
+        {
+            return 'slug';
         }
 
     }

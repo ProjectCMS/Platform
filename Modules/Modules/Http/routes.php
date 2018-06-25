@@ -1,7 +1,7 @@
 <?php
 
     Route::group([
-        'middleware' => ['web', 'user', 'auth:users'],
+        'middleware' => ['web', 'user', 'auth:users', 'theme_admin'],
         'prefix'     => 'admin/modules',
         'namespace'  => 'Modules\Modules\Http\Controllers',
         'as'         => 'admin.',

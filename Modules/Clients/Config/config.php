@@ -1,6 +1,5 @@
 <?php
 
-    return [
-        'name' => 'Clients',
-
-    ];
+return [
+    'name' => 'Clients'
+];

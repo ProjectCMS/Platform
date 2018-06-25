@@ -7,3 +7,6 @@ nwidart/laravel-modules
 shipu/themevel
 barryvdh/laravel-debugbar
 predis/predis
+genealabs/laravel-model-caching
+composer require artesaos/seotools
+laravel/socialite

@@ -115,3 +115,8 @@
 .tags li span:hover {
     background-color: #FB9678;
 }
+
+/***** CONTENT IMAGE *****/
+.content-image img {
+    max-width: 100%;
+}

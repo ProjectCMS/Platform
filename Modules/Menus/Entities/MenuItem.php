@@ -16,12 +16,14 @@
             'title',
             'icon',
             'url',
-            'model_type',
-            'model_id',
+            'provider',
+            'provider_model',
+            'provider_type',
+            'provider_id',
             'order'
         ];
 
-        public $models = [
+        public $providers = [
             'pages'      => '\Modules\Pages\Entities\Page',
             'categories' => '\Modules\Posts\Entities\Category',
         ];
@@ -39,11 +41,24 @@
             return $this->belongsTo('Modules\Menus\Entities\MenuItem', 'parent_id');
         }
 
-        public function mdl ()
+        public function getProviderTypeAttribute ()
         {
-            $model = (isset($this->models[$this->model_type]) ? $this->models[$this->model_type] : FALSE);
-            if ($model != FALSE) {
-                return $this->belongsTo($model, 'model_id', 'id');
+            $providers = collect($this->providers);
+
+            if ($this->provider_model != NULL && $providers->search($this->provider_model, TRUE)) {
+                $providerModel = $providers->search($this->provider_model);
+            } else {
+                $providerModel = 'link';
+            }
+
+            return $providerModel;
+        }
+
+
+        public function provider ()
+        {
+            if ($this->provider_model != NULL) {
+                return $this->belongsTo($this->provider_model, 'provider_id', 'id');
             }
         }
 
@@ -57,13 +72,14 @@
 
                     $collect = collect();
 
-                    $model = (isset($this->models[$item["model_type"]]) ? $this->models[$item["model_type"]] : FALSE);
-                    $model = $model::where('id', $item["item"])->get()->first();
+                    $model    = (isset($this->providers[$item["provider_type"]]) ? $this->providers[$item["provider_type"]] : FALSE);
+                    $provider = $model::where('id', $item["item"])->get()->first();
 
-                    $collect->tmp_id     = rand();
-                    $collect->title      = $model->title;
-                    $collect->model_type = $item["model_type"];
-                    $collect->mdl        = $model;
+                    $collect->tmp_id         = rand();
+                    $collect->title          = $provider->title;
+                    $collect->provider_model = $model;
+                    $collect->provider_type  = $item["provider_type"];
+                    $collect->provider       = $provider;
 
                     $merge->push($collect);
                 }
@@ -71,11 +87,11 @@
                 $data = $merge->all();
 
             } else {
-                $data->tmp_id     = rand();
-                $data->title      = $request->title;
-                $data->url        = $request->url;
-                $data->model_type = 'link';
-                $data             = [$data];
+                $data->tmp_id        = rand();
+                $data->title         = $request->title;
+                $data->url           = $request->url;
+                $data->provider_type = 'link';
+                $data                = [$data];
             }
 
             return $data;
@@ -108,15 +124,17 @@
                         $item  = $items->where('id', $item)->first();
                         $order = $key + 1;
 
+                        $providerModel = ($item->elements->provider_type == 'link' ? null : $this->providers[$item->elements->provider_type]);
+
                         $data = [
-                            'menu_id'    => $menu_id,
-                            'parent_id'  => 0,
-                            'tmp_id'     => $item->id,
-                            'title'      => (isset($item->elements->title) ? $item->elements->title : NULL),
-                            'url'        => (isset($item->elements->url) ? $item->elements->url : NULL),
-                            'model_type' => (isset($item->elements->model_type) ? $item->elements->model_type : NULL),
-                            'model_id'   => (isset($item->elements->model_id) ? $item->elements->model_id : NULL),
-                            'order'      => $max + $order,
+                            'menu_id'        => $menu_id,
+                            'parent_id'      => 0,
+                            'tmp_id'         => $item->id,
+                            'title'          => (isset($item->elements->title) ? $item->elements->title : NULL),
+                            'url'            => (isset($item->elements->url) ? $item->elements->url : NULL),
+                            'provider_model' => $providerModel,
+                            'provider_id'    => (isset($item->elements->provider_id) ? $item->elements->provider_id : NULL),
+                            'order'          => $max + $order,
 
                         ];
 

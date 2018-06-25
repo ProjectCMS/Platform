@@ -15,32 +15,28 @@
             $this->cTimeFormat = setting('format_time', 'H:i:s');
         }
 
-        public function getCreatedAtAttribute ($value)
+        public function getCreatedAtCmAttribute ()
         {
             $this->setVariables();
-            return Date::parse($value)->format($this->cDateFormat);
+            return Date::parse($this->attributes['created_at'])->format($this->cDateFormat);
         }
 
-        public function getUpdatedAtAttribute ($value)
+        public function getUpdatedAtCmAttribute ()
         {
             $this->setVariables();
-            return Date::parse($value)->format($this->cDateFormat);
+            return Date::parse($this->attributes['updated_at'])->format($this->cDateFormat);
         }
 
-        public function getDeletedAtAttribute ($value)
+        public function getDeletedAtCmAttribute ()
         {
             $this->setVariables();
-            if ($value != NULL) {
-                return Date::parse($value)->format($this->cDateFormat);
-            }
-
-            return NULL;
+            return Date::parse($this->attributes['deleted_at'])->format($this->cDateFormat);
         }
 
-        public function getPublishAtAttribute ($value)
+        public function getPublishAtCmAttribute ($value)
         {
             $this->setVariables();
-            return Date::parse($value)->format($this->cDateFormat);
+            return Date::parse($this->attributes['publish_at'])->format($this->cDateFormat);
         }
 
         public function getcreatedAtFullAttribute ()

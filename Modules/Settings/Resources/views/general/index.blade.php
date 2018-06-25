@@ -34,6 +34,14 @@
                     </div>
 
                     <div class="form-group row mb-5">
+                        {{ Form::label('site_keywords', 'Tags', ['class' => 'col-sm-3 col-form-label']) }}
+                        <div class="col-lg-6 col-sm-9">
+                            {{ Form::text('site_keywords', setting('site_keywords'), ['class' => 'form-control']) }}
+                            <p class="text-muted mb-0 mt-1 ml-2">Separe as tags por virgula.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-5">
                         {{ Form::label('site_url', 'Endereço do site (URL)', ['class' => 'col-sm-3 col-form-label']) }}
                         <div class="col-lg-6 col-sm-9">
                             {{ Form::text('site_url', setting('site_url', config('app.url')), ['class' => 'form-control']) }}

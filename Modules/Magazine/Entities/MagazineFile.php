@@ -23,7 +23,7 @@
 
             if ($items != NULL) {
 
-                $magazineFiles = MagazineFile::where('magazine_id', $magazine_id);
+                $magazineFiles = $this->where('magazine_id', $magazine_id);
                 $max           = $magazineFiles->max('order');
                 $count         = 1;
 

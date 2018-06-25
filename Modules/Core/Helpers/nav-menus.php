@@ -32,3 +32,17 @@
             return [];
         }
     }
+
+    //** Get Menus Registered **//
+    if (!function_exists('get_menus')) {
+
+        function get_menus ($location = NULL)
+        {
+            $value = \Modules\Menus\Entities\MenuLocation::with(['items', 'items.children'])->get();
+            if ($location) {
+                $value = $value->where('location', $location)->first();
+            }
+
+            return $value;
+        }
+    }

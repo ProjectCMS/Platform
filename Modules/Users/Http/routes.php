@@ -1,7 +1,7 @@
 <?php
 
     Route::group([
-        'middleware' => 'web',
+        'middleware' => ['web', 'theme_admin'],
         'prefix'     => 'admin',
         'namespace'  => 'Modules\Users\Http\Controllers'
     ], function() {
@@ -16,7 +16,7 @@
     });
 
     Route::group([
-        'middleware' => ['web', 'user', 'auth:users'],
+        'middleware' => ['web', 'user', 'auth:users', 'theme_admin'],
         'prefix'     => 'admin',
         'as'         => 'admin.',
         'namespace'  => 'Modules\Users\Http\Controllers'

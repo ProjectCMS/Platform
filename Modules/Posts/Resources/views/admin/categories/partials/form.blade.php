@@ -22,7 +22,6 @@
                 <span class="text-danger">{{ $errors->first('title') }}</span>
             </div>
         </div>
-
     </div>
 
     <div class="card-footer">

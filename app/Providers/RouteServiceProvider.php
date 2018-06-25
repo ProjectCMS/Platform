@@ -43,6 +43,25 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
+     * Define the "client" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapClientRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'client', 'auth:client'],
+            'prefix' => 'client',
+            'as' => 'client.',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/client.php');
+        });
+    }
+
+    /**
      * Define the "web" routes for the application.
      *
      * These routes all receive session state, CSRF protection, etc.

@@ -15,8 +15,8 @@ mix.sass('resources/scss/theme.scss', 'assets/css').options(
  |--------------------------------------------------------------------------
  |
  */
-mix.scripts(['../../Modules/**/compile/js/*.js'], 'assets/js/modules.min.js');
-mix.styles(['../../Modules/**/compile/css/*.css'], 'assets/css/modules.min.css');
+mix.scripts(['../../Modules/**/admin/compile/js/*.js'], 'assets/js/modules.min.js');
+mix.styles(['../../Modules/**/admin/compile/css/*.css'], 'assets/css/modules.min.css');
 
 mix.scripts([
                 nodeModules + 'jquery/dist/jquery.min.js',

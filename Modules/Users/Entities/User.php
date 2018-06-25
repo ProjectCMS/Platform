@@ -2,11 +2,13 @@
 
     namespace Modules\Users\Entities;
 
+    use GeneaLabs\LaravelModelCaching\Traits\Cachable;
     use Illuminate\Notifications\Notifiable;
     use Illuminate\Foundation\Auth\User as Authenticatable;
 
     class User extends Authenticatable {
         use Notifiable;
+        use Cachable;
 
         protected static $logAttributes = ['name', 'email'];
         protected static $logName       = 'Usuários';

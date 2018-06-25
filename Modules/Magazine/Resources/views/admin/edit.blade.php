@@ -29,11 +29,11 @@
                         <div class="card-body">
                             <h4 class="mt-0 header-title">Informações</h4>
                             <p><i class="fa fa-calendar"></i> Publicado:
-                                <b class="pull-right">{{ $data->publish_at }}</b></p>
+                                <b class="pull-right">{{ $data->publish_at_cm }}</b></p>
                             <p><i class="fa fa-calendar"></i> Criado:
-                                <b class="pull-right">{{ $data->created_at }}</b></p>
+                                <b class="pull-right">{{ $data->created_at_cm }}</b></p>
                             <p><i class="fa fa-calendar"></i> Editado:
-                                <b class="pull-right">{{ $data->updated_at }}</b></p>
+                                <b class="pull-right">{{ $data->updated_at_cm }}</b></p>
                         </div>
                         <div class="card-footer">
                             {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}

@@ -57,8 +57,6 @@ class DashboardServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //** Register admin template **//
-        \Theme::set('fonik');
     }
 
     /**

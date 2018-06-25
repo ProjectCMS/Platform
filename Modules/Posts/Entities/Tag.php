@@ -24,7 +24,7 @@
 
         public function posts ()
         {
-            return $this->belongsTo('Modules\Posts\Entities\PostTag', 'id', 'tag_id');
+            return $this->belongsToMany('Modules\Posts\Entities\Post', 'post_tags', 'tag_id', 'post_id');
         }
 
         public function search (Array $request)
@@ -39,5 +39,10 @@
             });
 
             return $tags;
+        }
+
+        public function getRouteKeyName()
+        {
+            return 'slug';
         }
     }

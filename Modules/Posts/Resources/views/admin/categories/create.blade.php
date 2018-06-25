@@ -24,6 +24,9 @@
                             {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
                         </div>
                     </div>
+
+                    @include('posts::admin.categories.partials.image')
+
                 </div>
             </div>
         </div>
