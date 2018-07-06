@@ -8,5 +8,8 @@ shipu/themevel
 barryvdh/laravel-debugbar
 predis/predis
 genealabs/laravel-model-caching
-composer require artesaos/seotools
+artesaos/seotools
 laravel/socialite
+paulvl/backup 3.*
+davejamesmiller/laravel-breadcrumbs:5.x
+mohd-isa/laravel-settings

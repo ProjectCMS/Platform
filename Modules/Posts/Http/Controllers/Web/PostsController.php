@@ -34,10 +34,12 @@
          */
         public function index ()
         {
-            $posts = $this->post->with(['images', 'tags', 'categories'])->paginate(10);
-            $seo   = $this->seo->setData('page', NULL, ["title" => "Blog"]);
+            $posts = $this->post->with(['images', 'tags', 'categories']);
+            $title = 'Blog';
+            $posts = $posts->orderBy('updated_at', 'DESC')->paginate(10);
+            $seo   = $this->seo->setData('page', NULL, compact('title'));
 
-            return view('posts::web.list', compact('posts'));
+            return view('posts::web.list', compact('posts', 'seo'));
         }
 
         public function tag (Tag $tag)
@@ -46,7 +48,7 @@
             $posts = $data->posts()->with(['images', 'tags', 'categories'])->paginate(10);
             $seo   = $this->seo->setData('tag', $data);
 
-            return view('posts::web.list', compact('data', 'posts'));
+            return view('posts::web.list', compact('data', 'posts', 'seo'));
         }
 
         public function category (Category $category)
@@ -55,7 +57,7 @@
             $posts = $data->posts()->with(['images', 'tags', 'categories'])->paginate(10);
             $seo   = $this->seo->setData('category', $data);
 
-            return view('posts::web.list', compact('data', 'posts'));
+            return view('posts::web.list', compact('data', 'posts', 'seo'));
         }
 
         /**
@@ -69,8 +71,7 @@
             $next = Post::where('id', '>', $post->id)->first();
             $seo  = $this->seo->setData('post', $post);
 
-            return view('posts::web.show', compact('post', 'prev', 'next'));
+            return view('posts::web.show', compact('post', 'prev', 'next', 'seo'));
         }
-
 
     }

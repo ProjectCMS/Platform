@@ -21,12 +21,14 @@
                 $table->integer('order')->nullable();
                 $table->string('seo_token');
                 $table->integer('status_id')->unsigned();
+                $table->integer('template_id')->nullable()->unsigned();
                 $table->softDeletes();
                 $table->timestamps();
             });
 
             Schema::table('pages', function(Blueprint $table) {
                 $table->foreign('status_id')->references('id')->on('status');
+                $table->foreign('template_id')->references('id')->on('page_templates');
             });
 
         }

@@ -9,12 +9,21 @@
 
         use Cachable;
 
+        protected $hidden   = ['path'];
         protected $fillable = ['magazine_id', 'path', 'order', 'subscriber'];
         protected $appends  = ['url'];
 
         public function getUrlAttribute ()
         {
+            /*
+                Verifica se usuário está logado
+            */
+            if ($this->subscriber == 1 && (!auth('client')->user() && !auth('user')->user())) {
+                return NULL;
+            }
+
             return asset('storage/' . $this->path);
+
         }
 
         public function managerItems ($magazine_id, $items)

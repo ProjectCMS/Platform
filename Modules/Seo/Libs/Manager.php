@@ -12,8 +12,7 @@
 
         public function setData ($type = NULL, $model = NULL, $custom = [])
         {
-
-            // Default
+            $titleSeo    = NULL;
             $title       = setting('site_name');
             $description = setting('site_description');
             $url         = url()->current();
@@ -28,7 +27,8 @@
                     $prev = Post::where('id', '<', $model->id)->orderBy('id', 'desc')->first();
                     $next = Post::where('id', '>', $model->id)->first();
 
-                    $title       = $model->seo->seo_title . ' - ' . $title;
+                    $titleSeo    = $model->seo->seo_title;
+                    $title       = $titleSeo . ' - ' . $title;
                     $description = $model->seo->seo_content;
                     $url         = route('web.posts.' . $model->slug);
                     $keywords    = explode(', ', $model->seo->seo_keywords);
@@ -63,7 +63,8 @@
                     break;
 
                 case 'category':
-                    $title = $model->title . ' - ' . $title;
+                    $titleSeo = $model->title;
+                    $title    = $titleSeo . ' - ' . $title;
                     if ($model->image != NULL) {
                         OpenGraph::addImage([
                             'url'  => asset('storage/' . $model->image),
@@ -73,18 +74,21 @@
                     break;
 
                 case 'tag':
-                    $title = $model->title . ' - ' . $title;
+                    $titleSeo = $model->title;
+                    $title    = $titleSeo . ' - ' . $title;
                     break;
 
                 case 'page':
                     if ($model != NULL) {
-                        $title       = $model->seo->seo_title . ' - ' . $title;
+                        $titleSeo    = $model->seo->seo_title;
+                        $title       = $titleSeo . ' - ' . $title;
                         $description = $model->seo->seo_content;
                         $url         = route('web.pages.' . $model->slug);
                         $keywords    = explode(', ', $model->seo->seo_keywords);
                     }
                     if ($custom) {
-                        $title = $custom->title . ' - ' . $title;
+                        $titleSeo = $custom->title;
+                        $title    = $titleSeo . ' - ' . $title;
                     }
                     break;
 
@@ -101,6 +105,11 @@
             OpenGraph::setUrl($url);
             OpenGraph::addProperty('locale', 'pt-br');
             OpenGraph::setSiteName(setting('site_name'));
+
+            $title = $titleSeo;
+
+            return (object)compact('title', 'description', 'url');
+
         }
 
     }

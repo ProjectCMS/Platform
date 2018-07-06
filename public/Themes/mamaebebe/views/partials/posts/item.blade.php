@@ -1,5 +1,5 @@
 <div class="post" title="{{ $post->title }}">
-    <a href="{{ url($post->slug) }}">
+    <a href="{{ route('web.posts.'.$post->slug) }}">
         <div class="box-image">
             @if($post->images->count())
                 <img src="{{ asset('storage/'.$post->images->first()->path) }}" class="no-image">
@@ -19,7 +19,7 @@
         <h3><a href="{{ url($post->slug) }}">{{ $post->title }}</a></h3>
         <p>{{ str_limit(strip_tags($post->content), 205, '[...]') }}</p>
         <div class="meta">
-            <span class="date"><i class="fa fa-clock-o"></i> {{ $post->updated_at_cm }}</span>
+            <span class="date"><i class="fa fa-clock-o"></i> {{ $post->created_at_cm }}</span>
         </div>
     </div>
     <ul class="social list-inline">

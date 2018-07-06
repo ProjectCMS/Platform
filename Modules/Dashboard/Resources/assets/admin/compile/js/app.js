@@ -190,19 +190,29 @@
 
         $(window).on("resize load", function () {
             var w = $('body').width();
-            if (w >= 1920) {
-                grid.attr('data-columns', 6);
-            } else if (w >= 1780 && w < 1920) {
-                grid.attr('data-columns', 5);
-            } else if (w >= 1480 && w < 1780) {
-                grid.attr('data-columns', 4);
-            } else if (w >= 1080 && w < 1480) {
-                grid.attr('data-columns', 3);
-            } else if (w >= 880 && w < 1080) {
-                grid.attr('data-columns', 2);
-            } else {
+            if(w <= 576){
                 grid.attr('data-columns', 1);
+            }else if(w > 576 && w <= 768){
+                grid.attr('data-columns', 3);
+            }else if(w > 768 && w <= 1200){
+                grid.attr('data-columns', 4);
+            }else{
+                grid.attr('data-columns', 5);
             }
+
+            // if (w >= 1920) {
+            //     grid.attr('data-columns', 6);
+            // } else if (w >= 1780 && w < 1920) {
+            //     grid.attr('data-columns', 5);
+            // } else if (w >= 1480 && w < 1780) {
+            //     grid.attr('data-columns', 4);
+            // } else if (w >= 1080 && w < 1480) {
+            //     grid.attr('data-columns', 3);
+            // } else if (w >= 880 && w < 1080) {
+            //     grid.attr('data-columns', 2);
+            // } else {
+            //     grid.attr('data-columns', 1);
+            // }
         });
     }
 

@@ -20,11 +20,11 @@
             </div>
 
             <div class="row">
-                <div class="col-xl-9 col-lg-8 col-md-12">
+                <div class="col-12 col-lg">
                     @include('posts::admin.tags.partials.form')
                 </div>
 
-                <div class="col-xl-3 col-lg-4 col-md-12">
+                <div class="col col-flex flex-400">
                     <div class="card m-b-20">
                         <div class="card-body">
                             <h4 class="mt-0 header-title">Informações</h4>

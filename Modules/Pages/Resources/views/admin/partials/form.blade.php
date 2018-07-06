@@ -27,6 +27,14 @@
             </div>
 
             <div class="col-md-6">
+                <div class="form-group {{ $errors->has('template_id') ? 'has-error' : '' }}">
+                    {{ Form::label('template_id', 'Template') }}
+                    {{ Form::select('template_id', $template, NULL, ['class' => 'form-control select2']) }}
+                    <span class="text-danger">{{ $errors->first('template_id') }}</span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                     {{ Form::label('title', 'Título da página') }}
                     {{ Form::text('title', NULL, ['class' => 'form-control']) }}

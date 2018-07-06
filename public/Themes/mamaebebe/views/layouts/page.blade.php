@@ -5,14 +5,12 @@
     </div>
     <nav aria-label="breadcrumb" class="cm-breadcrumb">
         <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Library</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data</li>
-            </ol>
+            @yield('page_breadcrumb')
         </div>
     </nav>
     <div class="container">
-        @yield('page_content')
+        <div class="page-content mt-4">
+                @yield('page_content')
+        </div>
     </div>
 @stop

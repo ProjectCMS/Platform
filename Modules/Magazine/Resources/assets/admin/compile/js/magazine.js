@@ -49,49 +49,51 @@ var listPDF = $(".grid")
 
     Magazine.prototype.pngToPDF = function (index, item) {
         pdfjsLib.disableStream = true;
-        var loadingTask        = pdfjsLib.getDocument(item.url);
+        if(item.url) {
+            var loadingTask = pdfjsLib.getDocument(item.url);
 
-        var list    = $app.grid.append('<div class="item sortable" id="' + item.id + '">' +
-            '<div class="pdf-content item-content" data-id="' + item.id + '" data-path="' + item.path + '" data-subscriber="' + item.subscriber + '">\n' +
-            '<div id="dropdown" class="btn-group-sm">\n' +
-            '<button class="dripicons-gear btn btn-primary" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>\n' +
-            '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">\n' +
-            '<a class="dropdown-item text-muted item-subscriber" href="#"><i class="ti-medall text-warning"></i> Apenas inscritos</a>\n' +
-            '<div class="dropdown-divider"></div>\n' +
-            '<a class="dropdown-item text-muted item-delete" href="#"><i class="ti-trash text-danger"></i> Deletar</a>\n' +
-            '</div>\n' +
-            '</div>\n' +
-            '<div class="load"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i>\n' +
-            '<span>Carregando...</span></div>' +
-            '</div>' +
-            '</div>'),
-            content = list.find('#' + item.id);
+            var list    = $app.grid.append('<div class="item sortable" id="' + item.id + '">' +
+                '<div class="pdf-content item-content" data-id="' + item.id + '" data-path="' + item.path + '" data-subscriber="' + item.subscriber + '">\n' +
+                '<div id="dropdown" class="btn-group-sm">\n' +
+                '<button class="dripicons-gear btn btn-primary" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>\n' +
+                '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">\n' +
+                '<a class="dropdown-item text-muted item-subscriber" href="#"><i class="ti-medall text-warning"></i> Apenas inscritos</a>\n' +
+                '<div class="dropdown-divider"></div>\n' +
+                '<a class="dropdown-item text-muted item-delete" href="#"><i class="ti-trash text-danger"></i> Deletar</a>\n' +
+                '</div>\n' +
+                '</div>\n' +
+                '<div class="load"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i>\n' +
+                '<span>Carregando...</span></div>' +
+                '</div>' +
+                '</div>'),
+                content = list.find('#' + item.id);
 
-        loadingTask.promise.then(function (pdf) {
+            loadingTask.promise.then(function (pdf) {
 
-            // Fetch the first page
-            var pageNumber = 1;
-            pdf.getPage(pageNumber).then(function (page) {
+                // Fetch the first page
+                var pageNumber = 1;
+                pdf.getPage(pageNumber).then(function (page) {
 
-                var viewport  = page.getViewport(1),
-                    canvas    = document.createElement('canvas'),
-                    context   = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width  = viewport.width;
+                    var viewport  = page.getViewport(1),
+                        canvas    = document.createElement('canvas'),
+                        context   = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width  = viewport.width;
 
-                // Render PDF page into canvas context
-                var renderContext = {
-                    canvasContext: context,
-                    viewport: viewport
-                };
-                page.render(renderContext).then(function () {
-                    content.find('.pdf-content').append('<img src="' + canvas.toDataURL('image/jpeg', 1.0) + '">');
+                    // Render PDF page into canvas context
+                    var renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    page.render(renderContext).then(function () {
+                        content.find('.pdf-content').append('<img src="' + canvas.toDataURL('image/jpeg', 1.0) + '">');
+                    });
+
                 });
-
+            }, function (reason) {
+                console.error(reason);
             });
-        }, function (reason) {
-            console.error(reason);
-        });
+        }
     }
 
     Magazine.prototype.actionItems = function () {

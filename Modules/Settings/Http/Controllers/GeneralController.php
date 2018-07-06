@@ -43,7 +43,7 @@
             $request = $request->except(['_method', '_token']);
 
             foreach ($request as $key => $value) {
-                Setting::set($key, $value);
+                \Modules\Settings\Entities\Setting::set($key, $value);
             }
 
             return back()->with('status-success', 'Dados atualizado com sucesso');

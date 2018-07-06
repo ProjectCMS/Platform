@@ -51,7 +51,7 @@
                                      ->take(14)
                                      ->get();
 
-            return view('pages::web.index', compact('postsFixed', 'postsMain'));
+            return view('pages::web.index', compact('postsFixed', 'postsMain', 'seo'));
         }
 
         /**
@@ -60,9 +60,9 @@
          */
         public function show (Page $page)
         {
-            $page = $this->page->findOrFail($page->id);
+            $page = $this->page->with('seo', 'template')->findOrFail($page->id);
             $seo  = $this->seo->setData('page', $page);
-            return view('pages::web.show', compact('page'));
+            return view('pages::web.show', compact('page', 'seo'));
         }
 
 

@@ -1,4 +1,6 @@
-<!doctype html>
+
+
+        <!doctype html>
 <html lang="pt-br" class="bg">
 <head>
     <meta charset="UTF-8">
@@ -18,53 +20,56 @@
 <body>
 
 <div class="overlay"></div>
-<div class="loader"></div>
+<div class="loader-content">
+    <div class="loader"></div>
+</div>
+
 <div class="main-content">
 
     <header class="header">
-        <div class="header-top"></div>
-
-        <div class="nav-content">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container">
-
-                    <div class="collapse navbar-collapse" id="navbar">
-                        @include('partials.menu.top.item')
-                        <div href class="user">
-                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                            @if($client)
-                                <span>Olá, {{ $client->name }}</span>
-                                <span>
-                                    <a href="#">Minha conta</a>
-                                    @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
-                                        <a href="#">Sair</a>
-                                    @else
-                                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
-                                        <form id="logout-form" action="{{ route('web.clients.logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    @endif
-                            </span>
-                            @else
-                                <span>Olá, visitante!</span>
-                                <span>
-                                <a href="#" data-toggle="modal" data-target="#modal-login" data-event="register">Cadastre-se</a>
-                                <a href="#" data-toggle="modal" data-target="#modal-login" data-event="login">Login</a>
-                            </span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-
-        <div class="logo">
+        <div class="header-top">
             <div class="container">
-                <a href="{{ url('') }}"><img src="{{ asset('storage/logo.png') }}" height="40"></a>
-                <i class="fa fa-bars sidebar-collapse"></i>
+                <ul class="nav pull-left">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-link" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-link" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-link" href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+                <ul class="nav justify-content-end pull-right">
+                    @if($client)
+                        <li class="nav-item"><a class="nav-link btn btn-link" href="#">Minha conta</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
+                            <form id="logout-form" action="{{ route('web.clients.logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-link" href="#" data-toggle="modal" data-target="#modal-login" data-event="register">Cadastre-se</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-link" href="#" data-toggle="modal" data-target="#modal-login" data-event="login">Login</a>
+                        </li>
+                    @endif
+                </ul>
             </div>
         </div>
 
+        <div class="header-content">
+            <div id="app" class="container">
+                <nav class="navbar navbar-expand-lg navbar-light" id="nav-top">
+                    <div id="navbarNavDropdown" class="navbar-collapse collapse">
+                        @include ('partials.menu.top.item')
+                    </div>
+                </nav>
+            </div>
+        </div>
     </header>
 
     <div class="page-content">
@@ -135,7 +140,7 @@
 </footer>
 
 @if(!$client)
-    @include('partials.modal_login')
+    @include('partials.account.form.modal')
 @endif
 
 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b28232fa7603d0012fa8517&product=inline-share-buttons' async='async'></script>

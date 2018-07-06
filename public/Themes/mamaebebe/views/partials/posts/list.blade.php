@@ -1,5 +1,12 @@
 @extends('layouts.page')
-@section('page_title', (isset($data->title) ? $data->title : 'Blog'))
+@section('page_title', $seo->title)
+@section('page_breadcrumb')
+    @if(isset($data->title))
+        {{ Breadcrumbs::render('post.partial', $data) }}
+    @else
+        {{ Breadcrumbs::render('post') }}
+    @endif
+@stop
 @section('page_content')
     <section class="mt-5">
         <div class="container">

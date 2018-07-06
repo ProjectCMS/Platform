@@ -1,8 +1,11 @@
 @extends('layouts.post')
-@section('post_title', $post->title)
+@section('post_title', $seo->title)
 @section('post_date', $post->updated_at_cm)
 @section('post_content')
     {!! $post->content !!}
+@stop
+@section('post_breadcrumb')
+    {{ Breadcrumbs::render('post.item', $post) }}
 @stop
 @section('post_images')
     @if($post->images->count())

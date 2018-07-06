@@ -11,7 +11,7 @@
         use FormatDates;
         use Cachable;
 
-        protected $fillable = ['title', 'status_id', 'publish_at'];
+        protected $fillable = ['title', 'image', 'status_id', 'publish_at'];
 
         public function status ()
         {

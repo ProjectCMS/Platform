@@ -6,7 +6,7 @@
                 @foreach($postsFixed as $post)
                     <article>
                         <div class="content">
-                            <a href="{{ url($post->slug) }}">
+                            <a href="{{ route('web.posts.'.$post->slug) }}">
                                 <div class="box-image">
                                     @if($post->images->count())
                                         <img src="{{ asset('storage/'.$post->images->first()->path) }}" class="no-image">
@@ -19,7 +19,7 @@
                                 @if($post->categories->count())
                                     <div class="post-categories">
                                         @foreach($post->categories->slice(0, 1) as $category)
-                                            <span><a href="">{{ $category->title }}</a></span>
+                                            <span><a href="{{ route('web.posts.category', $category->slug) }}">{{ $category->title }}</a></span>
                                         @endforeach
                                     </div>
                                 @endif

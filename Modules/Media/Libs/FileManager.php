@@ -99,7 +99,8 @@
             $request = $this->data;
             if ($request->file) {
                 foreach ($request->file as $key => $file) {
-                    $file->storeAs('public' . DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR . @base64_decode($request->dir), $file->getClientOriginalName());
+                    $filename = str_slug(preg_replace('/\..+$/', '', $file->getClientOriginalName())) . '.' . $file->getClientOriginalExtension();
+                    $file->storeAs('public' . DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR . @base64_decode($request->dir), $filename);
                 }
             }
         }

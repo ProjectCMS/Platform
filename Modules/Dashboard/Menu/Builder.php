@@ -25,6 +25,18 @@
             }
         }
 
+        public function findBy ($key, $value)
+        {
+            return collect($this->menu)->filter(function($item) use ($key, $value) {
+                return $item[$key] == $value;
+            })->first();
+        }
+
+        public function aaaa ()
+        {
+            return $this;
+        }
+
         public function transformItems ($items)
         {
             return array_filter(array_map([$this, 'applyFilters'], $items));

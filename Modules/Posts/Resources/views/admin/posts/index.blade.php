@@ -16,11 +16,11 @@
                         {!! Form::open(['route' => 'admin.posts', 'method' => 'get', 'class' => 'form-inline ml-auto']) !!}
 
                         <div class="form-group mr-sm-2">
-                            {{ Form::select('date', $dates, '', ['class' => 'form-control']) }}
+                            {{ Form::select('date', $dates, NULL, ['class' => 'form-control']) }}
                         </div>
 
                         <div class="form-group mr-sm-2">
-                            {{ Form::select('category_id', $categories, '', ['class' => 'form-control']) }}
+                            {{ Form::select('category_id', $categories, NULL, ['class' => 'form-control']) }}
                         </div>
 
                         <div class="form-group mr-sm-2">

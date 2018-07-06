@@ -156,4 +156,9 @@
             return $posts;
         }
 
+        public function getRouteKeyName()
+        {
+            return 'slug';
+        }
+
     }

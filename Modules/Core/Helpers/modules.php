@@ -27,16 +27,7 @@
 
         function setting ($key, $default = NULL)
         {
-            if (is_null($key)) {
-                return new \Modules\Settings\Entities\Setting();
-            }
-
-            if (is_array($key)) {
-                return \Modules\Settings\Entities\Setting::set($key[0], $key[1]);
-            }
-
-            $value = \Modules\Settings\Entities\Setting::get($key);
-
+            $value = \Modules\Settings\Entities\Setting::get($key, $default);
             return is_null($value) ? value($default) : $value;
         }
     }

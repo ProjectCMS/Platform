@@ -19,7 +19,7 @@
 </div>
 
 <div class="row">
-    <div class="col">
+    <div class="col col-flex flex-350">
         <div class="card m-b-20">
             <div id="accordion">
                 <div class="card">
@@ -67,7 +67,7 @@
 
         </div>
     </div>
-    <div class="col-lg-9">
+    <div class="col-12 col-lg">
         <div class="card m-b-20">
             <div class="card-header">
                 <div class="form-inline">

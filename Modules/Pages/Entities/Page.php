@@ -16,7 +16,16 @@
         protected static $logAttributes = ['title', 'content'];
         protected static $logName       = 'Páginas';
 
-        protected $fillable = ['parent_id', 'title', 'slug', 'order', 'content', 'seo_token', 'status_id'];
+        protected $fillable = [
+            'parent_id',
+            'title',
+            'slug',
+            'order',
+            'content',
+            'seo_token',
+            'status_id',
+            'template_id'
+        ];
         protected $dates    = ['deleted_at'];
 
         public function setTitleAttribute ($value)
@@ -44,6 +53,11 @@
             return $this->hasMany('Modules\Pages\Entities\Page', 'parent_id', 'id');
         }
 
+        public function template ()
+        {
+            return $this->belongsTo('Modules\Pages\Entities\PageTemplate');
+        }
+
         public function seo ()
         {
             return $this->belongsTo('Modules\Seo\Entities\Seo', 'seo_token', 'seo_token');
@@ -51,7 +65,7 @@
 
         public function menuItem ()
         {
-            return $this->belongsTo('Modules\Menus\Entities\MenuItem', 'id', 'provider_id')->where(function ($query) {
+            return $this->belongsTo('Modules\Menus\Entities\MenuItem', 'id', 'provider_id')->where(function($query) {
                 return $query->whereProviderModel('\Modules\Pages\Entities\Page');
             });
         }

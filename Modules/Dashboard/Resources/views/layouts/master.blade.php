@@ -1,5 +1,4 @@
 @extends('fonik::layouts.master')
-
 @section('css')
 
     @yield('dashboard_css')

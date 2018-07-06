@@ -7,3 +7,9 @@
         }
     }
 }
+
+@media (max-width: 992px) {
+    .col-flex{
+        flex: 0 0 100% !important;
+    }
+}

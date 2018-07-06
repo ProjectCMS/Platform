@@ -30259,9 +30259,10 @@ File: Responsive
 
 /***** BTN *****/
 .btn {
-  font-size: .9571em;
+  font-size: .8571em;
   border-radius: 0;
-  padding: 10px 18px 10px 18px;
+  padding: 11.5px 18px 11.5px 18px;
+  text-transform: uppercase;
 }
 
 .btn.btn-round {
@@ -30368,6 +30369,38 @@ File: Responsive
 
 #accordion .card-header a:hover:after {
   color: #333;
+}
+
+/***** NAV TABS *****/
+.nav-pills .nav-link {
+  text-transform: uppercase;
+  padding: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 0;
+}
+
+.nav-pills .nav-link i {
+  margin-right: 5px;
+}
+
+/***** FLEXBOX *****/
+.col-flex.flex-350 {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 350px;
+          flex: 0 0 350px;
+}
+
+.col-flex.flex-400 {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 400px;
+          flex: 0 0 400px;
+}
+
+.col-flex.flex-450 {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 450px;
+          flex: 0 0 450px;
 }
 
 .ui-autocomplete {
@@ -30601,6 +30634,14 @@ div.mce-fullscreen {
     font-size: 12px;
     padding-left: 12px;
     padding-right: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  .col-flex {
+    -webkit-box-flex: 0 !important;
+        -ms-flex: 0 0 100% !important;
+            flex: 0 0 100% !important;
   }
 }
 

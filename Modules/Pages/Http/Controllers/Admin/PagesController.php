@@ -8,6 +8,7 @@
 
     use Modules\Core\Entities\Status;
     use Modules\Pages\Entities\Page;
+    use Modules\Pages\Entities\PageTemplate;
     use Modules\Seo\Entities\Seo;
     use Modules\Pages\Http\Requests\CreateRequest;
     use Modules\Pages\Http\Requests\UpdateRequest;
@@ -26,12 +27,17 @@
          * @var Seo
          */
         private $seo;
+        /**
+         * @var PageTemplate
+         */
+        private $pageTemplate;
 
-        public function __construct (Page $page, Status $status, Seo $seo)
+        public function __construct (Page $page, Status $status, Seo $seo, PageTemplate $pageTemplate)
         {
-            $this->page = $page;
-            $this->status = $status;
-            $this->seo = $seo;
+            $this->page         = $page;
+            $this->status       = $status;
+            $this->seo          = $seo;
+            $this->pageTemplate = $pageTemplate;
         }
 
         /**
@@ -52,12 +58,11 @@
          */
         public function create ()
         {
-            $parent = $this->page->where('parent_id', 0)
-                                 ->pluck('title', 'id')
-                                 ->prepend('# Página Principal', 0);
-            $status = $this->status->pluck('title', 'id');
+            $parent   = $this->page->where('parent_id', 0)->pluck('title', 'id')->prepend('# Página Principal', 0);
+            $status   = $this->status->pluck('title', 'id');
+            $template = $this->pageTemplate->pluck('title', 'id')->prepend('Todos os templates', '');
 
-            return view('pages::admin.create', compact('parent', 'status'));
+            return view('pages::admin.create', compact('parent', 'status', 'template'));
         }
 
         /**
@@ -99,17 +104,18 @@
          */
         public function edit ($id)
         {
-            $data   = $this->page->with(['seo'])->find($id);
-            $parent = $this->page->where([["id", "!=", $id], ["parent_id", "=", 0]])
-                                  ->pluck('title', 'id')
-                                  ->prepend('Página Principal', 0);
-            $status = $this->status->pluck('title', 'id');
+            $data     = $this->page->with(['seo'])->find($id);
+            $parent   = $this->page->where([["id", "!=", $id], ["parent_id", "=", 0]])
+                                   ->pluck('title', 'id')
+                                   ->prepend('Página Principal', 0);
+            $status   = $this->status->pluck('title', 'id');
+            $template = $this->pageTemplate->pluck('title', 'id')->prepend('Todos os templates', '');
 
             if (!$data) {
                 return redirect()->route('admin.pages');
             }
 
-            return view('pages::admin.edit', compact('data', 'parent', 'status'));
+            return view('pages::admin.edit', compact('data', 'parent', 'status', 'template'));
         }
 
         /**

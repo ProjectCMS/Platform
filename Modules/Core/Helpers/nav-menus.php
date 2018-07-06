@@ -42,7 +42,6 @@
             if ($location) {
                 $value = $value->where('location', $location)->first();
             }
-
             return $value;
         }
     }
