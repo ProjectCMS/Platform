@@ -10,6 +10,6 @@ predis/predis
 genealabs/laravel-model-caching
 artesaos/seotools
 laravel/socialite
-paulvl/backup 3.*
 davejamesmiller/laravel-breadcrumbs:5.x
 mohd-isa/laravel-settings
+pragmarx/tracker

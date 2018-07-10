@@ -31,6 +31,17 @@
 
         public function __construct (Page $page, Post $post, Category $category, Manager $seo)
         {
+            $sessions = \Tracker::sessions(60 * 24);
+            foreach ($sessions as $session) {
+                dump($session->user->email);
+                dump($session->device->kind . ' - ' . $session->device->platform);
+                dump($session->agent->browser . ' - ' . $session->agent->browser_version);
+                dump($session->toArray());
+            }
+
+            $pageViews = \Tracker::pageViews(60 * 24 * 30);
+            dump($pageViews->toArray());
+
             $this->page     = $page;
             $this->post     = $post;
             $this->category = $category;
@@ -43,7 +54,7 @@
          */
         public function index ()
         {
-            $seo = $this->seo->setData();
+            $seo        = $this->seo->setData();
             $postsFixed = $this->post->with(['images', 'categories'])->where('status_id', 2)->get();
             $postsMain  = $this->post->with(['images', 'categories'])
                                      ->where('status_id', 1)
@@ -62,6 +73,7 @@
         {
             $page = $this->page->with('seo', 'template')->findOrFail($page->id);
             $seo  = $this->seo->setData('page', $page);
+
             return view('pages::web.show', compact('page', 'seo'));
         }
 

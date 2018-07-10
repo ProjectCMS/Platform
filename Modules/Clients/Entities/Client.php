@@ -5,6 +5,7 @@ namespace Modules\Clients\Entities;
 use Modules\Clients\Notifications\ClientResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Auth;
 
 class Client extends Authenticatable
 {
@@ -43,4 +44,15 @@ class Client extends Authenticatable
     {
         return $this->hasMany('Modules\Clients\Entities\SocialAccount');
     }
+
+    public static function check()
+    {
+        return Auth::guard('client')->check();
+    }
+
+    public static function user()
+    {
+        return Auth::guard('client')->user();
+    }
+
 }
