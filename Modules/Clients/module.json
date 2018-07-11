@@ -3,7 +3,7 @@
     "alias": "clients",
     "description": "",
     "keywords": [],
-    "active": 0,
+    "active": 1,
     "order": 0,
     "providers": [
         "Modules\\Clients\\Providers\\ClientsServiceProvider"
