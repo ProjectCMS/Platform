@@ -1,6 +1,5 @@
 <?php
 
-    return false;
     $pages = \Modules\Pages\Entities\Page::all();
 
     Breadcrumbs::for('page', function ($trail, $page) {

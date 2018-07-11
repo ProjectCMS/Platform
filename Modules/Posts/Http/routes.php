@@ -1,6 +1,5 @@
 <?php
 
-    return false;
     $posts = \Modules\Posts\Entities\Post::all();
 
     /*
