@@ -51,7 +51,7 @@
                 'collation'   => 'utf8mb4_unicode_ci',
                 'prefix'      => '',
                 'strict'      => TRUE,
-                'engine'      => NULL,
+                'engine'      => 'InnoDB ROW_FORMAT=DYNAMIC',
             ],
 
             'pgsql' => [
@@ -90,7 +90,7 @@
                 'collation'   => 'utf8mb4_unicode_ci',
                 'prefix'      => '',
                 'strict'      => false,
-                'engine'      => NULL,
+                'engine'      => 'InnoDB ROW_FORMAT=DYNAMIC',
             ],
 
         ],
