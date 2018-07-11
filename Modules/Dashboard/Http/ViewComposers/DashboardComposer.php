@@ -12,9 +12,7 @@
          */
         private $dashboard;
 
-        public function __construct(
-            Dashboard $dashboard
-        ) {
+        public function __construct(Dashboard $dashboard) {
             $this->dashboard = $dashboard;
         }
 

@@ -1,6 +1,10 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'tracker', 'namespace' => 'Modules\Tracker\Http\Controllers'], function()
-{
-    Route::get('/', 'TrackerController@index');
-});
+    Route::group([
+        'middleware' => ['web', 'user', 'auth:user', 'theme_admin'],
+        'prefix'     => 'admin/tracker',
+        'namespace'  => 'Modules\Tracker\Http\Controllers',
+        'as'         => 'admin.'
+    ], function() {
+        Route::get('/', 'TrackerController@index')->name('tracker');
+    });

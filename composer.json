@@ -26,7 +26,8 @@
         "nwidart/laravel-modules": "^3.1",
         "pragmarx/tracker": "^3.3",
         "predis/predis": "^1.1",
-        "shipu/themevel": "^1.6"
+        "shipu/themevel": "^1.6",
+        "orangehill/iseed": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

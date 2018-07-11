@@ -7,5 +7,4 @@
         'as'         => 'admin.'
     ], function() {
         Route::get('/home', 'DashboardController@index')->name('home');
-
     });

@@ -21,10 +21,12 @@
     "jquery-ui-dist": "^1.12.1",
     "jquery.nicescroll": "^3.7.6",
     "jquery.scrollto": "^2.1.2",
+    "morris.js": "^0.5.0",
     "nestable2": "^1.6.0",
     "npm": "^5.8.0",
     "pdfjs-dist": "^2.0.489",
     "popper.js": "^1.14.3",
+    "raphael": "^2.2.7",
     "tinymce": "^4.7.12"
   }
 }

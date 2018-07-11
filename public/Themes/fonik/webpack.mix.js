@@ -27,6 +27,8 @@ mix.scripts([
                 nodeModules + 'jquery.scrollto/jquery.scrollTo.min.js',
                 nodeModules + 'jquery.nicescroll/dist/jquery.nicescroll.min.js',
                 nodeModules + 'nestable2/dist/jquery.nestable.min.js',
+                nodeModules + 'morris.js/morris.min.js',
+                nodeModules + 'raphael/raphael.min.js',
 
                 nodeModules + 'pdfjs-dist/build/pdf.min.js',
                 nodeModules + 'pdfjs-dist/build/pdf.worker.min.js',
@@ -37,5 +39,6 @@ mix.scripts([
 mix.styles([
                nodeModules + 'jquery-ui-dist/jquery-ui.min.css',
                nodeModules + 'jquery-ui-dist/jquery-ui.theme.min.css',
-               nodeModules + 'nestable2/dist/jquery.nestable.min.css'
+               nodeModules + 'nestable2/dist/jquery.nestable.min.css',
+               nodeModules + 'morris.js/morris.css'
            ], 'assets/css/libs.min.css');
