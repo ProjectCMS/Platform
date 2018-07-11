@@ -148,7 +148,7 @@
          */
         public function registerComposers ()
         {
-
+return false;
             $magazine = \Modules\Magazine\Entities\Magazine::with('files')->get();
 
             view()->composer('*', function($view) use ($magazine) {
