@@ -24,7 +24,7 @@
                                     </div>
                                 @endif
                                 <h3>
-                                    <a href="{{ url($post->slug) }}">{{ $post->title }}</a>
+                                    <a href="{{ route('web.posts.'.$post->slug) }}">{{ $post->title }}</a>
                                 </h3>
                                 <div class="meta">
                                     <span class="date"><i class="fa fa-clock-o"></i> {{ $post->updated_at_cm }}</span>

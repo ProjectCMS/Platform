@@ -2,6 +2,7 @@
 
     namespace Modules\Posts\Providers;
 
+    use Illuminate\Support\Facades\View;
     use Illuminate\Support\ServiceProvider;
     use Illuminate\Database\Eloquent\Factory;
     use Illuminate\Contracts\Events\Dispatcher;
@@ -62,7 +63,6 @@
             $this->registerViews();
             $this->registerFactories();
             $this->registerComposers();
-            $this->registerRoutes();
             $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
             /** Menu **/
@@ -151,85 +151,15 @@
         }
 
         /**
-         * Register default routes
-         */
-        public function registerRoutes ()
-        {
-            /** @var Router $router */
-            $router = app()->make('router');
-
-            try {
-
-                /** @var $posts */
-                $posts = \Modules\Posts\Entities\Post::all();
-
-                $router->group([
-                    'middleware' => ['web', 'theme_web'],
-                    'namespace'  => 'Modules\Posts\Http\Controllers\Web',
-                    'as'         => 'web.'
-                ], function() use ($router, $posts) {
-
-                    $posts->each(function($post) use ($router) {
-
-                        $year  = $post->created_at->format('Y');
-                        $month = $post->created_at->format('m');
-                        $day   = $post->created_at->format('d');
-
-                        $router->get("{$post->id}-{$post->slug}", 'PostsController@show')
-                               ->name('posts.' . $post->slug)
-                               ->defaults('post', $post);
-
-                        $router->get("{$year}/{$month}/{$day}/{$post->slug}", 'PostsController@show')
-                               ->name('posts.date.' . $post->slug)
-                               ->defaults('post', $post);
-                    });
-
-                });
-
-            } catch (\Exception $e) {
-
-            }
-        }
-
-        /**
          * Register an additional composer.
          *
          * @return void
          */
         public function registerComposers ()
         {
-            $outherPosts   = NULL;
-            $postsCategory = NULL;
-            $tags          = NULL;
-
-            view()->composer('*', function($view) use ($postsCategory) {
-
-                $postsCategory = \Modules\Posts\Entities\Category::withCount('posts')->with([
-                    'posts.images',
-                    'posts.categories'
-                ])->orderBy('posts_count', 'DESC')->take(3)->get();
-
-                $view->with('postsCategory', $postsCategory);
-            });
-
-            view()->composer('*', function($view) use ($outherPosts) {
-
-                $outherPosts = \Modules\Posts\Entities\Post::with('images')
-                                                           ->limit(4)
-                                                           ->orderBy('updated_at', 'DESC')
-                                                           ->get();
-
-                $view->with('outherPosts', $outherPosts);
-            });
-
-            view()->composer('*', function($view) use ($tags) {
-
-                $tags = \Modules\Posts\Entities\Tag::withCount('posts')
-                                                   ->limit(20)
-                                                   ->orderBy('posts_count', 'DESC')
-                                                   ->get();
-
-                $view->with('tags', $tags);
-            });
+            View::composer([
+                'pages::web.index',
+                'posts::web.*'
+            ], 'Modules\Posts\Http\ViewComposers\PostComposer');
         }
     }

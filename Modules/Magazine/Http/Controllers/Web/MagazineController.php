@@ -25,7 +25,8 @@
          */
         public function index ()
         {
-            return view('magazine::index');
+            $magazine = $this->magazine->with('files')->get();
+            return view('magazine::index', compact('magazine'));
         }
 
         /**

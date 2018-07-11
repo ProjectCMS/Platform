@@ -3,6 +3,7 @@
     namespace Modules\Magazine\Providers;
 
     use Illuminate\Contracts\Events\Dispatcher;
+    use Illuminate\Support\Facades\View;
     use Illuminate\Support\ServiceProvider;
     use Illuminate\Database\Eloquent\Factory;
     use Modules\Dashboard\Events\BuildingMenu;
@@ -148,10 +149,6 @@
          */
         public function registerComposers ()
         {
-            $magazine = NULL;
-            view()->composer('*', function($view) use ($magazine) {
-                $magazine = \Modules\Magazine\Entities\Magazine::with('files')->get();
-                $view->with('magazine', $magazine);
-            });
+            View::composer('magazine::web.*', 'Modules\Magazine\Http\ViewComposers\MagazineComposer');
         }
     }

@@ -1,8 +1,7 @@
 <?php
-
-    Breadcrumbs::for('page', function ($trail, $page) {
+    Breadcrumbs::for ('page', function($trail, $page) {
         $trail->push('Home', ('/'));
-        $trail->push($page->title, route('web.pages.'.$page->slug));
+        $trail->push($page->title, route('web.pages.' . $page->slug));
     });
 
     Route::group([
@@ -13,4 +12,8 @@
 
         Route::get('/', 'PagesController@index');
 
+        $pages = \Modules\Pages\Entities\Page::all();
+        $pages->each(function($page) {
+            Route::get($page->slug, 'PagesController@show')->name('pages.' . $page->slug)->defaults('page', $page);
+        });
     });

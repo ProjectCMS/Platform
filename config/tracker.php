@@ -5,7 +5,7 @@
         /*
          * Enable it?
          */
-        'enabled'                            => TRUE,
+        'enabled'                            => FALSE,
 
         /*
          * Enable cache?

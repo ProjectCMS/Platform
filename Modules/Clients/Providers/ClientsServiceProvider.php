@@ -143,9 +143,8 @@
          */
         public function registerComposers ()
         {
-            $client = NULL;
+            $client = auth('client');
             view()->composer('*', function($view) use ($client) {
-                $client = auth('client');
                 $view->with('client', $client->user());
             });
         }

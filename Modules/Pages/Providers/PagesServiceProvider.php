@@ -54,7 +54,6 @@
             $this->registerConfig();
             $this->registerViews();
             $this->registerFactories();
-            $this->registerRoutes();
             $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
             /** Menu **/
@@ -131,37 +130,6 @@
             }
         }
 
-
-        /**
-         * Register default routes
-         */
-        public function registerRoutes ()
-        {
-            /** @var Router $router */
-            $router = app()->make('router');
-
-            try{
-
-                /** @var $pages */
-                $pages = \Modules\Pages\Entities\Page::all();
-
-                $router->group([
-                    'middleware' => ['web', 'theme_web'],
-                    'namespace'  => 'Modules\Pages\Http\Controllers\Web',
-                    'as'         => 'web.'
-                ], function() use($router, $pages) {
-
-                    $pages->each(function($page) use($router) {
-                        $router->get($page->slug, 'PagesController@show')->name('pages.' . $page->slug)->defaults('page', $page);
-                    });
-
-                });
-
-            }catch (\Exception $e){
-
-            }
-
-        }
 
         /**
          * Get the services provided by the provider.
