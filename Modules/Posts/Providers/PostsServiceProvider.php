@@ -156,28 +156,37 @@
          */
         public function registerComposers ()
         {
-            $outherPosts   = \Modules\Posts\Entities\Post::with('images')
-                                                         ->limit(4)
-                                                         ->orderBy('updated_at', 'DESC')
-                                                         ->get();
-            $postsCategory = \Modules\Posts\Entities\Category::withCount('posts')->with([
-                'posts.images',
-                'posts.categories'
-            ])->orderBy('posts_count', 'DESC')->take(3)->get();
-            $tags          = \Modules\Posts\Entities\Tag::withCount('posts')
-                                                        ->limit(20)
-                                                        ->orderBy('posts_count', 'DESC')
-                                                        ->get();
+            $outherPosts   = NULL;
+            $postsCategory = NULL;
+            $tags          = NULL;
 
             view()->composer('*', function($view) use ($postsCategory) {
+
+                $postsCategory = \Modules\Posts\Entities\Category::withCount('posts')->with([
+                    'posts.images',
+                    'posts.categories'
+                ])->orderBy('posts_count', 'DESC')->take(3)->get();
+
                 $view->with('postsCategory', $postsCategory);
             });
 
             view()->composer('*', function($view) use ($outherPosts) {
+
+                $outherPosts = \Modules\Posts\Entities\Post::with('images')
+                                                           ->limit(4)
+                                                           ->orderBy('updated_at', 'DESC')
+                                                           ->get();
+
                 $view->with('outherPosts', $outherPosts);
             });
 
             view()->composer('*', function($view) use ($tags) {
+
+                $tags = \Modules\Posts\Entities\Tag::withCount('posts')
+                                                   ->limit(20)
+                                                   ->orderBy('posts_count', 'DESC')
+                                                   ->get();
+
                 $view->with('tags', $tags);
             });
         }
