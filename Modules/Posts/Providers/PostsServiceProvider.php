@@ -159,7 +159,7 @@
             $router = app()->make('router');
 
             /** @var $posts */
-            $posts = \Modules\Posts\Entities\Post::all();
+//            $posts = \Modules\Posts\Entities\Post::all();
 
 //            $posts->each(function($post) {
 //

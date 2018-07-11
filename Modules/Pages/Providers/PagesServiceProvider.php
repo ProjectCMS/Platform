@@ -140,8 +140,14 @@
             /** @var Router $router */
             $router = app()->make('router');
 
-            /** @var $pages */
-            $pages = \Modules\Pages\Entities\Page::all();
+            try{
+
+                /** @var $pages */
+                $pages = \Modules\Pages\Entities\Page::all();
+
+            }catch (\Exception $e){
+
+            }
 
 //            $pages->each(function($page) {
 //                Route::get($page->slug, 'PagesController@show')->name('pages.' . $page->slug)->defaults('page', $page);
