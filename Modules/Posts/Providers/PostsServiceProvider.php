@@ -158,24 +158,37 @@
             /** @var Router $router */
             $router = app()->make('router');
 
-            /** @var $posts */
-//            $posts = \Modules\Posts\Entities\Post::all();
+            try {
 
-//            $posts->each(function($post) {
-//
-//                $year  = $post->created_at->format('Y');
-//                $month = $post->created_at->format('m');
-//                $day   = $post->created_at->format('d');
-//
-//                Route::get("{$post->id}-{$post->slug}", 'PostsController@show')
-//                     ->name('posts.' . $post->slug)
-//                     ->defaults('post', $post);
-//
-//                Route::get("{$year}/{$month}/{$day}/{$post->slug}", 'PostsController@show')
-//                     ->name('posts.date.' . $post->slug)
-//                     ->defaults('post', $post);
-//            });
+                /** @var $posts */
+                $posts = \Modules\Posts\Entities\Post::all();
 
+                $router->group([
+                    'middleware' => ['web', 'theme_web'],
+                    'namespace'  => 'Modules\Posts\Http\Controllers\Web',
+                    'as'         => 'web.'
+                ], function() use ($router, $posts) {
+
+                    $posts->each(function($post) use ($router) {
+
+                        $year  = $post->created_at->format('Y');
+                        $month = $post->created_at->format('m');
+                        $day   = $post->created_at->format('d');
+
+                        $router->get("{$post->id}-{$post->slug}", 'PostsController@show')
+                               ->name('posts.' . $post->slug)
+                               ->defaults('post', $post);
+
+                        $router->get("{$year}/{$month}/{$day}/{$post->slug}", 'PostsController@show')
+                               ->name('posts.date.' . $post->slug)
+                               ->defaults('post', $post);
+                    });
+
+                });
+
+            } catch (\Exception $e) {
+
+            }
         }
 
         /**

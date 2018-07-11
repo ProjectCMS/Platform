@@ -145,13 +145,21 @@
                 /** @var $pages */
                 $pages = \Modules\Pages\Entities\Page::all();
 
+                $router->group([
+                    'middleware' => ['web', 'theme_web'],
+                    'namespace'  => 'Modules\Pages\Http\Controllers\Web',
+                    'as'         => 'web.'
+                ], function() use($router, $pages) {
+
+                    $pages->each(function($page) use($router) {
+                        $router->get($page->slug, 'PagesController@show')->name('pages.' . $page->slug)->defaults('page', $page);
+                    });
+
+                });
+
             }catch (\Exception $e){
 
             }
-
-//            $pages->each(function($page) {
-//                Route::get($page->slug, 'PagesController@show')->name('pages.' . $page->slug)->defaults('page', $page);
-//            });
 
         }
 

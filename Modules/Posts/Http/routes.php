@@ -1,8 +1,5 @@
 <?php
 
-    /*
-     * Breadcrumbs blog
-     */
     Breadcrumbs::for ('post', function($trail) {
         $trail->push('Home', ('/'));
         $trail->push('Blog', route('web.posts'));
