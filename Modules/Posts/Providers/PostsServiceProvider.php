@@ -62,6 +62,7 @@
             $this->registerViews();
             $this->registerFactories();
             $this->registerComposers();
+            $this->registerRoutes();
             $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
             /** Menu **/
@@ -147,6 +148,34 @@
         public function provides ()
         {
             return [];
+        }
+
+        /**
+         * Register default routes
+         */
+        public function registerRoutes ()
+        {
+            /** @var Router $router */
+            $router = app()->make('router');
+
+            /** @var $posts */
+            $posts = \Modules\Posts\Entities\Post::all();
+
+//            $posts->each(function($post) {
+//
+//                $year  = $post->created_at->format('Y');
+//                $month = $post->created_at->format('m');
+//                $day   = $post->created_at->format('d');
+//
+//                Route::get("{$post->id}-{$post->slug}", 'PostsController@show')
+//                     ->name('posts.' . $post->slug)
+//                     ->defaults('post', $post);
+//
+//                Route::get("{$year}/{$month}/{$day}/{$post->slug}", 'PostsController@show')
+//                     ->name('posts.date.' . $post->slug)
+//                     ->defaults('post', $post);
+//            });
+
         }
 
         /**
