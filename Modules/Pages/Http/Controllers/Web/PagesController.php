@@ -31,17 +31,6 @@
 
         public function __construct (Page $page, Post $post, Category $category, Manager $seo)
         {
-            $sessions = \Tracker::sessions(60 * 24);
-            foreach ($sessions as $session) {
-                dump($session->user->email);
-                dump($session->device->kind . ' - ' . $session->device->platform);
-                dump($session->agent->browser . ' - ' . $session->agent->browser_version);
-                dump($session->toArray());
-            }
-
-            $pageViews = \Tracker::pageViews(60 * 24 * 30);
-            dump($pageViews->toArray());
-
             $this->page     = $page;
             $this->post     = $post;
             $this->category = $category;
