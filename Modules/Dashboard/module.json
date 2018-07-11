@@ -3,14 +3,14 @@
     "alias": "dashboard",
     "description": "",
     "keywords": [],
-    "active": 1,
+    "active": 0,
     "order": 0,
     "permission": 0,
     "providers": [
         "Modules\\Dashboard\\Providers\\DashboardServiceProvider",
         "Modules\\Dashboard\\Providers\\MenuServiceProvider"
     ],
-    "aliases": {},
+    "aliases": [],
     "files": [
         "start.php"
     ],
