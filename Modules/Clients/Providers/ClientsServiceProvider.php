@@ -3,8 +3,11 @@
     namespace Modules\Clients\Providers;
 
     use Illuminate\Routing\Router;
+    use Illuminate\Support\Facades\Gate;
     use Illuminate\Support\ServiceProvider;
     use Illuminate\Database\Eloquent\Factory;
+    use Illuminate\Contracts\Events\Dispatcher;
+    use Modules\Dashboard\Events\BuildingMenu;
 
     class ClientsServiceProvider extends ServiceProvider {
         /**
@@ -24,13 +27,40 @@
             'client.guest' => \Modules\Clients\Http\Middleware\RedirectIfClient::class,
         ];
 
+        /**
+         * Menu admin
+         *
+         * @param $events
+         */
+        private function MenuAdmin ($events)
+        {
+            $events->listen(BuildingMenu::class, function(BuildingMenu $event) {
+                $event->menu->add([
+                    'text'    => 'Clientes',
+                    'icon'    => 'dripicons-user-group',
+                    'url'     => route('admin.clients'),
+                    'order'   => 5,
+                    'submenu' => [
+                        [
+                            'text' => 'Listar tudo',
+                            'url'  => route('admin.clients')
+                        ],
+                        [
+                            'text' => 'Adicionar novo',
+                            'url'  => route('admin.clients.create'),
+                        ],
+                    ],
+                ]);
+            });
+        }
+
 
         /**
          * Boot the application events.
          *
          * @return void
          */
-        public function boot ()
+        public function boot (Dispatcher $events)
         {
             $this->registerTranslations();
             $this->registerConfig();
@@ -39,6 +69,9 @@
             $this->registerComposers();
             $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
             $this->registerMiddleware($this->app['router']);
+
+            /** Menu **/
+            $this->MenuAdmin($events);
         }
 
         /**

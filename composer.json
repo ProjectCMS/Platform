@@ -14,7 +14,7 @@
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "fideloper/proxy": "~4.0",
         "genealabs/laravel-model-caching": "^0.2.62",
-        "geoip2/geoip2": "~2.0",
+        "geoip2/geoip2": "^2.9",
         "hesto/multi-auth": "^2.0",
         "ilovepdf/ilovepdf-php": "^1.1",
         "jenssegers/date": "^3.3",
@@ -25,9 +25,9 @@
         "mohd-isa/laravel-settings": "^2.2",
         "nwidart/laravel-modules": "^3.1",
         "pragmarx/tracker": "^3.3",
-        "predis/predis": "^1.1",
         "shipu/themevel": "^1.6",
-        "orangehill/iseed": "dev-master"
+        "spatie/laravel-permission": "^2.12",
+        "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

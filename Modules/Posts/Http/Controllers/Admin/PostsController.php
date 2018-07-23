@@ -14,8 +14,7 @@
     use Modules\Posts\Entities\PostImage;
     use Modules\Posts\Entities\PostTag;
     use Modules\Posts\Entities\Tag;
-    use Modules\Posts\Http\Requests\Posts\CreateRequest;
-    use Modules\Posts\Http\Requests\Posts\UpdateRequest;
+    use Modules\Posts\Http\Requests\PostRequest;
     use Modules\Seo\Entities\Seo;
 
     class PostsController extends Controller {
@@ -92,7 +91,7 @@
          *
          * @return Response
          */
-        public function store (CreateRequest $request)
+        public function store (PostRequest $request)
         {
             $request->request->add(['author_id' => auth()->user()->id]);
             $request->request->add(['seo_token' => bcrypt(date('Y-m-d H:i:s'))]);
@@ -144,7 +143,7 @@
          *
          * @return Response
          */
-        public function update (UpdateRequest $request, $id)
+        public function update (PostRequest $request, $id)
         {
             $data = $this->post->withTrashed()->findOrFail($id);
 

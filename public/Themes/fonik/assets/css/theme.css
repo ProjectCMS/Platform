@@ -30197,6 +30197,13 @@ File: Responsive
 }
 
 /***** FORM *****/
+label {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .form-control {
   border: 1px solid #E3E3E3;
   border-radius: 30px;
@@ -30282,6 +30289,8 @@ File: Responsive
   line-height: 12px;
   border-radius: 2px;
   font-weight: 400;
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
 
 .badge.badge-outline-primary {
@@ -30627,6 +30636,12 @@ div.mce-fullscreen {
 .dd3-handle:hover {
   background: #404040;
   border: 1px solid #404040;
+}
+
+/***** DATATABLE *****/
+table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > td.sorting_asc, table.dataTable thead > tr > td.sorting_desc, table.dataTable thead > tr > td.sorting {
+  border-top: 0;
+  border-bottom: 0;
 }
 
 @media (max-width: 1200px) {

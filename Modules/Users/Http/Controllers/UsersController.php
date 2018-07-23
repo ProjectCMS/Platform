@@ -5,9 +5,10 @@
     use Illuminate\Http\Request;
     use Illuminate\Http\Response;
     use Illuminate\Routing\Controller;
+    use Modules\Users\Entities\Acl\Permission;
+    use Modules\Users\Entities\Acl\Role;
     use Modules\Users\Entities\User;
-    use Modules\Users\Http\Requests\CreateRequest;
-    use Modules\Users\Http\Requests\UpdateRequest;
+    use Modules\Users\Http\Requests\UserRequest;
 
     class UsersController extends Controller {
 
@@ -16,10 +17,20 @@
          * @var User
          */
         private $user;
+        /**
+         * @var Role
+         */
+        private $role;
+        /**
+         * @var Permission
+         */
+        private $permission;
 
-        public function __construct (User $user)
+        public function __construct (User $user, Role $role, Permission $permission)
         {
-            $this->user = $user;
+            $this->user       = $user;
+            $this->role       = $role;
+            $this->permission = $permission;
         }
 
 
@@ -29,8 +40,7 @@
          */
         public function index ()
         {
-            dd($this->user);
-            $paginate = $this->user->with('roles')->paginate($this->perPages);
+            $paginate = $this->user->with(['roles', 'permissions'])->paginate($this->perPages);
 
             return view('users::index', compact('paginate'));
         }
@@ -41,7 +51,10 @@
          */
         public function create ()
         {
-            return view('users::create');
+            $roles       = $this->role->all();
+            $permissions = $this->permission->all();
+
+            return view('users::create', compact('roles', 'permissions'));
         }
 
         /**
@@ -51,11 +64,13 @@
          *
          * @return Response
          */
-        public function store (CreateRequest $request)
+        public function store (UserRequest $request)
         {
             $insert = $this->user->create($request->all());
+            $insert->syncRoles($request->roles ? $request->roles : []);
+            $insert->syncPermissions($request->permissions ? $request->permissions : []);
 
-            return redirect(route('admin.users.edit', $insert->id))->with('status-success', 'Tag criada com sucesso');
+            return redirect(route('admin.users.edit', $insert->id))->with('status-success', 'Usuário criado com sucesso');
         }
 
         /**
@@ -73,12 +88,15 @@
          */
         public function edit ($id)
         {
-            $data = $this->user->findOrFail($id);
+            $data        = $this->user->with(['roles', 'permissions'])->find($id);
+            $roles       = $this->role->all();
+            $permissions = $this->permission->all();
+
             if (!$data) {
                 return redirect()->route('admin.users');
             }
 
-            return view('users::edit', compact('data'));
+            return view('users::edit', compact('data', 'roles', 'permissions'));
         }
 
         /**
@@ -88,11 +106,13 @@
          *
          * @return Response
          */
-        public function update (UpdateRequest $request, $id)
+        public function update (UserRequest $request, $id)
         {
             $data = $this->user->findOrFail($id);
 
             $data->update($request->all());
+            $data->syncRoles($request->roles ? $request->roles : []);
+            $data->syncPermissions($request->permissions ? $request->permissions : []);
 
             return back()->with('status-success', 'Dados atualizado com sucesso');
         }
@@ -101,7 +121,9 @@
          * Remove the specified resource from storage.
          * @return Response
          */
-        public function destroy ()
+        public function destroy (Request $request)
         {
+            $data = $this->user->findOrFail($request->id);
+            $data->forceDelete();
         }
     }

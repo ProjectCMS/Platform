@@ -28,7 +28,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($paginate as $data)
+                        @forelse($paginate as $data)
                             <tr>
                                 <td class="text-center">{{ $data->id }}</td>
                                 <td>{{ $data->title }}</td>
@@ -53,7 +53,9 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <td class="colspanchange" colspan="7">Nenhum resultado encontrado.</td>
+                        @endforelse
                         </tbody>
                     </table>
 

@@ -1,7 +1,7 @@
 <?php
 
     Route::group([
-        'middleware' => ['web', 'theme_web'],
+        'middleware' => ['web', 'tracker', 'theme_web'],
         'prefix'     => 'clients',
         'namespace'  => 'Modules\Clients\Http\Controllers\Web\Auth',
         'as'         => 'web.'

@@ -17,27 +17,24 @@
     });
 
     Route::group([
-        'middleware' => ['web', 'user', 'auth:users', 'theme_admin'],
-        'prefix'     => 'admin',
+        'middleware' => ['web', 'user', 'auth:user', 'theme_admin', 'acl'],
+        'prefix'     => 'admin/users',
         'as'         => 'admin.',
         'namespace'  => 'Modules\Users\Http\Controllers'
     ], function() {
         //** Manager **//
-        Route::get('/manager', 'UsersController@index')->name('users');
+        Route::get('/', 'UsersController@index')->name('users');
         Route::get('/create', 'UsersController@create')->name('users.create');
         Route::post('/create', 'UsersController@store')->name('users.store');
 
         Route::get('/edit/{id}', 'UsersController@edit')->name('users.edit');
         Route::put('/update/{id}', 'UsersController@update')->name('users.update');
-        Route::put('/order', 'UsersController@order')->name('users.order');
 
         Route::delete('/delete', 'UsersController@destroy')->name('users.delete');
         Route::delete('/trash', 'UsersController@trash')->name('users.trash');
         Route::put('/restore', 'UsersController@restore')->name('users.restore');
 
-
-        Route::get('/master', function () {
-            return view('dashboard::index');
-        });
-
+        Route::get('/account', 'UsersController@account')->name('account');
+        Route::put('/account/update/{id}', 'UsersController@account_update')->name('account.update');
     });
+

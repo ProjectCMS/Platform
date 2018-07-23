@@ -46,6 +46,10 @@
                             'text' => 'Tags',
                             'url'  => route('admin.tags'),
                         ],
+                        [
+                            'text' => 'Timeline',
+                            'url'  => route('admin.timeline'),
+                        ],
                     ],
                 ]);
             });

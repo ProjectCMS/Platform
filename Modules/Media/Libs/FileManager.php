@@ -16,7 +16,7 @@
         public function __construct (Request $request)
         {
             $this->data = $request;
-            $this->path = (isset($this->data["dir"]) ? base64_decode($this->data["dir"]) : NULL);
+            $this->path = (isset($this->data->dir) && $this->data->dir != NULL ? base64_decode($this->data->dir) : NULL);
             $this->setRealPath();
         }
 

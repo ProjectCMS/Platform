@@ -25,7 +25,7 @@
         @endforeach
     @endif
 </ul>
-<a class="navbar-brand" href="{{ url('/') }}">
+<a class="navbar-brand" href="{{ url('/') }}" title="{{ setting('site_name') }}">
     <div class="logo">
         <div class="container">
             <img src="{{ asset('storage/logo.png') }}" height="50">

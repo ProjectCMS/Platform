@@ -5,19 +5,23 @@
     use Illuminate\Http\Request;
     use Illuminate\Http\Response;
     use Illuminate\Routing\Controller;
+    use PragmaRX\Tracker\Support\Minutes;
     use Tracker;
 
     class TrackerController extends Controller {
+
+
         /**
          * Display a listing of the resource.
          * @return Response
          */
         public function index ()
         {
-            $visitor   = Tracker::sessions(60 * 24);
-            $users     = Tracker::onlineUsers();
-            $pageViews = Tracker::pageViews(60 * 24 * 30);
-            dump($visitor->toArray(), $users->toArray(), $pageViews->toArray());
+            $range = new Minutes();
+            $range->setStart(\Carbon\Carbon::now()->subDays(5));
+            $range->setEnd(\Carbon\Carbon::now()->subDays(1));
+            $devices = Tracker::userDevices($range);
+            dump($range);
         }
 
         /**

@@ -45,4 +45,4 @@
         </div>
     </div>
     {!! Form::close() !!}
-@stop()
+@stop

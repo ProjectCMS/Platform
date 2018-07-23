@@ -1,6 +1,6 @@
 <?php
     Route::group([
-        'middleware' => ['web', 'user', 'auth:user', 'theme_admin'],
+        'middleware' => ['web', 'user', 'auth:user', 'theme_admin', 'acl'],
         'prefix'     => 'admin/media',
         'namespace'  => 'Modules\Media\Http\Controllers',
         'as'         => 'admin.',

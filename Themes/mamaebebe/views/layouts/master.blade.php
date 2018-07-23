@@ -63,6 +63,14 @@
 
         <div class="header-content">
             <div id="app" class="container">
+                <div class="mobile">
+                    <a href="{{ url('/') }}" title="{{ setting('site_name') }}" class="logo">
+                        <img src="{{ asset('storage/logo.png') }}" height="50">
+                    </a>
+                    <a href="#" class="nav sidebar-collapse">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </a>
+                </div>
                 <nav class="navbar navbar-expand-lg navbar-light" id="nav-top">
                     <div id="navbarNavDropdown" class="navbar-collapse collapse">
                         @include ('partials.menu.top.item')

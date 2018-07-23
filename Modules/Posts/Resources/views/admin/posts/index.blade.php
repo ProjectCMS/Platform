@@ -108,7 +108,7 @@
                             </tr>
                         @empty
                             <tr class="no-items">
-                                <td class="colspanchange" colspan="7">Nenhum post encontrado.</td>
+                                <td class="colspanchange" colspan="7">Nenhum resultado encontrado.</td>
                             </tr>
                         @endforelse
                         </tbody>

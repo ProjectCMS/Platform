@@ -29,6 +29,8 @@ mix.scripts([
                 nodeModules + 'nestable2/dist/jquery.nestable.min.js',
                 nodeModules + 'morris.js/morris.min.js',
                 nodeModules + 'raphael/raphael.min.js',
+                nodeModules + 'datatables.net/js/jquery.dataTables.min.js',
+                nodeModules + 'datatables.net-bs4/js/dataTables.bootstrap4.min.js',
 
                 nodeModules + 'pdfjs-dist/build/pdf.min.js',
                 nodeModules + 'pdfjs-dist/build/pdf.worker.min.js',
@@ -40,5 +42,6 @@ mix.styles([
                nodeModules + 'jquery-ui-dist/jquery-ui.min.css',
                nodeModules + 'jquery-ui-dist/jquery-ui.theme.min.css',
                nodeModules + 'nestable2/dist/jquery.nestable.min.css',
-               nodeModules + 'morris.js/morris.css'
+               nodeModules + 'morris.js/morris.css',
+               nodeModules + 'datatables.net-bs4/css/dataTables.bootstrap4.min.css'
            ], 'assets/css/libs.min.css');

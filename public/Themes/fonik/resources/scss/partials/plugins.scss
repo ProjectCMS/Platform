@@ -164,7 +164,7 @@ div.mce-fullscreen {
                          linear-gradient(45deg, #FFF 25%, transparent 25%, transparent 75%, #FFF 75%, #FFF);
     background-size:     60px 60px;
     background-position: 0 0, 30px 30px;
-    display: none;
+    display:             none;
 }
 
 .dd-dragel {
@@ -201,7 +201,7 @@ div.mce-fullscreen {
     height:                     48px !important;
     border-top-right-radius:    0;
     border-bottom-right-radius: 0;
-    z-index: 999;
+    z-index:                    999;
 }
 
 .dd3-handle:before {
@@ -223,4 +223,12 @@ div.mce-fullscreen {
 .dd3-handle:hover {
     background: #404040;
     border:     1px solid #404040;
+}
+
+/***** DATATABLE *****/
+table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > td.sorting_asc, table.dataTable thead > tr > td.sorting_desc, table.dataTable thead > tr > td.sorting {
+    border: {
+        top:    0;
+        bottom: 0;
+    }
 }

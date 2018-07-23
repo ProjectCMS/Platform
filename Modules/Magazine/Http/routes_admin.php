@@ -1,7 +1,7 @@
 <?php
 
     Route::group([
-        'middleware' => ['web', 'user', 'auth:user', 'theme_admin'],
+        'middleware' => ['web', 'user', 'auth:user', 'theme_admin', 'acl'],
         'prefix'     => 'admin/magazine',
         'namespace'  => 'Modules\Magazine\Http\Controllers\Admin',
         'as'         => 'admin.',
@@ -16,7 +16,6 @@
 
         Route::get('/edit/{id}', 'MagazineController@edit')->name('magazine.edit');
         Route::put('/update/{id}', 'MagazineController@update')->name('magazine.update');
-        Route::put('/order', 'MagazineController@order')->name('magazine.order');
 
         Route::delete('/delete', 'MagazineController@destroy')->name('magazine.delete');
         Route::delete('/trash', 'MagazineController@trash')->name('magazine.trash');

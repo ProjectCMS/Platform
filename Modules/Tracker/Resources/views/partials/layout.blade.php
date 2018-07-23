@@ -100,7 +100,6 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                        <img src="assets/images/users/avatar-2.jpg" alt="user-image" class="thumb-sm rounded-circle mr-2"/>
                                         Herbert C. Patton
                                     </td>
                                     <td><i class="mdi mdi-checkbox-blank-circle text-success"></i> Confirm</td>
@@ -119,8 +118,7 @@
 
                                 <tr>
                                     <td>
-                                        <img src="assets/images/users/avatar-3.jpg" alt="user-image" class="thumb-sm rounded-circle mr-2"/>
-                                        Mathias N. Klausen
+                                                Mathias N. Klausen
                                     </td>
                                     <td><i class="mdi mdi-checkbox-blank-circle text-warning"></i> Waiting payment</td>
                                     <td>
@@ -138,7 +136,7 @@
 
                                 <tr>
                                     <td>
-                                        <img src="assets/images/users/avatar-4.jpg" alt="user-image" class="thumb-sm rounded-circle mr-2"/>
+
                                         Nikolaj S. Henriksen
                                     </td>
                                     <td><i class="mdi mdi-checkbox-blank-circle text-success"></i> Confirm</td>
@@ -157,7 +155,6 @@
 
                                 <tr>
                                     <td>
-                                        <img src="assets/images/users/avatar-5.jpg" alt="user-image" class="thumb-sm rounded-circle mr-2"/>
                                         Lasse C. Overgaard
                                     </td>
                                     <td><i class="mdi mdi-checkbox-blank-circle text-danger"></i> Payment expired</td>
@@ -176,7 +173,6 @@
 
                                 <tr>
                                     <td>
-                                        <img src="assets/images/users/avatar-6.jpg" alt="user-image" class="thumb-sm rounded-circle mr-2"/>
                                         Kasper S. Jessen
                                     </td>
                                     <td><i class="mdi mdi-checkbox-blank-circle text-success"></i> Confirm</td>

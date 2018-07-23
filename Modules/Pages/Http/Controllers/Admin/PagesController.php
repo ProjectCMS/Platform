@@ -9,9 +9,8 @@
     use Modules\Core\Entities\Status;
     use Modules\Pages\Entities\Page;
     use Modules\Pages\Entities\PageTemplate;
+    use Modules\Pages\Http\Requests\PageRequest;
     use Modules\Seo\Entities\Seo;
-    use Modules\Pages\Http\Requests\CreateRequest;
-    use Modules\Pages\Http\Requests\UpdateRequest;
 
     class PagesController extends Controller {
 
@@ -72,7 +71,7 @@
          *
          * @return Response
          */
-        public function store (CreateRequest $request)
+        public function store (PageRequest $request)
         {
             $request->request->add(['seo_token' => bcrypt(date('Y-m-d H:i:s'))]);
             $request->request->add(['order' => $this->page->max('order') + 1]);
@@ -125,7 +124,7 @@
          *
          * @return Response
          */
-        public function update (UpdateRequest $request, $id)
+        public function update (PageRequest $request, $id)
         {
             $data = $this->page->findOrFail($id);
             $data->update($request->all());

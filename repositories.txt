@@ -13,3 +13,4 @@ laravel/socialite
 davejamesmiller/laravel-breadcrumbs:5.x
 mohd-isa/laravel-settings
 pragmarx/tracker
+spatie/laravel-permission

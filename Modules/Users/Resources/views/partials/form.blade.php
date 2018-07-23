@@ -38,9 +38,56 @@
                 <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
             </div>
         </div>
-
     </div>
 
+</div>
+
+<div class="card m-b-20">
+    <div class="card-body">
+        <h4 class="mt-0 header-title">Regras
+            <small>Definir regras de acesso</small>
+        </h4>
+        <div class="form-group row {{ $errors->has('roles') ? 'has-error' : '' }}">
+            {{ Form::label('roles', 'Regras', ['class' => 'col-sm-3 col-form-label']) }}
+            <div class="col-sm-9">
+                <div class="row">
+                    @foreach ($roles as $role)
+                        <div class="col-lg-6 col-xl-3 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <input id="checkboxs-{{ $role->id }}" class="custom-control-input" type="checkbox" name="roles[]" value="{{ $role->id }}"
+                                       @if(isset($data->roles) && $data->roles->pluck('id')->contains($role->id)) checked @endif><span></span>
+                                {{ Form::label('checkboxs-'.$role->id, $role->label, ['class' => 'custom-control-label']) }}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card m-b-20">
+    <div class="card-body">
+        <h4 class="mt-0 header-title">Permissões
+            <small>Definir permissões de acesso</small>
+        </h4>
+        <div class="form-group row {{ $errors->has('permissions') ? 'has-error' : '' }}">
+            {{ Form::label('permissions', 'Permissões', ['class' => 'col-sm-3 col-form-label']) }}
+            <div class="col-sm-9">
+                <div class="row">
+                    @foreach ($permissions as $permission)
+                        <div class="col-lg-6 col-xl-3 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <input id="checkboxs-p-{{ $permission->id }}" class="custom-control-input" type="checkbox" name="permissions[]" value="{{ $permission->id }}"
+                                       @if(isset($data->permissions) && $data->permissions->pluck('id')->contains($permission->id)) checked @endif><span></span>
+                                {{ Form::label('checkboxs-p-'.$permission->id, $permission->label, ['class' => 'custom-control-label']) }}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card-footer">
         {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}
     </div>

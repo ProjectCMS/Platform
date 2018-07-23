@@ -21,7 +21,7 @@
             });
 
             Schema::table('social_accounts', function(Blueprint $table) {
-                $table->foreign('user_id')->references('id')->on('clients');
+                $table->foreign('user_id')->references('id')->on('clients')->onDelete('cascade');
             });
         }
 

@@ -27,19 +27,21 @@
 
     //creates Bar chart
     Tracker.prototype.createBarChart = function (element, data, xkey, ykeys, labels, lineColors) {
-        Morris.Bar({
-                       element: element,
-                       data: data,
-                       xkey: xkey,
-                       ykeys: ykeys,
-                       labels: labels,
-                       gridLineColor: 'rgba(255,255,255,0.1)',
-                       gridTextColor: '#98a6ad',
-                       barSizeRatio: 0.2,
-                       resize: true,
-                       hideHover: 'auto',
-                       barColors: lineColors
-                   });
+        if (document.getElementById(element) !== null) {
+            Morris.Bar({
+                           element: element,
+                           data: data,
+                           xkey: xkey,
+                           ykeys: ykeys,
+                           labels: labels,
+                           gridLineColor: 'rgba(255,255,255,0.1)',
+                           gridTextColor: '#98a6ad',
+                           barSizeRatio: 0.2,
+                           resize: true,
+                           hideHover: 'auto',
+                           barColors: lineColors
+                       });
+        }
     }
 
     Tracker.prototype.init = function () {

@@ -8,7 +8,6 @@
     use Illuminate\Database\Eloquent\Factory;
     use Illuminate\Contracts\Events\Dispatcher;
     use Modules\Dashboard\Events\BuildingMenu;
-    use Modules\Users\Entities\User;
 
     class UsersServiceProvider extends ServiceProvider {
         /**
@@ -26,6 +25,7 @@
         protected $middleware = [
             'user'       => \Modules\Users\Http\Middleware\RedirectIfNotUser::class,
             'user.guest' => \Modules\Users\Http\Middleware\RedirectIfUser::class,
+            'acl'        => \Modules\Users\Http\Middleware\Acl::class,
         ];
 
         /**
@@ -49,6 +49,14 @@
                         [
                             'text' => 'Adicionar novo',
                             'url'  => route('admin.users.create'),
+                        ],
+                        [
+                            'text' => 'Regras',
+                            'url'  => route('admin.roles'),
+                        ],
+                        [
+                            'text' => 'Permissões',
+                            'url'  => route('admin.permissions'),
                         ],
                     ],
                 ]);
@@ -152,18 +160,20 @@
          */
         public function registerPolicies ()
         {
-            Gate::define('check.user', function ($user, $id) {
-                if($user->isAdmin() == false && ($id != $user->id)){
-                    return false;
+            Gate::define('check.user', function($user, $id) {
+                if ($user->isAdmin() == FALSE && ($id != $user->id)) {
+                    return FALSE;
                 }
-                return true;
+
+                return TRUE;
             });
 
-            Gate::define('check.delete.user', function ($user, $id) {
-                if($user->isAdmin() == false && ($id != $user->id)){
-                    return false;
+            Gate::define('check.delete.user', function($user, $id) {
+                if ($user->isAdmin() == FALSE && ($id != $user->id)) {
+                    return FALSE;
                 }
-                return true;
+
+                return TRUE;
             });
         }
 

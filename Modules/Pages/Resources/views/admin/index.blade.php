@@ -73,7 +73,7 @@
                             </tr>
                         @empty
                             <tr class="no-items">
-                                <td class="colspanchange" colspan="7">Nenhuma página encontrada.</td>
+                                <td class="colspanchange" colspan="7">Nenhum resultado encontrado.</td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -88,3 +88,4 @@
     </div>
 
 @stop
+

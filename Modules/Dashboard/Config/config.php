@@ -63,8 +63,7 @@
         |
         */
 
-        'menu' => [
-        ],
+        'menu' => [],
 
         /*
         |--------------------------------------------------------------------------
@@ -84,6 +83,7 @@
             \Modules\Dashboard\Menu\Filters\SubmenuFilter::class,
             \Modules\Dashboard\Menu\Filters\ClassesFilter::class,
             \Modules\Dashboard\Menu\Filters\GateFilter::class,
+            \Modules\Dashboard\Menu\Filters\AclFilter::class
         ],
 
 

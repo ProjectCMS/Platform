@@ -6,8 +6,7 @@
     use Illuminate\Http\Response;
     use Illuminate\Routing\Controller;
     use Modules\Posts\Entities\Category;
-    use Modules\Posts\Http\Requests\Categories\CreateRequest;
-    use Modules\Posts\Http\Requests\Categories\UpdateRequest;
+    use Modules\Posts\Http\Requests\CategoryRequest;
 
     class CategoriesController extends Controller {
 
@@ -52,7 +51,7 @@
          *
          * @return Response
          */
-        public function store (CreateRequest $request)
+        public function store (CategoryRequest $request)
         {
             $insert = $this->category->create($request->all());
 
@@ -92,7 +91,7 @@
          *
          * @return Response
          */
-        public function update (UpdateRequest $request, $id)
+        public function update (CategoryRequest $request, $id)
         {
             $data = $this->category->findOrFail($id);
 

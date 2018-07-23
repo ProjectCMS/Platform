@@ -25,6 +25,7 @@
                             <th data-sort="title">Nome</th>
                             <th data-sort="email" width="300">E-mail</th>
                             <th width="250">Regras</th>
+                            <th width="250">Permissões</th>
                             <th width="90">Opções</th>
                         </tr>
                         </thead>
@@ -35,8 +36,13 @@
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->email }}</td>
                                 <td>
-                                         @foreach($data->roles as $role)
+                                    @foreach($data->roles as $role)
                                         <span class="badge badge-outline-secondary">{{ $role->label }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach($data->permissions as $permission)
+                                        <span class="badge badge-outline-info">{{ $permission->label }}</span>
                                     @endforeach
                                 </td>
                                 <td>
@@ -47,6 +53,7 @@
                                 </td>
                             </tr>
                         @empty
+                            <td class="colspanchange" colspan="7">Nenhum resultado encontrado.</td>
                         @endforelse
                     </table>
 

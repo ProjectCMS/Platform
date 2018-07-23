@@ -40,7 +40,6 @@
          */
         'do_not_track_paths'                 => [
             'api/*',
-            'admin/*',
         ],
 
         /*
@@ -136,7 +135,7 @@
         /*
          * Log events?
          */
-        'log_events'               => FALSE,
+        'log_events'               => TRUE,
 
         /*
          * Which events do you want to log exactly?
@@ -225,7 +224,7 @@
         /*
          * Log errors and exceptions?
          */
-        'log_exceptions'           => FALSE,
+        'log_exceptions'           => TRUE,
 
         /*
          * A cookie may be created on your visitor device, so you can have information
@@ -236,12 +235,12 @@
         /*
          * If you are storing cookies, you better change it to a name you of your own.
          */
-        'tracker_cookie_name'      => 'mamaebebe_cookies',
+        'tracker_cookie_name'      => 'mamaebebe_cookie',
 
         /*
          * Internal tracker session name.
          */
-        'tracker_session_name'     => 'tracker_session',
+        'tracker_session_name'     => 'mamaebebe_session',
 
         /*
          * ** IMPORTANT **
@@ -253,36 +252,60 @@
          * You can use your own model for every single table Tracker has.
          */
 
-        'session_model'                     => 'PragmaRX\Tracker\Vendor\Laravel\Models\Session',
-        'log_model'                         => 'PragmaRX\Tracker\Vendor\Laravel\Models\Log',
-        'path_model'                        => 'PragmaRX\Tracker\Vendor\Laravel\Models\Path',
-        'query_model'                       => 'PragmaRX\Tracker\Vendor\Laravel\Models\Query',
-        'query_argument_model'              => 'PragmaRX\Tracker\Vendor\Laravel\Models\QueryArgument',
-        'agent_model'                       => 'PragmaRX\Tracker\Vendor\Laravel\Models\Agent',
-        'device_model'                      => 'PragmaRX\Tracker\Vendor\Laravel\Models\Device',
-        'cookie_model'                      => 'PragmaRX\Tracker\Vendor\Laravel\Models\Cookie',
-        'domain_model'                      => 'PragmaRX\Tracker\Vendor\Laravel\Models\Domain',
-        'referer_model'                     => 'PragmaRX\Tracker\Vendor\Laravel\Models\Referer',
-        'referer_search_term_model'         => 'PragmaRX\Tracker\Vendor\Laravel\Models\RefererSearchTerm',
-        'route_model'                       => 'PragmaRX\Tracker\Vendor\Laravel\Models\Route',
-        'route_path_model'                  => 'PragmaRX\Tracker\Vendor\Laravel\Models\RoutePath',
-        'route_path_parameter_model'        => 'PragmaRX\Tracker\Vendor\Laravel\Models\RoutePathParameter',
-        'error_model'                       => 'PragmaRX\Tracker\Vendor\Laravel\Models\Error',
-        'geoip_model'                       => 'PragmaRX\Tracker\Vendor\Laravel\Models\GeoIp',
-        'sql_query_model'                   => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQuery',
-        'sql_query_binding_model'           => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQueryBinding',
+        'session_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Session',
+
+        'log_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Log',
+
+        'path_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Path',
+
+        'query_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Query',
+
+        'query_argument_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\QueryArgument',
+
+        'agent_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Agent',
+
+        'device_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Device',
+
+        'cookie_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Cookie',
+
+        'domain_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Domain',
+
+        'referer_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Referer',
+
+        'referer_search_term_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\RefererSearchTerm',
+
+        'route_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Route',
+
+        'route_path_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\RoutePath',
+
+        'route_path_parameter_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\RoutePathParameter',
+
+        'error_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Error',
+
+        'geoip_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\GeoIp',
+
+        'sql_query_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQuery',
+
+        'sql_query_binding_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQueryBinding',
+
         'sql_query_binding_parameter_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQueryBindingParameter',
-        'sql_query_log_model'               => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQueryLog',
-        'connection_model'                  => 'PragmaRX\Tracker\Vendor\Laravel\Models\Connection',
-        'event_model'                       => 'PragmaRX\Tracker\Vendor\Laravel\Models\Event',
-        'event_log_model'                   => 'PragmaRX\Tracker\Vendor\Laravel\Models\EventLog',
-        'system_class_model'                => 'PragmaRX\Tracker\Vendor\Laravel\Models\SystemClass',
-        'language_model'                    => 'PragmaRX\Tracker\Vendor\Laravel\Models\Language',
+
+        'sql_query_log_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQueryLog',
+
+        'connection_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Connection',
+
+        'event_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Event',
+
+        'event_log_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\EventLog',
+
+        'system_class_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\SystemClass',
+
+        'language_model'             => 'PragmaRX\Tracker\Vendor\Laravel\Models\Language',
 
         /*
          * Laravel internal variables on user authentication and login.
          */
-        'authentication_ioc_binding'        => ['\Modules\Clients\Entities\Client'],
+        'authentication_ioc_binding' => ['\Modules\Clients\Entities\Client'],
         // defaults to 'auth' in Illuminate\Support\Facades\Auth
 
         'authenticated_check_method' => 'check',

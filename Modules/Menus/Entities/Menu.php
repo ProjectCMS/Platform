@@ -8,7 +8,7 @@
 
     class Menu extends Model {
 
-                use Cachable;
+        use Cachable;
 
         protected $fillable = ['title'];
 

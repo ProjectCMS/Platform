@@ -11,8 +11,7 @@
     use Modules\Core\Entities\Status;
     use Modules\Magazine\Entities\Magazine;
     use Modules\Magazine\Entities\MagazineFile;
-    use Modules\Magazine\Http\Requests\CreateRequest;
-    use Modules\Magazine\Http\Requests\UpdateRequest;
+    use Modules\Magazine\Http\Requests\MagazineRequest;
 
     class MagazineController extends Controller {
 
@@ -74,7 +73,7 @@
          *
          * @return Response
          */
-        public function store (CreateRequest $request)
+        public function store (MagazineRequest $request)
         {
             $insert = $this->magazine->create($request->all());
             $this->magazineFile->managerItems($insert->id, $request->files_items);
@@ -98,7 +97,7 @@
          */
         public function edit ($id)
         {
-            $data   = $this->magazine->with(['files'])->findOrFail($id);
+            $data   = $this->magazine->with(['files'])->find($id);
             $status = $this->status->pluck('title', 'id');
 
             if (!$data) {
@@ -115,7 +114,7 @@
          *
          * @return Response
          */
-        public function update (UpdateRequest $request, $id)
+        public function update (MagazineRequest $request, $id)
         {
             $data = $this->magazine->findOrFail($id);
             $data->update($request->all());

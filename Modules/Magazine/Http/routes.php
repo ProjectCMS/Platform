@@ -1,7 +1,7 @@
 <?php
 
     Route::group([
-        'middleware' => ['web', 'cors'],
+        'middleware' => ['web', 'tracker', 'cors'],
         'prefix'     => 'magazine',
         'namespace'  => 'Modules\Magazine\Http\Controllers\Web',
         'as'         => 'web.',

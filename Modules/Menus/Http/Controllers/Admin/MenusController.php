@@ -8,7 +8,7 @@
     use Modules\Menus\Entities\Menu;
     use Modules\Menus\Entities\MenuItem;
     use Modules\Menus\Entities\MenuLocation;
-    use Modules\Menus\Http\Requests\CreateRequest;
+    use Modules\Menus\Http\Requests\MenusRequest;
 
     class MenusController extends Controller {
 
@@ -70,7 +70,7 @@
          *
          * @return Response
          */
-        public function store (CreateRequest $request)
+        public function store (MenusRequest $request)
         {
             $insert = $this->menu->create($request->all());
             $items  = $this->menuItem->managerItems($insert->id, $request->menu_items);
@@ -109,7 +109,7 @@
          *
          * @return Response
          */
-        public function update (Request $request, $id)
+        public function update (MenusRequest $request, $id)
         {
             $update = $this->menu->findOrFail($id);
             $update = $update->update($request->all());

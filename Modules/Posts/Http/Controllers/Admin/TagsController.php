@@ -6,8 +6,7 @@
     use Illuminate\Http\Response;
     use Illuminate\Routing\Controller;
     use Modules\Posts\Entities\Tag;
-    use Modules\Posts\Http\Requests\Tags\CreateRequest;
-    use Modules\Posts\Http\Requests\Tags\UpdateRequest;
+    use Modules\Posts\Http\Requests\TagRequest;
 
     class TagsController extends Controller {
 
@@ -48,7 +47,7 @@
          *
          * @return Response
          */
-        public function store (CreateRequest $request)
+        public function store (TagRequest $request)
         {
             $insert = $this->tag->create($request->all());
 
@@ -85,7 +84,7 @@
          *
          * @return Response
          */
-        public function update (UpdateRequest $request, $id)
+        public function update (TagRequest $request, $id)
         {
             $data = $this->tag->findOrFail($id);
 

@@ -5,7 +5,7 @@
     });
 
     Route::group([
-        'middleware' => ['web', 'theme_web'],
+        'middleware' => ['web', 'tracker', 'theme_web'],
         'namespace'  => 'Modules\Pages\Http\Controllers\Web',
         'as'         => 'web.'
     ], function() {
