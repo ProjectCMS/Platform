@@ -55,6 +55,7 @@
             $this->registerViews();
             $this->registerFactories();
             $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+            $this->registerRoutes();
 
             /** Menu **/
             $this->MenuAdmin($events);
@@ -128,6 +129,32 @@
             if (!app()->environment('production')) {
                 app(Factory::class)->load(__DIR__ . '/../Database/Factories');
             }
+        }
+
+        /**
+         * Register routes.
+         *
+         * @return void
+         */
+        public function registerRoutes ()
+        {
+            /** @var Router $router */
+            $router = app()->make('router');
+
+            $router->group([
+                'middleware' => ['web', 'tracker', 'theme_web'],
+                'namespace'  => 'Modules\Pages\Http\Controllers\Web',
+                'as'         => 'web.'
+            ], function() use($router) {
+
+                $router->get('/', 'PagesController@index');
+
+                $pages = \Modules\Pages\Entities\Page::all();
+                $pages->each(function(\Modules\Pages\Entities\Page $page) use($router) {
+                    $router->get($page->slug, 'PagesController@show')->name('pages.' . $page->slug)->defaults('page', $page);
+                });
+            });
+
         }
 
 
