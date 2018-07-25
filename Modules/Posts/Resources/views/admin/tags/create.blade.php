@@ -4,7 +4,7 @@
 
 @section('content')
 
-    {!! Form::open(['route' => 'admin.tags.store', 'method' => 'post']) !!}
+    {!! Form::open(['route' => 'admin.posts.tags.store', 'method' => 'post']) !!}
     <div class="wrapper">
         <div class="container-fluid">
 

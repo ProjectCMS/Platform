@@ -32,6 +32,8 @@ mix.scripts([
                 nodeModules + 'datatables.net/js/jquery.dataTables.min.js',
                 nodeModules + 'datatables.net-bs4/js/dataTables.bootstrap4.min.js',
 
+                nodeModules + 'jquery-maskmoney/dist/jquery.maskMoney.min.js',
+
                 nodeModules + 'pdfjs-dist/build/pdf.min.js',
                 nodeModules + 'pdfjs-dist/build/pdf.worker.min.js',
 

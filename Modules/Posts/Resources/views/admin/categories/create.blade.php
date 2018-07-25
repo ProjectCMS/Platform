@@ -3,7 +3,7 @@
 @section('title_prefix', trans('dashboard::dashboard.page.create'))
 
 @section('content')
-    {!! Form::open(['route' => 'admin.categories.store', 'method' => 'post']) !!}
+    {!! Form::open(['route' => 'admin.posts.categories.store', 'method' => 'post']) !!}
     <div class="wrapper">
         <div class="container-fluid">
 

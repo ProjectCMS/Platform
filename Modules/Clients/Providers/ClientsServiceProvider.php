@@ -49,6 +49,25 @@
                             'text' => 'Adicionar novo',
                             'url'  => route('admin.clients.create'),
                         ],
+
+                        [
+                            'text' => 'Assinaturas',
+                            'url'  => route('admin.subscribes'),
+                            'submenu' => [
+                                [
+                                    'text' => 'Assinantes',
+                                    'url'  => route('admin.subscribes')
+                                ],
+                                [
+                                    'text' => 'Ciclos',
+                                    'url'  => route('admin.subscribes.cicles'),
+                                ],
+                                [
+                                    'text' => 'Logs',
+                                    'url'  => route('admin.subscribes.payments'),
+                                ],
+                            ],
+                        ],
                     ],
                 ]);
             });

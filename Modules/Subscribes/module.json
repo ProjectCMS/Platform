@@ -1,0 +1,16 @@
+{
+    "name": "Subscribes",
+    "alias": "subscribes",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Subscribes\\Providers\\SubscribesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

@@ -94,6 +94,21 @@ label {
     }
 }
 
+fieldset {
+    padding: 10px 30px;
+    border:  1px solid #EEE;
+}
+
+legend {
+    color:          #2F8EE0;
+    text-transform: uppercase;
+    font-size:      12px;
+    display:        inline-block;
+    width:          auto;
+    padding:        10px 0;
+    margin-left:    -20px;
+}
+
 /***** BTN *****/
 .btn {
     font-size:      .8571em;

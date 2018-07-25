@@ -137,6 +137,12 @@
         });
     }
 
+    App.prototype.initMasks = function () {
+
+        $('.money').maskMoney({showSymbol: false, symbol: "R$", decimal: ",", thousands: "."});
+
+    }
+
     App.prototype.initGrid = function () {
 
         var grid       = $self.grid,
@@ -190,13 +196,13 @@
 
         $(window).on("resize load", function () {
             var w = $('body').width();
-            if(w <= 576){
+            if (w <= 576) {
                 grid.attr('data-columns', 1);
-            }else if(w > 576 && w <= 768){
+            } else if (w > 576 && w <= 768) {
                 grid.attr('data-columns', 3);
-            }else if(w > 768 && w <= 1200){
+            } else if (w > 768 && w <= 1200) {
                 grid.attr('data-columns', 4);
-            }else{
+            } else {
                 grid.attr('data-columns', 5);
             }
 
@@ -361,6 +367,7 @@
         this.initAjaxAciton();
         this.initAjaxModules();
         this.initCustomTable();
+        this.initMasks();
         this.initGrid();
         this.initCheckbox();
     }

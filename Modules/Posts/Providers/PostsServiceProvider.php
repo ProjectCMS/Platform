@@ -40,11 +40,11 @@
                         ],
                         [
                             'text' => 'Categorias',
-                            'url'  => route('admin.categories'),
+                            'url'  => route('admin.posts.categories'),
                         ],
                         [
                             'text' => 'Tags',
-                            'url'  => route('admin.tags'),
+                            'url'  => route('admin.posts.tags'),
                         ],
                         [
                             'text' => 'Timeline',
