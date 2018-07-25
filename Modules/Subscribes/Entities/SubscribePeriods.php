@@ -12,8 +12,9 @@
             return $this->belongsTo('Modules\Subscribes\Entities\SubscribeCicles');
         }
 
-        public function getExtendDaysAttribute ($value)
+        public function getExtendDaysAttribute ()
         {
+            $value = $this->days;
             if ($value == 0) {
                 $return = 'Vitalício';
             } elseif ($value <= 30) {

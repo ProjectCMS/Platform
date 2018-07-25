@@ -30,7 +30,7 @@
                             <tr>
                                 <td class="text-center">{{ $data->id }}</td>
                                 <td>{{ $data->title }}</td>
-                                <td>R$ {{ $data->amount }} /  {{ $data->discount }}</td>
+                                <td>R$ {{ $data->amount }}</td>
                                 <td>{{ $data->period->extend_days }}</td>
                                 <td>
                                     @if($data->created_at == $data->updated_at)

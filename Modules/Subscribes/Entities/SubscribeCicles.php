@@ -11,7 +11,7 @@
         use FormatDates;
 
         protected $fillable = ['title', 'period_id', 'amount'];
-        protected $appends  = ['dicount'];
+        protected $appends  = ['month_amount'];
 
         protected $decimalsFields = [
             'amount',
@@ -22,14 +22,16 @@
             return $this->belongsTo('Modules\Subscribes\Entities\SubscribePeriods');
         }
 
-        public function getDiscountAttribute ()
+        public function getMonthAmountAttribute ()
         {
-            $month = SubscribePeriods::with('cicles')->whereDays(30);
-            dump($month->get()->toArray());
-//            if($this->period->days > 30 && $month->count()) {
-//                dump($month);
-//            }
-        }
+            $period     = $this->period;
+            $monthAmount = NULL;
+            if ($period->days >= 60) {
+                $month = round(($period->days / 30));
+                dump($this->amount);
+            }
 
+            return "teste";
+        }
 
     }
