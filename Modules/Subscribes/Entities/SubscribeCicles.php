@@ -24,14 +24,13 @@
 
         public function getMonthAmountAttribute ()
         {
-            $period     = $this->period;
+            $period      = $this->period;
             $monthAmount = NULL;
             if ($period->days >= 60) {
                 $month = round(($period->days / 30));
-                dump($this->amount);
             }
 
-            return "teste";
+            return NULL;
         }
 
     }

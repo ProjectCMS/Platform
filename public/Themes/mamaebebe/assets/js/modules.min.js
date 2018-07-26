@@ -16,7 +16,7 @@
             formGroup.removeClass('has-error');
             formGroup.find('.text-danger').empty();
 
-            $plugins.waitMe('load', '.item-content', 'stretch');
+            $plugins.waitMe('load', '.right-contet', 'stretch');
 
             $.post({
                        url: url,
@@ -27,12 +27,12 @@
                 if(data.auth){
                     location.href = data.intended;
                 }else{
-                    $plugins.waitMe('hide', '.item-content');
+                    $plugins.waitMe('hide', '.right-contet');
                 }
 
             }).fail(function (data, status, error) {
 
-                $plugins.waitMe('hide', '.item-content');
+                $plugins.waitMe('hide', '.right-contet');
 
                 var responde = data.responseJSON;
                 $.each(responde.errors, function (index, val) {

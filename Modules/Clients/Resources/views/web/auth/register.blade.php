@@ -1,0 +1,1 @@
+@extends($theme.'::partials.account.auth.register')

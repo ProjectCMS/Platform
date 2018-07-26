@@ -2,27 +2,35 @@
 
     Route::group([
         'middleware' => ['web', 'tracker', 'theme_web'],
-        'prefix'     => 'clients',
-        'namespace'  => 'Modules\Clients\Http\Controllers\Web\Auth',
-        'as'         => 'web.'
+        'as'         => 'web.',
+        'prefix'    => 'clients',
     ], function() {
-        Route::post('/login', 'LoginController@login')->name('clients.login');
-        Route::post('/logout', 'LoginController@logout')->name('clients.logout');
 
-        Route::post('/register', 'RegisterController@register')->name('clients.register');
+        Route::group([
+            'namespace' => 'Modules\Clients\Http\Controllers\Web\Auth',
+        ], function() {
+            Route::get('/', 'LoginController@showLoginForm')->name('clients');
+            Route::post('/login', 'LoginController@login')->name('clients.login');
+            Route::post('/logout', 'LoginController@logout')->name('clients.logout');
 
-        Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('clients.password.request');
-        Route::post('/password/reset', 'ResetPasswordController@reset')->name('clients.password.email');
-        Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('clients.password.reset');
-        Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('clients.password.reset.token');
-    });
+            Route::get('/register', 'RegisterController@showRegistrationForm')->name('clients.register');
+            Route::post('/register', 'RegisterController@register')->name('clients.register.post');
 
-    Route::group([
-        'middleware' => ['web', 'theme_web'],
-        'prefix'     => 'clients',
-        'namespace'  => 'Modules\Clients\Http\Controllers\Web',
-        'as'         => 'web.'
-    ], function() {
-        Route::get('social/login/{provider}', 'SocialController@login')->name('clients.social.login');
-        Route::get('social/redirect/{provider}', 'SocialController@redirect')->name('clients.social.redirect');
+            Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')
+                 ->name('clients.password.request');
+            Route::post('/password/reset', 'ResetPasswordController@reset')->name('clients.password.email');
+            Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')
+                 ->name('clients.password.reset');
+            Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')
+                 ->name('clients.password.reset.token');
+        });
+
+        Route::group([
+            'namespace' => 'Modules\Clients\Http\Controllers\Web',
+        ], function() {
+            Route::get('social/login/{provider}', 'SocialController@login')->name('clients.social.login');
+            Route::get('social/redirect/{provider}', 'SocialController@redirect')->name('clients.social.redirect');
+        });
+
+
     });

@@ -48,7 +48,7 @@
          */
         public function showLoginForm ()
         {
-            return view('client.auth.login');
+            return view('clients::web.auth.login');
         }
 
         /**
