@@ -163,7 +163,7 @@
 
                 $router->get('blog', 'PostsController@index')->name('posts');
                 $router->get('tag/{tag}', 'PostsController@tag')->name('posts.tag');
-                $router->get('category/{category}', 'PostsController@category')->name('posts.category');
+                $router->get('categoria/{category}', 'PostsController@category')->name('posts.category');
 
                 $posts = \Modules\Posts\Entities\Post::all();
                 $posts->each(function(\Modules\Posts\Entities\Post $post) use($router) {

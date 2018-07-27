@@ -45,11 +45,6 @@
             $this->notify(new ClientResetPassword($token));
         }
 
-        public function setPasswordAttribute ($value)
-        {
-            $this->attributes["password"] = bcrypt($value);
-        }
-
         public function socialAccount ()
         {
             return $this->hasMany('Modules\Clients\Entities\SocialAccount');

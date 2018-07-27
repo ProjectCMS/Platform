@@ -7,6 +7,7 @@
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
     use Hesto\MultiAuth\Traits\LogsoutGuard;
+    use Modules\Seo\Libs\Manager;
 
     class LoginController extends Controller {
         /*
@@ -30,15 +31,25 @@
          * @var string
          */
         public $redirectTo = '/';
+        /**
+         * @var Manager
+         */
+        private $seo;
+        /**
+         * @var Request
+         */
+        private $request;
 
         /**
          * Create a new controller instance.
          *
          * @return void
          */
-        public function __construct ()
+        public function __construct (Manager $seo, Request $request)
         {
             $this->middleware('client.guest', ['except' => 'logout']);
+            $this->seo     = $seo;
+            $this->request = $request;
         }
 
         /**
@@ -48,7 +59,9 @@
          */
         public function showLoginForm ()
         {
-            return view('clients::web.auth.login');
+            $seo = $this->seo->setData('page', NULL, ['title' => 'Login']);
+
+            return view('clients::web.auth.login', compact('seo'));
         }
 
         /**
@@ -71,6 +84,23 @@
                 ]);
 
             }
+        }
+
+        /**
+         * @return string
+         */
+        public function redirectTo ()
+        {
+            $redirect = '/';
+            $session  = $this->request->session();
+
+            if ($session->has('redirect')) {
+                $redirect = $session->get('redirect');
+            }
+
+            $this->redirectTo = $redirect;
+
+            return $this->redirectTo;
         }
 
     }

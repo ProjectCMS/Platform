@@ -3,7 +3,7 @@
     Route::group([
         'middleware' => ['web', 'tracker', 'theme_web'],
         'as'         => 'web.',
-        'prefix'    => 'clients',
+        'prefix'    => 'clientes',
     ], function() {
 
         Route::group([
@@ -13,15 +13,15 @@
             Route::post('/login', 'LoginController@login')->name('clients.login');
             Route::post('/logout', 'LoginController@logout')->name('clients.logout');
 
-            Route::get('/register', 'RegisterController@showRegistrationForm')->name('clients.register');
-            Route::post('/register', 'RegisterController@register')->name('clients.register.post');
+            Route::get('/registro', 'RegisterController@showRegistrationForm')->name('clients.register');
+            Route::post('/registro', 'RegisterController@register')->name('clients.register.post');
 
-            Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')
+            Route::post('/senha/email', 'ForgotPasswordController@sendResetLinkEmail')
                  ->name('clients.password.request');
-            Route::post('/password/reset', 'ResetPasswordController@reset')->name('clients.password.email');
-            Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')
+            Route::post('/senha/reset', 'ResetPasswordController@reset')->name('clients.password.email');
+            Route::get('/senha/reset', 'ForgotPasswordController@showLinkRequestForm')
                  ->name('clients.password.reset');
-            Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')
+            Route::get('/senha/reset/{token}', 'ResetPasswordController@showResetForm')
                  ->name('clients.password.reset.token');
         });
 
