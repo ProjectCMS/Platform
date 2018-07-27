@@ -1,8 +1,11 @@
 @php
-    $menu = get_menus('top')->items;
-    $menu = collect($menu);
-    $menu = $menu->prepend((object) ['title' => 'Home', 'url' => '/', 'children' => collect([])]);
-    $menu = $menu->chunk(ceil($menu->count() / 2));
+    $menu = get_menus('top');
+    if($menu){
+        $menu = $menu->items;
+        $menu = collect($menu);
+        $menu = $menu->prepend((object) ['title' => 'Home', 'url' => '/', 'children' => collect([])]);
+        $menu = $menu->chunk(ceil($menu->count() / 2));
+    }
 @endphp
 
 <ul class="navbar-nav ml-auto">
