@@ -14,15 +14,21 @@
          * @var SocialAccount
          */
         private $socialAccount;
+        /**
+         * @var Request
+         */
+        private $request;
 
-        public function __construct (SocialAccount $socialAccount)
+        public function __construct (SocialAccount $socialAccount, Request $request)
         {
             $this->socialAccount = $socialAccount;
+            $this->request       = $request;
         }
 
         public function login ($provider)
         {
             $this->setConfig($provider);
+
             return Socialite::driver($provider)->redirect();
         }
 
@@ -35,11 +41,18 @@
                 if ($user) {
                     auth('client')->login($user);
 
-                    return redirect()->to('/');
+                    $redirect = '/';
+                    $session  = $this->request->session();
+
+                    if ($session->has('redirect')) {
+                        $redirect = $session->get('redirect');
+                    }
+
+                    return redirect()->to($redirect);
                 }
 
             } catch (\Exception $e) {
-                return redirect('/teste');
+                return redirect('/');
             }
         }
 

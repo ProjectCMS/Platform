@@ -110,4 +110,21 @@
 
             }
         }
+
+        /**
+         * @return string
+         */
+        public function redirectTo ()
+        {
+            $redirect = '/';
+            $session  = $this->request->session();
+
+            if ($session->has('redirect')) {
+                $redirect = $session->get('redirect');
+            }
+
+            $this->redirectTo = $redirect;
+
+            return $this->redirectTo;
+        }
     }
