@@ -149,10 +149,16 @@
 
                 $router->get('/', 'PagesController@index');
 
-                $pages = \Modules\Pages\Entities\Page::all();
-                $pages->each(function(\Modules\Pages\Entities\Page $page) use($router) {
-                    $router->get($page->slug, 'PagesController@show')->name('pages.' . $page->slug)->defaults('page', $page);
-                });
+                try{
+
+                    $pages = \Modules\Pages\Entities\Page::all();
+                    $pages->each(function(\Modules\Pages\Entities\Page $page) use($router) {
+                        $router->get($page->slug, 'PagesController@show')->name('pages.' . $page->slug)->defaults('page', $page);
+                    });
+
+                }catch (\Exception $e){
+
+                }
             });
 
         }
