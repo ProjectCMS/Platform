@@ -1,5 +1,8 @@
 @php
-    $menu = get_menus('footer')->items;
+    $menu = get_menus('footer');
+    if($menu){
+        $menu = $menu->items;
+    }
 @endphp
 
 @if($menu)
