@@ -68,7 +68,6 @@
             $this->registerFactories();
             $this->registerComposers();
             $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-            $this->registerRoutes();
 
             /** Menu **/
             $this->MenuAdmin($events);
@@ -143,20 +142,6 @@
             if (!app()->environment('production')) {
                 app(Factory::class)->load(__DIR__ . '/../Database/Factories');
             }
-        }
-
-        /**
-         * Register routes.
-         *
-         * @return void
-         */
-        public function registerRoutes ()
-        {
-            /** @var Router $router */
-            $router = app()->make('router');
-
-
-
         }
 
         /**

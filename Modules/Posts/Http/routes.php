@@ -24,8 +24,6 @@
         Route::get('tag/{tag}', 'PostsController@tag')->name('posts.tag');
         Route::get('categoria/{category}', 'PostsController@category')->name('posts.category');
 
-        try {
-
             $posts = \Modules\Posts\Entities\Post::all();
             $posts->each(function(\Modules\Posts\Entities\Post $post) {
                 $year  = $post->created_at->format('Y');
@@ -40,8 +38,4 @@
                        ->name('posts.date.' . $post->slug)
                        ->defaults('post', $post);
             });
-
-        }catch (\Exception $e){
-
-        }
     });
