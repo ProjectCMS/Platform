@@ -1,33 +1,37 @@
 <?php
 
-namespace Modules\Emails\Emails;
+    namespace Modules\Emails\Emails;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
+    use Illuminate\Bus\Queueable;
+    use Illuminate\Mail\Mailable;
+    use Illuminate\Queue\SerializesModels;
+    use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ContactMail extends Mailable
-{
-    use Queueable, SerializesModels;
+    class ContactMail extends Mailable {
+        use Queueable, SerializesModels;
+        private $data;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
+        /**
+         * Create a new message instance.
+         *
+         * @return void
+         */
+        public function __construct ($data)
+        {
+            //
+            $this->data = $data;
+        }
+
+        /**
+         * Build the message.
+         *
+         * @return $this
+         */
+        public function build ()
+        {
+            return $this->view('emails::templates.contact')
+                        ->from($this->data->email)
+                        ->subject(setting('site_name') . ' - ' . $this->data->subject)
+                        ->with(['data' => $this->data]);
+        }
     }
-
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
-        return $this->view('emails::templates.contact');
-    }
-}
