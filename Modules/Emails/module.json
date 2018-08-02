@@ -1,0 +1,16 @@
+{
+    "name": "Emails",
+    "alias": "emails",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Emails\\Providers\\EmailsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

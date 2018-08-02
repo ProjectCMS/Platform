@@ -2,6 +2,8 @@
 
 @section('layout')
 
+    @include('partials.menu.sidebar.item')
+
     <div class="main-content">
 
         <header class="header">

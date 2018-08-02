@@ -13,6 +13,11 @@
 
         Route::get('/', 'PagesController@index');
 
+        /**
+         * Contact Pages
+         */
+        Route::post('/enviar-email-contato', 'ContactController@sendMailContact')->name('contact.send');
+
         try{
 
             $pages = \Modules\Pages\Entities\Page::all();

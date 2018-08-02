@@ -36,7 +36,7 @@
 @stop
 
 @section('post_outhers')
-    <div class="post-nav">
+    <div class="post-nav d-none">
         @if($prev)
             <a href="{{ route('web.posts.'.$prev->slug) }}" class="item pull-left">
                 <span class="text-left">Artigo anterior</span>
