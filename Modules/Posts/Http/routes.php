@@ -24,6 +24,8 @@
         Route::get('tag/{tag}', 'PostsController@tag')->name('posts.tag');
         Route::get('categoria/{category}', 'PostsController@category')->name('posts.category');
 
+        dump("teste");
+
         try {
 
             $posts = \Modules\Posts\Entities\Post::all();
