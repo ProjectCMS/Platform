@@ -29,9 +29,9 @@
          */
         public function build ()
         {
-            return $this->view('emails::templates.contact')
-                        ->from($this->data->email)
-                        ->subject(setting('site_name') . ' - ' . $this->data->subject)
-                        ->with(['data' => $this->data]);
+            return $this->view('emails::templates.contact')->from([
+                    'address' => $this->data->email,
+                    'name'    => $this->data->name
+                ])->subject(setting('site_name') . ' - ' . $this->data->subject)->with(['data' => $this->data]);
         }
     }
