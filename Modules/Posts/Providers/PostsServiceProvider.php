@@ -155,37 +155,7 @@
             /** @var Router $router */
             $router = app()->make('router');
 
-            $router->group([
-                'middleware' => ['web', 'tracker', 'theme_web'],
-                'namespace'  => 'Modules\Posts\Http\Controllers\Web',
-                'as'         => 'web.'
-            ], function() use($router) {
 
-                $router->get('blog', 'PostsController@index')->name('posts');
-                $router->get('tag/{tag}', 'PostsController@tag')->name('posts.tag');
-                $router->get('categoria/{category}', 'PostsController@category')->name('posts.category');
-
-                try {
-
-                    $posts = \Modules\Posts\Entities\Post::all();
-                    $posts->each(function(\Modules\Posts\Entities\Post $post) use ($router) {
-                        $year  = $post->created_at->format('Y');
-                        $month = $post->created_at->format('m');
-                        $day   = $post->created_at->format('d');
-
-                        $router->get("{$post->id}-{$post->slug}", 'PostsController@show')
-                               ->name('posts.' . $post->slug)
-                               ->defaults('post', $post);
-
-                        $router->get("{$year}/{$month}/{$day}/{$post->id}-{$post->slug}", 'PostsController@show')
-                               ->name('posts.date.' . $post->slug)
-                               ->defaults('post', $post);
-                    });
-
-                }catch (\Exception $e){
-
-                }
-            });
 
         }
 

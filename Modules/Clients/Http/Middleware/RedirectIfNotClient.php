@@ -18,7 +18,7 @@
         public function handle ($request, Closure $next, $guard = 'client')
         {
             if (!Auth::guard($guard)->check()) {
-                return redirect('client/login');
+                return redirect(route('web.clients.login'));
             }
 
             return $next($request);

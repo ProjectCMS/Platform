@@ -27,6 +27,6 @@
     @endif
 
     <div class="text-center my-4">
-        <a href="{{ route('web.clients') }}">Já tenho minha conta</a>
+        <a href="{{ route('web.clients.login') }}">Já tenho minha conta</a>
     </div>
 @stop

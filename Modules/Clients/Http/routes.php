@@ -9,7 +9,7 @@
         Route::group([
             'namespace' => 'Modules\Clients\Http\Controllers\Web\Auth',
         ], function() {
-            Route::get('/', 'LoginController@showLoginForm')->name('clients');
+            Route::get('/login', 'LoginController@showLoginForm')->name('clients.login');
             Route::post('/login', 'LoginController@login')->name('clients.login');
             Route::post('/logout', 'LoginController@logout')->name('clients.logout');
 

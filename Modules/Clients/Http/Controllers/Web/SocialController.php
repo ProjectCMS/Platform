@@ -41,12 +41,7 @@
                 if ($user) {
                     auth('client')->login($user);
 
-                    $redirect = '/';
-                    $session  = $this->request->session();
-
-                    if ($session->has('redirect')) {
-                        $redirect = $session->get('redirect');
-                    }
+                    $redirect = $this->request->session()->get('url.intended');
 
                     return redirect()->to($redirect);
                 }

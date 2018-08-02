@@ -1,0 +1,25 @@
+{
+    "name": "michelvieira/payments",
+    "description": "",
+    "authors": [
+        {
+            "name": "Michel Vieira",
+            "email": "michelvieira@outlook.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Payments\\Providers\\PaymentsServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Payments\\": ""
+        }
+    }
+}

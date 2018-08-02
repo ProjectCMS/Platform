@@ -36,24 +36,24 @@
         */
 
         'guards' => [
-            'client' => [
-                'driver'   => 'session',
-                'provider' => 'clients',
-            ],
-
             'user' => [
                 'driver'   => 'session',
                 'provider' => 'users',
             ],
 
+            'client' => [
+                'driver'   => 'session',
+                'provider' => 'clients',
+            ],
+
             'web' => [
                 'driver'   => 'session',
-                'provider' => 'users',
+                'provider' => 'clients',
             ],
 
             'api' => [
                 'driver'   => 'token',
-                'provider' => 'users',
+                'provider' => 'clients',
             ],
         ],
 

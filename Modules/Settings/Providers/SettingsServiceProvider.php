@@ -38,6 +38,10 @@
                             'text' => 'Menus',
                             'url'  => route('admin.settings.menus'),
                         ],
+                        [
+                            'text' => 'Formas de pagamento',
+                            'url'  => route('admin.settings.payments'),
+                        ],
                     ],
                 ]);
             });

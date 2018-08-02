@@ -13,7 +13,7 @@
                     <div class="col-md-6">
                         <div class="right-contet">
                             <div class="description-content d-flex flex-column justify-content-center">
-                                <img src="{{ asset('storage/logo.png') }}" class="logo">
+                                <img src="{{ asset('storage/filemanager/logo.png') }}" class="logo">
                                 @yield('form')
                             </div>
                         </div>

@@ -17,8 +17,6 @@
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#configuracoes" role="tab" aria-controls="configuracoes" aria-selected="true"><i class="fa fa-cog" aria-hidden="true"></i> Configurações
                                     gerais</a>
-                                <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#pagamentos" role="tab" aria-controls="pagamentos" aria-selected="true"><i class="fa fa-dollar" aria-hidden="true"></i> Configurações
-                                    de pagamentos</a>
                                 <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#redes-sociais" role="tab" aria-controls="redes-sociais" aria-selected="false"><i class="fa fa-share-alt" aria-hidden="true"></i> Redes
                                     sociais</a>
                             </div>
@@ -168,31 +166,6 @@
                                         </div>
                                     </div>
 
-                                </div>
-
-                                <div class="tab-pane fade" id="pagamentos" role="tabpanel" aria-labelledby="pagamentos-tab">
-                                    <h4 class="mt-0 header-title">Configurações de pagamento</h4>
-                                    <fieldset class="form-group">
-                                        <legend>PagSeguro</legend>
-                                        <div class="form-group row mb-4">
-                                            {{ Form::label('pagseguro_status', 'Status', ['class' => 'col-sm-3 col-form-label']) }}
-                                            <div class="col-lg-7 col">
-                                                {{ Form::select('pagseguro[status]', [0 => 'Inativo', 1 => 'Ativo'], setting('pagseguro.status'), ['class' => 'form-control']) }}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-4">
-                                            {{ Form::label('pagseguro_email', 'E-mail', ['class' => 'col-sm-3 col-form-label']) }}
-                                            <div class="col-lg-7 col">
-                                                {{ Form::text('pagseguro[email]', setting('pagseguro.email'), ['class' => 'form-control']) }}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-4">
-                                            {{ Form::label('pagseguro_token', 'Token', ['class' => 'col-sm-3 col-form-label']) }}
-                                            <div class="col-lg-7 col">
-                                                {{ Form::text('pagseguro[token]', setting('pagseguro.token'), ['class' => 'form-control']) }}
-                                            </div>
-                                        </div>
-                                    </fieldset>
                                 </div>
 
                                 <div class="tab-pane fade" id="redes-sociais" role="tabpanel" aria-labelledby="redes-sociais-tab">

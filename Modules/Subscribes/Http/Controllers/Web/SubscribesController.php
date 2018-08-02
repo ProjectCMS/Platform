@@ -27,7 +27,6 @@
         public function plan (Request $request, $id)
         {
             $request->session()->forget('subscribe_cicle');
-            $client = auth()->guard('client')->user();
 
             if ($id && $this->cicles->find($id)) {
                 $request->session()->put('subscribe_cicle', $request->id);
@@ -35,17 +34,19 @@
                 return redirect()->back();
             }
 
-            if(!$client) {
-                $request->session()->put('redirect', $request->getPathInfo());
-                return redirect(route('web.clients'));
-            }
-
             return redirect(route('web.subscribes.payment'));
         }
 
         public function payment (Request $request)
         {
-            $cicle = $request->session()->get('subscribe_cicle');
-            dump($cicle);
+            $cicle     = $request->session()->get('subscribe_cicle');
+            $auth      = auth()->guard('client')->user();
+            $subscribe = $this->subscribe->whereClientId($auth->id)->with(['cicle'])->get();
+
+            if (!$cicle) {
+                return redirect('/');
+            }
+
+            return view('payments::web.list');
         }
     }

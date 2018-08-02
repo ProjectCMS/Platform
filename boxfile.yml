@@ -1,0 +1,43 @@
+run.config:
+  engine: php
+  engine.config:
+    runtime: php-7.2
+    apache_version: '2.2'
+    document_root: public
+    extensions:
+      - pdo
+      - mbstring
+      - tokenizer
+      - session
+      - zip
+      - dom
+      - xml
+      - ctype
+      - xmlwriter
+      - pdo_mysql
+      - geoip
+      - fileinfo
+      - redis
+      - curl
+deploy.config:
+  before_live:
+    web.site:
+      - mkdir -p storage/{app,framework/{sessions,cache,views},logs,public}
+      - php artisan migrate --force
+
+web.site:
+  start:
+    php: start-php
+  writable_dirs:
+    - bootstrap/cache
+  network_dirs:
+    data.storage:
+      - storage
+  log_watch:
+    laravel[error]: /app/storage/logs/laravel.log
+
+data.db:
+  image: nanobox/mysql:5.7
+
+data.storage:
+  image: nanobox/unfs:0.9

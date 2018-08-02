@@ -91,15 +91,7 @@
          */
         public function redirectTo ()
         {
-            $redirect = '/';
-            $session  = $this->request->session();
-
-            if ($session->has('redirect')) {
-                $redirect = $session->get('redirect');
-            }
-
-            $this->redirectTo = $redirect;
-
+            $this->redirectTo = $this->request->session()->get('url.intended');
             return $this->redirectTo;
         }
 

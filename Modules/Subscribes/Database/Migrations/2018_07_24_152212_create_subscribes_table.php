@@ -21,6 +21,11 @@ class CreateSubscribesTable extends Migration
             $table->dateTime('next_renovation');
             $table->timestamps();
         });
+
+        Schema::table('subscribes', function (Blueprint $table) {
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('cicle_id')->references('id')->on('subscribe_cicles');
+        });
     }
 
     /**

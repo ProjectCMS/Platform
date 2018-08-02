@@ -1,7 +1,7 @@
 <?php
 
     Route::group([
-        'middleware' => 'web',
+        'middleware' => ['web', 'client', 'auth:client'],
         'prefix'     => 'planos',
         'as'         => 'web.',
         'namespace'  => 'Modules\Subscribes\Http\Controllers\Web'

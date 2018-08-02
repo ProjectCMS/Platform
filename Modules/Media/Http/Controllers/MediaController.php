@@ -59,7 +59,7 @@
         {
             if ($file) {
                 $file    = base64_decode($file);
-                $storage = public_path('storage' . DIRECTORY_SEPARATOR . $file);
+                $storage = public_path('storage/filemanager/' . $file);
 
                 return response()->download($storage);
             }
@@ -73,12 +73,12 @@
             if ($files) {
                 foreach ($files as $key => $file) {
                     $file        = base64_decode($file);
-                    $storage     = public_path('storage' . DIRECTORY_SEPARATOR . $file);
+                    $storage     = public_path('storage/' . $file);
                     $files[$key] = $storage;
                 }
 
                 $name = 'arquivos-' . date('Y-m-d') . '.zip';
-                $path = 'downloads' . DIRECTORY_SEPARATOR . $name;
+                $path = 'downloads/' . $name;
                 $zipper->zip($path)->add($files)->close();
 
                 $storage = public_path($path);

@@ -10,13 +10,15 @@
 
     class FileManager {
 
-        private $root   = 'storage/';
+        private $root   = 'storage/filemanager/';
+        private $public = 'public/filemanager/';
         private $folder = '';
 
         public function __construct (Request $request)
         {
-            $this->data = $request;
-            $this->path = (isset($this->data->dir) && $this->data->dir != NULL ? base64_decode($this->data->dir) : NULL);
+            $this->data           = $request;
+            $this->path           = (isset($this->data->dir) && $this->data->dir != NULL ? base64_decode($this->data->dir) : NULL);
+            $this->realPathPublic = $this->public . $this->folder;
             $this->setRealPath();
         }
 
@@ -100,7 +102,7 @@
             if ($request->file) {
                 foreach ($request->file as $key => $file) {
                     $filename = str_slug(preg_replace('/\..+$/', '', $file->getClientOriginalName())) . '.' . $file->getClientOriginalExtension();
-                    $file->storeAs('public' . DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR . @base64_decode($request->dir), $filename);
+                    $file->storeAs($this->realPathPublic . @base64_decode($request->dir), $filename);
                 }
             }
         }
@@ -112,7 +114,7 @@
             if ($files) {
                 foreach ($files as $key => $file) {
                     $file    = base64_decode($file);
-                    $storage = 'public' . DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR . $file;
+                    $storage = $this->realPathPublic . $file;
                     $infos   = Storage::disk('local')->getMetaData($storage);
 
                     // Verifica se é um diretório
@@ -134,21 +136,24 @@
             $request = $this->data;
             if ($request->input('name') != NULL) {
                 $dir     = base64_decode($request->input('dir'));
-                $storage = 'public' . DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $request->input('name');
+                $storage = $this->realPathPublic . $dir . '/' . $request->input('name');
                 if (!Storage::exists($storage)) Storage::makeDirectory($storage, 0777, TRUE, TRUE);
             }
         }
 
         private function checkFolder ()
         {
-            $storage = 'public' . DIRECTORY_SEPARATOR . $this->folder;
-            if (!Storage::exists($storage)) Storage::makeDirectory($storage, 0777, TRUE, TRUE);
+            if (!Storage::exists($this->realPathPublic)) Storage::makeDirectory($this->realPathPublic, 0777, TRUE, TRUE);
         }
 
         private function setItems ($type)
         {
 
             $this->storage = public_path($this->realPath);
+            
+            if (!file_exists($this->storage)) {
+                mkdir($this->storage, 0777, TRUE);
+            }
 
             if (isset($this->path) && !empty($this->path) && strpos($this->path, '../') === FALSE && strpos($this->path, './') === FALSE) {
                 $this->subfolder = urldecode(trim(strip_tags($this->path), "/") . "/");

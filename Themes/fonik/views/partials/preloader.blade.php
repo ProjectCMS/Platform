@@ -1,5 +1,5 @@
 <div id="preloader">
-    <div id="status">
+    <div id="status-loader">
         <div class="spinner"></div>
     </div>
 </div>

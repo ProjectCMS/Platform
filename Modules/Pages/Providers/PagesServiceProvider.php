@@ -141,26 +141,6 @@
             /** @var Router $router */
             $router = app()->make('router');
 
-            $router->group([
-                'middleware' => ['web', 'tracker', 'theme_web'],
-                'namespace'  => 'Modules\Pages\Http\Controllers\Web',
-                'as'         => 'web.'
-            ], function() use($router) {
-
-                $router->get('/', 'PagesController@index');
-
-                try{
-
-                    $pages = \Modules\Pages\Entities\Page::all();
-                    $pages->each(function(\Modules\Pages\Entities\Page $page) use($router) {
-                        $router->get($page->slug, 'PagesController@show')->name('pages.' . $page->slug)->defaults('page', $page);
-                    });
-
-                }catch (\Exception $e){
-
-                }
-            });
-
         }
 
 

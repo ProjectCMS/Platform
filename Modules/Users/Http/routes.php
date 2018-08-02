@@ -3,7 +3,7 @@
     Route::group([
         'middleware' => ['web', 'theme_admin'],
         'prefix'     => 'admin',
-        'namespace'  => 'Modules\Users\Http\Controllers'
+        'namespace'  => 'Modules\Users\Http\Controllers\Auth'
     ], function() {
         Route::get('/', 'LoginController@showLoginForm')->name('login');
         Route::get('/login', 'LoginController@showLoginForm')->name('login');

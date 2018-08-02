@@ -36,7 +36,7 @@
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
             ],
 
-            'api' => [
+            'api'     => [
                 'throttle:60,1',
                 'bindings',
             ],
