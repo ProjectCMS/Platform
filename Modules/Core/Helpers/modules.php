@@ -56,3 +56,21 @@
         }
     }
 
+
+    //** Get Route group **//
+    if (!function_exists('random_date')) {
+
+        function random_date ($sStartDate, $sEndDate, $sFormat = 'Y-m-d H:i:s')
+        {
+            // Convert the supplied date to timestamp
+            $fMin = strtotime($sStartDate);
+            $fMax = strtotime($sEndDate);
+            // Generate a random number from the start and end dates
+            $fVal = mt_rand($fMin, $fMax);
+
+            // Convert back to the specified date format
+            return date($sFormat, $fVal);
+        }
+    }
+
+

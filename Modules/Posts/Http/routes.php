@@ -44,4 +44,15 @@
         }catch (\Exception $e){
 
         }
+
+        Route::get('/update-posts', function () {
+            $posts = \Modules\Posts\Entities\Post::all();
+            $posts->each(function ($post) {
+                $date = random_date('2018-01-01', '2018-08-02');
+                $post->created_at = $date;
+                $post->updated_at = $date;
+                $post->save();
+            });
+        });
+
     });

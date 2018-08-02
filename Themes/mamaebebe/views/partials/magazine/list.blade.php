@@ -1,6 +1,6 @@
 <div class="magazine">
     <div class="row">
-        @foreach($magazine as $item)
+        @forelse($magazine as $item)
             <div class="col-md-3 col-6">
                 <a href="#" class="item manager-magazine" data-id="{{ $item->id }}" title="{{ $item->title }}">
                     <figure>
@@ -12,6 +12,8 @@
                     </figure>
                 </a>
             </div>
-        @endforeach
+        @empty
+            @include('partials.errors.000')
+        @endforelse
     </div>
 </div>
