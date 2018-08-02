@@ -24,12 +24,9 @@
         Route::get('tag/{tag}', 'PostsController@tag')->name('posts.tag');
         Route::get('categoria/{category}', 'PostsController@category')->name('posts.category');
 
-        dump("teste");
-
         try {
 
             $posts = \Modules\Posts\Entities\Post::all();
-            dump($posts->toArray(), "Novo teste");
             $posts->each(function(\Modules\Posts\Entities\Post $post) {
                 $year  = $post->created_at->format('Y');
                 $month = $post->created_at->format('m');
