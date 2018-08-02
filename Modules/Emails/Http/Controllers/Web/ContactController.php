@@ -16,7 +16,7 @@
 
         public function sendMailContact (ContactRequest $request)
         {
-            $email = Mail::to('michelvieira@outlook.com')->send(new ContactMail($request));
+            Mail::to(setting('email', 'michelvieira@outlook.com'))->send(new ContactMail($request));
 
             if (Mail::failures()) {
                 return back()->with('status-danger', 'Sua mensagem não pode ser enviada, tente novamente!');
