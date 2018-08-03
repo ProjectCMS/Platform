@@ -12,12 +12,13 @@
 
         private $storagePath = 'storage/';
         private $publicPath  = 'public/';
-        private $folder      = '';
+        private $root        = '';
 
         public function __construct (Request $request)
         {
             $this->data = $request;
             $this->path = (isset($this->data->dir) && $this->data->dir != NULL ? base64_decode($this->data->dir) : NULL);
+            $this->root = $this->root;
 
             $this->setRealPath();
         }
@@ -28,14 +29,14 @@
         public function setRealPath ()
         {
             if (isset($this->data->root) && $this->data->root != NULL) {
-                $this->setFolder($this->data->root);
+                $this->setRoot($this->data->root);
             }
 
             // Public Path
-            $this->publicPath = $this->publicPath . $this->folder;
+            $this->publicPath = $this->publicPath . $this->root;
 
             // Storage Path
-            $this->storagePath = $this->storagePath . $this->folder;
+            $this->storagePath = $this->storagePath . $this->root;
 
             // Check exists folder
             $this->checkFolder();
@@ -46,19 +47,19 @@
          *
          * @param $folder
          */
-        public function setFolder ($folder)
+        public function setRoot ($root)
         {
-            $folder       = base64_decode($folder);
-            $this->folder = urldecode(trim(strip_tags($folder), "/") . "/");
+            $root       = base64_decode($root);
+            $this->root = urldecode(trim(strip_tags($root), "/") . "/");
         }
 
         /**
          * Get Folder
          * @return string
          */
-        public function getFolder ()
+        public function getRoot ()
         {
-            return $this->folder;
+            return $this->root;
         }
 
         public function getFilter ($perPages = 1)
@@ -75,7 +76,7 @@
             $currentPage      = LengthAwarePaginator::resolveCurrentPage();
             $currentPageItems = $collect->slice(($currentPage * $perPages) - $perPages, $perPages)->all();
             $paginatedItems   = new LengthAwarePaginator($currentPageItems, count($collect), 20);
-            $paginatedItems->setPath($this->data->root());
+            $paginatedItems->setPath($this->data->url());
 
             return $collect;
         }
@@ -206,6 +207,7 @@
 
             $folders = new \DirectoryIterator($storagePath . $this->subfolder);
 
+
             foreach ($folders as $key => $file) {
 
                 switch ($type) {
@@ -247,9 +249,9 @@
                     $this->setOptions($src);
 
                     $default[$key] = [
-                        'path_url'  => base64_encode($src),
+                        'path_url'  => base64_encode($this->root . $src),
                         'path'      => '?' . $this->setOptions($src),
-                        'storage'   => $this->folder . $src,
+                        'storage'   => $this->root . $src,
                         'file'      => $file->getFilename(),
                         'timestamp' => $file->getCTime(),
                         'date'      => $date,

@@ -126,7 +126,7 @@
          */
         public function edit ($id)
         {
-            $data   = $this->post->withTrashed()->with(['categories', 'tags', 'images'])->find($id);
+            $data   = $this->post->withTrashed()->with(['categories', 'tags', 'images', 'status'])->find($id);
             $status = $this->status->pluck('title', 'id');
 
             if (!$data) {

@@ -2,7 +2,7 @@
     <aside class="sidebar">
         <div class="widgets">
             <div class="mb-3">
-                <div class="ads mid"></div>
+                <div class="ads box" data-ads="box"></div>
             </div>
             @yield('custom_widget')
             <div class="widget">

@@ -76,6 +76,7 @@ var tags      = $('.tags'),
                     manager: manager,
                     tools: true,
                     multiple: true,
+                    root: 'filemanager',
                     data: {type: 'image'},
                     complete: function (data) {
                         if (data.length) {

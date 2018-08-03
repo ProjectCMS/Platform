@@ -42,6 +42,10 @@
                             'text' => 'Formas de pagamento',
                             'url'  => route('admin.settings.payments'),
                         ],
+                        [
+                            'text' => 'Publicidades',
+                            'url'  => route('admin.settings.publishers'),
+                        ],
                     ],
                 ]);
             });

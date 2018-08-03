@@ -1,0 +1,16 @@
+{
+    "name": "Publishers",
+    "alias": "publishers",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Publishers\\Providers\\PublishersServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

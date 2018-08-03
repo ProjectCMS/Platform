@@ -8,18 +8,16 @@
     ], function() {
 
         ///**** Subscribes ****///
-        Route::group([
-            'prefix' => 'subscribes',
-        ], function() {
+        Route::group([], function() {
 
-            Route::get('/', 'CiclesController@index')->name('subscribes');
-            Route::get('/create', 'CiclesController@create')->name('subscribes.create');
-            Route::post('/create', 'CiclesController@store')->name('subscribes.store');
+            Route::get('/', 'SubscribesController@index')->name('subscribes');
+            Route::get('/create', 'SubscribesController@create')->name('subscribes.create');
+            Route::post('/create', 'SubscribesController@store')->name('subscribes.store');
 
-            Route::get('/edit/{id}', 'CiclesController@edit')->name('subscribes.edit');
-            Route::put('/update/{id}', 'CiclesController@update')->name('subscribes.update');
+            Route::get('/edit/{id}', 'SubscribesController@edit')->name('subscribes.edit');
+            Route::put('/update/{id}', 'SubscribesController@update')->name('subscribes.update');
 
-            Route::delete('/delete', 'CiclesController@destroy')->name('subscribes.delete');
+            Route::delete('/delete', 'SubscribesController@destroy')->name('subscribes.delete');
 
         });
 

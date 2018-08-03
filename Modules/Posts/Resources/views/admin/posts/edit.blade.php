@@ -30,7 +30,7 @@
                     <div class="card m-b-20">
                         <div class="card-body">
                             <h4 class="mt-0 header-title">Informações</h4>
-                            <p><i class="fa fa-eye"></i> Status: <b class="pull-right">{{ $data->status->name }}</b>
+                            <p><i class="fa fa-eye"></i> Status: <b class="pull-right">{{ $data->status->title }}</b>
                             </p>
                             <p><i class="fa fa-calendar"></i> Criado:
                                 <b class="pull-right">{{ $data->created_at_cm }}</b></p>

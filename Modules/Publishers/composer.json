@@ -1,0 +1,25 @@
+{
+    "name": "michelvieira/publishers",
+    "description": "",
+    "authors": [
+        {
+            "name": "Michel Vieira",
+            "email": "michelvieira@outlook.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Publishers\\Providers\\PublishersServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Publishers\\": ""
+        }
+    }
+}
