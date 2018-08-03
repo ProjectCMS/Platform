@@ -36,10 +36,7 @@
                        ->name('posts.' . $post->slug)
                        ->defaults('post', $post);
 
-                Route::get("app/public/{$post->id}-{$post->slug}", 'PostsController@show')
-                     ->defaults('post', $post);
-
-                Route::get("{$year}/{$month}/{$day}/{$post->id}-{$post->slug}", 'PostsController@show')
+                   Route::get("{$year}/{$month}/{$day}/{$post->id}-{$post->slug}", 'PostsController@show')
                        ->name('posts.date.' . $post->slug)
                        ->defaults('post', $post);
             });
