@@ -24,7 +24,7 @@ var listPDF = $(".grid")
                     manager: manager,
                     tools: true,
                     multiple: false,
-                    url: 'revistas',
+                    root: 'revistas',
                     complete: function (data) {
                         var storage = data[0].storage;
 

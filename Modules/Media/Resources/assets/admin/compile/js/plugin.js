@@ -12,7 +12,7 @@
                 multiple: false,
                 tools: false,
                 manager: '',
-                url: '',
+                root: '',
                 data: '',
                 dataFile: '',
             }, options);
@@ -20,9 +20,8 @@
         var $selector = $("body");
 
         this.each(function () {
-
             serialize = {
-                url: (settings.url ? btoa(settings.url) : ''),
+                root: (settings.root ? btoa(settings.root) : ''),
                 tools: settings.tools,
                 dataFile: settings.dataFile,
                 multiple: (!settings.file ? settings.multiple : false),

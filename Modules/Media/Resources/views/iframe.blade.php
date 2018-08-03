@@ -85,8 +85,7 @@
         </div>
 
         <div class="toolbar text-right">
-            <button class="btn btn-info waves-effect waves-light" id="insert-item" disabled><i class="fa fa-plus"></i> Inserir no post
-            </button>
+            <button class="btn btn-info waves-effect waves-light" id="insert-item" disabled><i class="fa fa-plus"></i> Inserir</button>
         </div>
 
     </div>

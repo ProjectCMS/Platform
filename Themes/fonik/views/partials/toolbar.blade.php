@@ -3,7 +3,7 @@
     <ul class="list-inline float-right mb-0">
 
         <!-- notification-->
-        <li class="list-inline-item dropdown notification-list">
+        <li class="list-inline-item dropdown notification-list d-none">
             <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
                aria-haspopup="false" aria-expanded="false">
                 <i class="ti-bell noti-icon"></i>
@@ -54,12 +54,12 @@
                 <span class="ml-1">{{ auth()->user()->name }} <i class="mdi mdi-chevron-down"></i></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                <a class="dropdown-item" href="#"><i class="dripicons-user text-muted"></i> Profile</a>
-                <a class="dropdown-item" href="#"><i class="dripicons-wallet text-muted"></i> My Wallet</a>
-                <a class="dropdown-item" href="#"><span class="badge badge-success pull-right m-t-5">5</span><i class="dripicons-gear text-muted"></i>
-                    Settings</a>
-                <a class="dropdown-item" href="#"><i class="dripicons-lock text-muted"></i> Lock screen</a>
-                <div class="dropdown-divider"></div>
+                {{--<a class="dropdown-item" href="#"><i class="dripicons-user text-muted"></i> Profile</a>--}}
+                {{--<a class="dropdown-item" href="#"><i class="dripicons-wallet text-muted"></i> My Wallet</a>--}}
+                {{--<a class="dropdown-item" href="#"><span class="badge badge-success pull-right m-t-5">5</span><i class="dripicons-gear text-muted"></i>--}}
+                    {{--Settings</a>--}}
+                {{--<a class="dropdown-item" href="#"><i class="dripicons-lock text-muted"></i> Lock screen</a>--}}
+                {{--<div class="dropdown-divider"></div>--}}
 
 
                 @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))

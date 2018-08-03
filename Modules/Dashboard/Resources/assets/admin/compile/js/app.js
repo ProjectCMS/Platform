@@ -276,6 +276,7 @@
                     tools: true,
                     multiple: false,
                     dataFile: value,
+                    root: 'filemanager',
                     data: {type: meta.filetype},
                     complete: function (data) {
                         if (data.length) {
@@ -293,6 +294,7 @@
                     manager: app.urlManager,
                     tools: true,
                     multiple: true,
+                    root: 'filemanager',
                     complete: function (data) {
                         if (data.length) {
                             $.each(data, function (index, val) {
@@ -310,6 +312,7 @@
                 manager: manager,
                 tools: true,
                 multiple: false,
+                root: 'filemanager',
                 data: {type: 'image'},
                 complete: function (data) {
                     callback(data);

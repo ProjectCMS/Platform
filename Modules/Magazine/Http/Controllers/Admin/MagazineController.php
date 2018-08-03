@@ -51,7 +51,8 @@
          */
         public function index ()
         {
-            $paginate   = $this->magazine->with(['files'])->paginate(10);
+            $paginate = $this->magazine->with(['files'])->paginate(10);
+
             return view('magazine::admin.index', compact('paginate'));
         }
 
@@ -137,15 +138,14 @@
         {
             $this->ilovepdf->setApiKeys('project_public_bfaf4c0b037ed5fa7428e2063be25633_GrB3ibc71a8554e2763a588cbf68016d131ad', 'secret_key_a362a093f609f4462135cebd8bdfbfdd_G5BBmb05c526c09b616698aaf5ab2c693dfc1');
 
-            //                                    $storage = storage_path('app/public/' . $request->storage);
-            //                                    $pdf     = $ilovepdf->newTask('split');
-            //                                    $pdf->addFile($storage);
-            //                                    $pdf->setFixedRange(1);
-            //                                    $pdf->setOutputFilename('pagina');
-            //                                    $pdf->execute();
-            //                                    $pdf->download('storage/tmp/');
-            //
-            //                                    dd("teste");
+            $storage = storage_path('app/public/' . $request->storage);
+            $pdf     = $this->ilovepdf->newTask('split');
+
+            $pdf->addFile($storage);
+            $pdf->setFixedRange(1);
+            $pdf->setOutputFilename('pagina');
+            $pdf->execute();
+            $pdf->download('storage/tmp/');
 
             $output = public_path('storage/tmp/output.zip');
             $path   = 'revistas/revista-' . date('Y-m-d');

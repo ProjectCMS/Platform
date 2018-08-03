@@ -5,76 +5,104 @@
 
     use Carbon\Carbon;
     use Illuminate\Http\Request;
-    use Illuminate\Pagination\LengthAwarePaginator;
     use Illuminate\Support\Facades\Storage;
+    use Illuminate\Pagination\LengthAwarePaginator;
 
     class FileManager {
 
-        private $root   = 'storage/filemanager/';
-        private $public = 'public/filemanager/';
-        private $folder = '';
+        private $storagePath = 'storage/';
+        private $publicPath  = 'public/';
+        private $folder      = '';
 
         public function __construct (Request $request)
         {
-            $this->data           = $request;
-            $this->path           = (isset($this->data->dir) && $this->data->dir != NULL ? base64_decode($this->data->dir) : NULL);
-            $this->realPathPublic = $this->public . $this->folder;
+            $this->data = $request;
+            $this->path = (isset($this->data->dir) && $this->data->dir != NULL ? base64_decode($this->data->dir) : NULL);
+
             $this->setRealPath();
         }
 
+        /**
+         * Set Real Path
+         */
         public function setRealPath ()
         {
-            if (isset($this->data->url) && $this->data->url != NULL) {
-                $this->setFolder($this->data->url);
-                $this->checkFolder();
+            if (isset($this->data->root) && $this->data->root != NULL) {
+                $this->setFolder($this->data->root);
             }
-            $this->realPath = $this->root . $this->folder;
+
+            // Public Path
+            $this->publicPath = $this->publicPath . $this->folder;
+
+            // Storage Path
+            $this->storagePath = $this->storagePath . $this->folder;
+
+            // Check exists folder
+            $this->checkFolder();
         }
 
+        /**
+         * Set Folder
+         *
+         * @param $folder
+         */
         public function setFolder ($folder)
         {
             $folder       = base64_decode($folder);
             $this->folder = urldecode(trim(strip_tags($folder), "/") . "/");
         }
 
+        /**
+         * Get Folder
+         * @return string
+         */
         public function getFolder ()
         {
             return $this->folder;
-        }
-
-        public function getDirectories ()
-        {
-            return $this->setItems('dir');
-        }
-
-        public function getFiles ()
-        {
-            return $this->setItems('file');
         }
 
         public function getFilter ($perPages = 1)
         {
             $all     = $this->getFiles();
             $collect = collect($all)->sortByDesc('timestamp');
-
             if (isset($this->data->type) && $this->data->type != NULL) {
                 $type    = $this->setTypeFile($this->data->type);
                 $collect = $collect->where("type", $type);
             }
-
             if (isset($this->data->extension) && $this->data->extension != NULL) {
                 $collect = $collect->where("ext", $this->data->extension);
             }
-
             $currentPage      = LengthAwarePaginator::resolveCurrentPage();
             $currentPageItems = $collect->slice(($currentPage * $perPages) - $perPages, $perPages)->all();
             $paginatedItems   = new LengthAwarePaginator($currentPageItems, count($collect), 20);
-            $paginatedItems->setPath($this->data->url());
+            $paginatedItems->setPath($this->data->root());
 
             return $collect;
-
         }
 
+        /**
+         * Get Directories
+         * @return array
+         */
+        public function getDirectories ()
+        {
+            return $this->setItems('dir');
+        }
+
+        /**
+         * Get Files
+         * @return array
+         */
+        public function getFiles ()
+        {
+            return $this->setItems('file');
+        }
+
+
+        /**
+         * Get Breadcrumb
+         * @return array
+         */
         public function getBreadcrumb ()
         {
             $bc         = explode("/", $this->subfolder);
@@ -96,13 +124,17 @@
             }
         }
 
+        /**
+         * Upload files
+         */
         public function upload ()
         {
             $request = $this->data;
+
             if ($request->file) {
                 foreach ($request->file as $key => $file) {
                     $filename = str_slug(preg_replace('/\..+$/', '', $file->getClientOriginalName())) . '.' . $file->getClientOriginalExtension();
-                    $file->storeAs($this->realPathPublic . @base64_decode($request->dir), $filename);
+                    $file->storeAs($this->publicPath . @base64_decode($request->dir), $filename);
                 }
             }
         }
@@ -113,19 +145,21 @@
             $files   = $request->input('data');
             if ($files) {
                 foreach ($files as $key => $file) {
-                    $file    = base64_decode($file);
-                    $storage = $this->realPathPublic . $file;
-                    $infos   = Storage::disk('local')->getMetaData($storage);
+
+                    $file       = base64_decode($file);
+                    $publicPath = $this->publicPath . $file;
+                    $infos      = Storage::disk('local')->getMetaData($publicPath);
 
                     // Verifica se é um diretório
                     if ($infos["type"] == "dir") {
-                        $allFiles = Storage::allFiles($storage);
+                        $allFiles = Storage::allFiles($publicPath);
+
                         // Verifica se o diretório está vazio
                         if (empty($allFiles)) {
-                            Storage::deleteDirectory($storage, TRUE);
+                            Storage::deleteDirectory($publicPath, TRUE);
                         }
                     } else {
-                        Storage::delete($storage);
+                        Storage::delete($publicPath);
                     }
                 }
             }
@@ -135,25 +169,23 @@
         {
             $request = $this->data;
             if ($request->input('name') != NULL) {
-                $dir     = base64_decode($request->input('dir'));
-                $storage = $this->realPathPublic . $dir . '/' . $request->input('name');
-                if (!Storage::exists($storage)) Storage::makeDirectory($storage, 0777, TRUE, TRUE);
+
+                $dir        = base64_decode($request->input('dir'));
+                $publicPath = $this->publicPath . $dir . '/' . $request->input('name');
+
+                if (!Storage::exists($publicPath)) Storage::makeDirectory($publicPath, 0777, TRUE, TRUE);
             }
         }
 
         private function checkFolder ()
         {
-            if (!Storage::exists($this->realPathPublic)) Storage::makeDirectory($this->realPathPublic, 0777, TRUE, TRUE);
+            if (!Storage::exists($this->publicPath)) Storage::makeDirectory($this->publicPath, 0777, TRUE, TRUE);
         }
 
         private function setItems ($type)
         {
 
-            $this->storage = public_path($this->realPath);
-            
-            if (!file_exists($this->storage)) {
-                mkdir($this->storage, 0777, TRUE);
-            }
+            $storagePath = public_path($this->storagePath);
 
             if (isset($this->path) && !empty($this->path) && strpos($this->path, '../') === FALSE && strpos($this->path, './') === FALSE) {
                 $this->subfolder = urldecode(trim(strip_tags($this->path), "/") . "/");
@@ -166,13 +198,13 @@
             }
 
 
-            if (!file_exists($this->storage . $this->subfolder)) {
+            if (!file_exists($storagePath . $this->subfolder)) {
                 $this->subfolder = '';
             }
 
             $this->currentfolder = $this->subfolder;
 
-            $folders = new \DirectoryIterator($this->storage . $this->subfolder);
+            $folders = new \DirectoryIterator($storagePath . $this->subfolder);
 
             foreach ($folders as $key => $file) {
 
@@ -210,7 +242,7 @@
                     }
 
                     $date = date('Y-m-d H:i:s', $file->getCTime());
-                    $date = \Carbon\Carbon::parse($date)->diffForHumans();
+                    $date = Carbon::parse($date)->diffForHumans();
 
                     $this->setOptions($src);
 
@@ -248,7 +280,7 @@
                         $list[$key] = [
                             'type'     => $types[0],
                             'group'    => 2,
-                            'path'     => asset($this->realPath . $src),
+                            'path'     => asset($this->storagePath . $src),
                             'download' => route('admin.media.download', base64_encode($src)),
                             'name'     => strtolower($file->getBasename('.' . $file->getExtension())),
                             'ext'      => strtolower($file->getExtension()),
@@ -303,7 +335,7 @@
         private function setOptions ($src)
         {
             $return["dir"]       = base64_encode($src);
-            $return["url"]       = (isset($this->data->url) ? $this->data->url : NULL);
+            $return["root"]      = (isset($this->data->root) ? $this->data->root : NULL);
             $return["multiple"]  = (isset($this->data->multiple) ? $this->data->multiple : 'false');
             $return["type"]      = (isset($this->data->type) ? $this->data->type : NULL);
             $return["extension"] = (isset($this->data->extension) ? $this->data->extension : NULL);

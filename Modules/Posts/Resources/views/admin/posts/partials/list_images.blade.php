@@ -26,5 +26,5 @@
 </div>
 
 {{--{{ Form::select('images[]', (isset($images) ? $images->pluck('name', 'name') : []), '', ['class' => 'form-control files-input d-none', 'multiple' => 'multiple']) }}--}}
-{{ Form::hidden('files_items', (isset($images) ? $images->toJson() : ''), ['class' => 'form-control files-input', 'data-input' => 'images']) }}
+{{ Form::text('files_items', (isset($images) ? $images->toJson() : ''), ['class' => 'form-control files-input', 'data-input' => 'images']) }}
 
