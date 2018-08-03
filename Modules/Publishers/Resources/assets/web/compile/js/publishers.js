@@ -15,7 +15,7 @@
             adsJson.wide = data['wide'];
             adsJson.box  = data['box'];
 
-            if (data.length) {
+            if (data.length >= 1) {
                 $.each(adsHtml, function (index, val) {
 
                     if ($(this).data('ads') == 'wide') {
