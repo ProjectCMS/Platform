@@ -33,13 +33,14 @@
 
     Publishers.prototype.setHtmlAds = function (ads, item) {
 
-        if (item.image != null) {
-            ads.html('<img src="' + item.image + '" title="' + item.title + '">');
-            if (item.url != null) {
-                ads.wrap('<a href="' + item.url + '" target="_blank"></a>');
+        if (item) {
+            if (item.image != null) {
+                ads.html('<img src="' + item.image + '" title="' + item.title + '">');
+                if (item.url != null) {
+                    ads.wrap('<a href="' + item.url + '" target="_blank"></a>');
+                }
             }
         }
-
     }
 
     Publishers.prototype.showAds = function (callback) {
