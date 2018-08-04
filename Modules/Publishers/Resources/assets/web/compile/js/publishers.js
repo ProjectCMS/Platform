@@ -15,10 +15,7 @@
             adsJson.wide = data['wide'];
             adsJson.box  = data['box'];
 
-            console.log(data.length);
-
             $.each(adsHtml, function (index, val) {
-
                 if ($(this).data('ads') == 'wide') {
                     $self.setHtmlAds($(this), adsJson.wide[count.wide]);
                     count.wide++;
