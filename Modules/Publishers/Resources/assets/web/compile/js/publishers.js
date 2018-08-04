@@ -15,22 +15,20 @@
             adsJson.wide = data['wide'];
             adsJson.box  = data['box'];
 
-            $.each(adsHtml, function (index, val) {
+            if (adsJson.wide.length || adsJson.box.length) {
+                $.each(adsHtml, function (index, val) {
 
-                if (adsJson.wide.length) {
                     if ($(this).data('ads') == 'wide') {
                         $self.setHtmlAds($(this), adsJson.wide[count.wide]);
                         count.wide++;
                     }
-                }
 
-                if (adsJson.box.length) {
                     if ($(this).data('ads') == 'box') {
                         $self.setHtmlAds($(this), adsJson.box[count.box]);
                         count.box++;
                     }
-                }
-            });
+                });
+            }
         });
     }
 
