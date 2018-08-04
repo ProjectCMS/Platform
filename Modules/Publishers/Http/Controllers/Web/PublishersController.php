@@ -31,4 +31,16 @@
             return $json;
         }
 
+        public function redirect (Request $request)
+        {
+            if ($request->url && $url = $this->publisher->whereUrl($request->url)->first()) {
+                $url->count_clicks = $url->count_clicks + 1;
+                $url->save();
+
+                return redirect($request->url);
+            }
+
+            return back();
+        }
+
     }

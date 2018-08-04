@@ -44,9 +44,10 @@
 
     var web = {};
 
-    web.urlPublishers = '{{ route('web.publishers') }}';
-    web.request       = '{{ http_build_query(Request::all()) }}';
-    web.token         = $('meta[name="csrf-token"]').attr('content');
+    web.urlPublishers         = '{{ route('web.publishers') }}';
+    web.urlPublishersRedirect = '{{ route('web.publishers.redirect') }}';
+    web.request               = '{{ http_build_query(Request::all()) }}';
+    web.token                 = $('meta[name="csrf-token"]').attr('content');
 
 </script>
 

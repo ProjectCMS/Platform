@@ -9,5 +9,6 @@
     ], function() {
 
         Route::post('/', 'PublishersController@index')->name('publishers');
+        Route::get('/redirect', 'PublishersController@redirect')->name('publishers.redirect');
 
     });
