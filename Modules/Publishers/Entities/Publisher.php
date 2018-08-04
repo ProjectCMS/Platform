@@ -12,6 +12,7 @@
         use Cachable;
 
         protected $fillable = ['orientation_id', 'status_id', 'title', 'slug', 'url', 'image'];
+        protected $appends  = ['image_link'];
 
         public function setTitleAttribute ($value)
         {
@@ -19,10 +20,10 @@
             $this->attributes["slug"]  = str_slug($value, '-');
         }
 
-        public function getImageLinkAttribute ($value)
+        public function getImageLinkAttribute ()
         {
-            if ($value != NULL) {
-                return asset('storage/' . $value);
+            if ($this->image != NULL) {
+                return asset('storage/' . $this->image);
             }
         }
 
