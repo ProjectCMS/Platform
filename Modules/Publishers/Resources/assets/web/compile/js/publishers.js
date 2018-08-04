@@ -16,14 +16,19 @@
             adsJson.box  = data['box'];
 
             $.each(adsHtml, function (index, val) {
-                if ($(this).data('ads') == 'wide') {
-                    $self.setHtmlAds($(this), adsJson.wide[count.wide]);
-                    count.wide++;
+
+                if (adsJson.wide.length) {
+                    if ($(this).data('ads') == 'wide') {
+                        $self.setHtmlAds($(this), adsJson.wide[count.wide]);
+                        count.wide++;
+                    }
                 }
 
-                if ($(this).data('ads') == 'box') {
-                    $self.setHtmlAds($(this), adsJson.box[count.box]);
-                    count.box++;
+                if (adsJson.box.length) {
+                    if ($(this).data('ads') == 'box') {
+                        $self.setHtmlAds($(this), adsJson.box[count.box]);
+                        count.box++;
+                    }
                 }
             });
         });
