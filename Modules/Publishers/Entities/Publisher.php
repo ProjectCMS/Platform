@@ -19,7 +19,7 @@
             $this->attributes["slug"]  = str_slug($value, '-');
         }
 
-        public function getImageAttribute ($value)
+        public function getImageLinkAttribute ($value)
         {
             if ($value != NULL) {
                 return asset('storage/' . $value);
