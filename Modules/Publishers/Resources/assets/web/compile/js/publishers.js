@@ -37,7 +37,7 @@
     Publishers.prototype.setHtmlAds = function (ads, item) {
 
         if (item.image_link != null) {
-            ads.html('<img src="' + item.image_link + '" title="' + item.title + '">');
+            ads.html('<div class="box-image"><img src="' + item.image_link + '" title="' + item.title + '"></div>');
             if (item.url != null) {
                 ads.wrap('<a href="' + web.urlPublishersRedirect + '?url=' + item.url + '" target="_blank"></a>');
             }
