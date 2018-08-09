@@ -13,10 +13,11 @@
         public function rules ()
         {
             return [
-                'name'    => 'required',
-                'email'   => 'required|email',
-                'subject' => 'required',
-                'message' => 'required|min:20'
+                'name'                 => 'required',
+                'email'                => 'required|email',
+                'subject'              => 'required',
+                'message'              => 'required|min:20',
+                'g-recaptcha-response' => 'required|recaptcha'
             ];
         }
 
@@ -28,5 +29,15 @@
         public function authorize ()
         {
             return TRUE;
+        }
+
+        /**
+         * @return array
+         */
+        public function messages ()
+        {
+            return [
+                'g-recaptcha-response.required' => 'Por favor, certifique-se de que você é um ser humano!',
+            ];
         }
     }

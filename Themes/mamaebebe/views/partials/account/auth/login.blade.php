@@ -17,7 +17,7 @@
     <div class="mb-3 text-right">
         <a href="#">Esqueci minha senha</a>
     </div>
-    {{ Form::button('Login', ['class' => 'btn btn-info btn-block', 'type' => 'submit']) }}
+    {{ Form::button('Login', ['class' => 'btn btn-block btn-info btn-shadow btn-loading', 'type' => 'submit', 'type' => 'submit', 'data-style' => 'zoom-in', 'data-spinner-size' => 30]) }}
     {!! Form::close() !!}
 
     @if(Request::secure())

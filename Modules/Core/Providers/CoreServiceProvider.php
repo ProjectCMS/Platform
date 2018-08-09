@@ -2,6 +2,7 @@
 
     namespace Modules\Core\Providers;
 
+    use Illuminate\Support\Facades\Validator;
     use Illuminate\Support\ServiceProvider;
     use Illuminate\Database\Eloquent\Factory;
 
@@ -24,6 +25,7 @@
             $this->registerConfig();
             $this->registerViews();
             $this->registerFactories();
+            $this->registerCustomsValidators();
             $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         }
@@ -95,6 +97,14 @@
             if (!app()->environment('production')) {
                 app(Factory::class)->load(__DIR__ . '/../Database/Factories');
             }
+        }
+
+        /**
+         * Register custom validators
+         */
+        public function registerCustomsValidators ()
+        {
+            Validator::extend('recaptcha', 'Modules\\Core\\Validators\\ReCaptcha@validate');
         }
 
         /**

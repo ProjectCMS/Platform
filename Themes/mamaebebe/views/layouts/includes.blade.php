@@ -24,6 +24,7 @@
 
 @yield('layout')
 
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b28232fa7603d0012fa8517&product=inline-share-buttons' async='async'></script>
 <!-- jQuery  -->
 <script type="text/javascript" src="{{ Theme::assets('js/libs.min.js') }}?v={{ time() }}"></script>
