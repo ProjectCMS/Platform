@@ -27,7 +27,7 @@
          */
         public function compose (View $view)
         {
-            $timeline = $this->timeline->with('post')->get();
+            $timeline = $this->timeline->with('post')->orderBy('order', 'ASC')->get();
             $view->with('timeline', $timeline);
 
         }
