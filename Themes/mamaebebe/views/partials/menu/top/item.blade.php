@@ -14,12 +14,12 @@
             <li class="nav-item {{ ($item->children->count() ? 'dropdown' : '') }}">
                 @if(isset($item->provider) && $item->provider())
                     @if($item->provider_type == 'categories')
-                        <a class="nav-link" href="{{ route('web.posts.category', $item->provider->slug) }}">{{ $item->title }}</a>
+                        <a class="nav-link" href="{{ route('web.posts.category', $item->provider->slug) }}" title="{{ $item->title }}">{{ $item->title }}</a>
                     @else
-                        <a class="nav-link" href="{{ url($item->provider->slug) }}">{{ $item->title }}</a>
+                        <a class="nav-link" href="{{ url($item->provider->slug) }}" title="{{ $item->title }}">{{ $item->title }}</a>
                     @endif
                 @else
-                    <a class="nav-link" href="{{ $item->url }}">{{ $item->title }}</a>
+                    <a class="nav-link" href="{{ $item->url }}" title="{{ $item->title }}">{{ $item->title }}</a>
                 @endif
                 @if($item->children->count())
                     @include('partials.menu.top.submenu-item', ['items' => $item->children])
@@ -41,12 +41,12 @@
             <li class="nav-item {{ ($item->children->count() ? 'dropdown' : '') }}">
                 @if(isset($item->provider) && $item->provider())
                     @if($item->provider_type == 'categories')
-                        <a class="nav-link" href="{{ route('web.posts.category', $item->provider->slug) }}">{{ $item->title }}</a>
+                        <a class="nav-link" href="{{ route('web.posts.category', $item->provider->slug) }}" title="{{ $item->title }}">{{ $item->title }}</a>
                     @else
-                        <a class="nav-link" href="{{ url($item->provider->slug) }}">{{ $item->title }}</a>
+                        <a class="nav-link" href="{{ url($item->provider->slug) }}" title="{{ $item->title }}">{{ $item->title }}</a>
                     @endif
                 @else
-                    <a class="nav-link" href="{{ $item->url }}">{{ $item->title }}</a>
+                    <a class="nav-link" href="{{ $item->url }}" title="{{ $item->title }}">{{ $item->title }}</a>
                 @endif
                 @if($item->children->count())
                     @include('partials.menu.top.submenu-item', ['items' => $item->children])

@@ -10,7 +10,7 @@
                 <ul class="categories list-inline">
                     @foreach($postsCategory as $category)
                         <li>
-                            <a href="{{ route('web.posts.category', $category->slug) }}">
+                            <a href="{{ route('web.posts.category', $category->slug) }}" title="{{ $category->title }}">
                                 <span>{{ $category->title }}</span>
                                 @if($category->image != NULL)
                                     <img src="{{ asset('storage/'.$category->image) }}" class="no-image">

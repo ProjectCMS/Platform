@@ -18,10 +18,10 @@
         {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Senha']) }}
         <span class="text-danger">{{ $errors->first('password') }}</span>
     </div>
-    {{ Form::button('Cadastre-se', ['class' => 'btn btn-block btn-info btn-shadow btn-loading', 'type' => 'submit', 'type' => 'submit', 'data-style' => 'zoom-in', 'data-spinner-size' => 30]) }}
+    {{ Form::button('Cadastre-se', ['class' => 'btn btn-block btn-info btn-loading', 'type' => 'submit', 'type' => 'submit', 'data-style' => 'zoom-in', 'data-spinner-size' => 30]) }}
     {!! Form::close() !!}
 
-    @if(Request::secure())
+    @if(!Request::secure())
         <div class="or"><span>Ou inscreva-se usando</span></div>
         @include('partials.account.auth.btn_social')
     @endif

@@ -28,7 +28,7 @@
                             </li>
                         @endif
                     </ul>
-                    <ul class="nav justify-content-end pull-right">
+                    <ul class="nav justify-content-end pull-right d-none">
                         @if($client)
                             <li class="nav-item"><a class="nav-link btn btn-link" href="#">Minha conta</a></li>
                             <li class="nav-item">

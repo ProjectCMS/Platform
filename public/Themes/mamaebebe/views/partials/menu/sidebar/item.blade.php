@@ -17,17 +17,17 @@
             @foreach($menu as $item)
                 <li class="{{ ($item->children->count() ? 'dropdown' : '') }}">
                     @if($item->children->count())
-                        <a href="#{{ $item->id }}" data-toggle="collapse" class="" aria-expanded="true">{{ $item->title }}</a>
+                        <a href="#{{ $item->id }}" data-toggle="collapse" class="" aria-expanded="true" title="{{ $item->title }}">{{ $item->title }}</a>
                         @include('partials.menu.sidebar.submenu-item', ['items' => $item->children])
                     @else
                         @if(isset($item->provider) && $item->provider())
                             @if($item->provider_type == 'categories')
-                                <a href="{{ route('web.posts.category', $item->provider->slug) }}">{{ $item->title }}</a>
+                                <a href="{{ route('web.posts.category', $item->provider->slug) }}" title="{{ $item->title }}">{{ $item->title }}</a>
                             @else
-                                <a href="{{ url($item->provider->slug) }}">{{ $item->title }}</a>
+                                <a href="{{ url($item->provider->slug) }}" title="{{ $item->title }}">{{ $item->title }}</a>
                             @endif
                         @else
-                            <a href="{{ $item->url }}">{{ $item->title }}</a>
+                            <a href="{{ $item->url }}" title="{{ $item->title }}">{{ $item->title }}</a>
                         @endif
                     @endif
                 </li>
