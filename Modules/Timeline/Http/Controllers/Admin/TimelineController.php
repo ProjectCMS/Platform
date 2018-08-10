@@ -23,6 +23,12 @@
         {
             $this->timeline = $timeline;
             $this->post     = $post;
+
+            $this->order = $this->timeline->orderBy('order', 'ASC')->pluck('title', 'id');
+            $this->order = $this->order->map(function($item) {
+                return 'Acima - ' . $item;
+            });
+
         }
 
         /**
@@ -43,8 +49,9 @@
         public function create ()
         {
             $posts = $this->post->whereStatusId(4)->pluck('title', 'id');
+            $order = $this->order;
 
-            return view('timeline::admin.create', compact('posts'));
+            return view('timeline::admin.create', compact('posts', 'order'));
         }
 
         /**
@@ -76,14 +83,15 @@
          */
         public function edit ($id)
         {
-            $data = $this->timeline->find($id);
+            $data  = $this->timeline->find($id);
             $posts = $this->post->whereStatusId(4)->where([["id", "!=", $id]])->pluck('title', 'id');
+            $order = $this->order;
 
             if (!$data) {
                 return redirect()->route('admin.timeline');
             }
 
-            return view('timeline::admin.edit', compact('data', 'posts'));
+            return view('timeline::admin.edit', compact('data', 'posts', 'order'));
         }
 
         /**

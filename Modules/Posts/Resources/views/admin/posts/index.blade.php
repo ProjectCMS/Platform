@@ -13,18 +13,18 @@
                     <section class="d-flex align-items-center">
                         @include('core::status', ['route' => 'posts'])
 
-                        {!! Form::open(['route' => 'admin.posts', 'method' => 'get', 'class' => 'form-inline ml-auto']) !!}
+                        {!! Form::open(['route' => 'admin.posts', 'method' => 'GET', 'class' => 'form-inline ml-auto']) !!}
 
                         <div class="form-group mr-sm-2">
-                            {{ Form::select('date', $dates, NULL, ['class' => 'form-control']) }}
+                            {{ Form::select('date', $dates, Request::get('date'), ['class' => 'form-control']) }}
                         </div>
 
                         <div class="form-group mr-sm-2">
-                            {{ Form::select('category_id', $categories, NULL, ['class' => 'form-control']) }}
+                            {{ Form::select('category_id', $categories, Request::get('category_id'), ['class' => 'form-control']) }}
                         </div>
 
                         <div class="form-group mr-sm-2">
-                            {{ Form::text('search', NULL, ['class' => 'form-control', 'placeholder' => 'Título']) }}
+                            {{ Form::text('search', Request::get('search'), ['class' => 'form-control', 'placeholder' => 'Título']) }}
                         </div>
 
                         {{ Form::button('Filtrar registros', ['class' => 'btn btn-outline-primary btn-round', 'type' => 'submit']) }}
@@ -52,6 +52,7 @@
                             <th data-sort="author" width="200" class="text-center">Autor</th>
                             <th width="250">Categorias</th>
                             <th width="250">Tags</th>
+                            <th width="150" class="text-center">Visualizações</th>
                             <th data-sort="updated_at" width="150">Data</th>
                             <th width="130">Opções</th>
                         </tr>
@@ -83,6 +84,7 @@
                                         ----
                                     @endforelse
                                 </td>
+                                <td class="text-center">{{ $data->count_views }}</td>
                                 <td>
                                     @if($data->created_at == $data->updated_at)
                                         Criado

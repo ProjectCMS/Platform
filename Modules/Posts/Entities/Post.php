@@ -2,6 +2,7 @@
 
     namespace Modules\Posts\Entities;
 
+    use CyrildeWit\EloquentViewable\Viewable;
     use GeneaLabs\LaravelModelCaching\Traits\Cachable;
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,9 +13,11 @@
         use SoftDeletes;
         use FormatDates;
         use Cachable;
+        use Viewable;
 
         protected static $logAttributes = ['title', 'content'];
         protected static $logName       = 'Posts';
+        protected        $appends       = ['count_views'];
 
         protected $fillable = [
             'title',
@@ -39,6 +42,11 @@
             $content = str_replace("</p>", "\r\n", $content);
 
             $this->attributes["content"] = $content;
+        }
+
+        public function getCountViewsAttribute ()
+        {
+            return $this->getViews();
         }
 
         public function seo ()

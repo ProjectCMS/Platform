@@ -71,6 +71,8 @@
             $next = Post::where('id', '>', $post->id)->first();
             $seo  = $this->seo->setData('post', $post);
 
+            $post->addViewWithExpiryDate(\Carbon\Carbon::now()->addHours(12));
+
             return view('posts::web.show', compact('post', 'prev', 'next', 'seo'));
         }
 
