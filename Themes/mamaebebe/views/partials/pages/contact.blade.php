@@ -47,7 +47,7 @@
     </div>
 
     <div class="mt-4 mx-auto col-md-5">
-        {{ Form::button('<span class="ladda-label">Enviar mensagem', ['class' => 'btn btn-lg btn-info btn-round btn-shadow btn-loading', 'type' => 'submit', 'data-style' => 'zoom-in', 'data-spinner-size' => 30]) }}
+        {{ Form::button('<span class="ladda-label">Enviar mensagem', ['class' => 'btn btn-lg btn-block btn-info btn-round btn-shadow btn-loading', 'type' => 'submit', 'data-style' => 'zoom-in', 'data-spinner-size' => 30]) }}
     </div>
 
     {!! Form::close() !!}
