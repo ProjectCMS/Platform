@@ -42,7 +42,7 @@
          */
         public function create ()
         {
-            $post = $this->post->pluck('title', 'id');
+            $post = $this->post->whereStatusId(4)->pluck('title', 'id');
 
             return view('timeline::admin.create', compact('post'));
         }
@@ -77,7 +77,7 @@
         public function edit ($id)
         {
             $data = $this->timeline->find($id);
-            $post = $this->post->where([["id", "!=", $id]])->pluck('title', 'id');
+            $post = $this->post->whereStatusId(4)->where([["id", "!=", $id]])->pluck('title', 'id');
 
             if (!$data) {
                 return redirect()->route('admin.timeline');
@@ -105,7 +105,9 @@
          * Remove the specified resource from storage.
          * @return Response
          */
-        public function destroy ()
+        public function destroy (Request $request)
         {
+            $data = $this->timeline->findOrFail($request->id);
+            $data->forceDelete();
         }
     }

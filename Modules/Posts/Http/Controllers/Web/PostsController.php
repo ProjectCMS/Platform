@@ -36,7 +36,7 @@
         {
             $posts = $this->post->with(['images', 'tags', 'categories']);
             $title = 'Blog';
-            $posts = $posts->orderBy('updated_at', 'DESC')->paginate(10);
+            $posts = $posts->whereStatusId(1)->orderBy('updated_at', 'DESC')->paginate(10);
             $seo   = $this->seo->setData('page', NULL, compact('title'));
 
             return view('posts::web.list', compact('posts', 'seo'));
@@ -45,7 +45,7 @@
         public function tag (Tag $tag)
         {
             $data  = $tag->with(['posts'])->findOrFail($tag->id);
-            $posts = $data->posts()->with(['images', 'tags', 'categories'])->paginate(10);
+            $posts = $data->posts()->whereStatusId(1)->orderBy('updated_at', 'DESC')->with(['images', 'tags', 'categories'])->paginate(10);
             $seo   = $this->seo->setData('tag', $data);
 
             return view('posts::web.list', compact('data', 'posts', 'seo'));
@@ -54,7 +54,7 @@
         public function category (Category $category)
         {
             $data  = $category->with(['posts'])->findOrFail($category->id);
-            $posts = $data->posts()->with(['images', 'tags', 'categories'])->paginate(10);
+            $posts = $data->posts()->whereStatusId(1)->orderBy('updated_at', 'DESC')->with(['images', 'tags', 'categories'])->paginate(10);
             $seo   = $this->seo->setData('category', $data);
 
             return view('posts::web.list', compact('data', 'posts', 'seo'));

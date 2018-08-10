@@ -53,7 +53,7 @@
         <div class="container">
             <div class="posts-category">
                 <div class="row">
-                    @foreach($postsCategory as $category)
+                    @foreach($categoryPosts as $category)
                         <div class="col-md-4">
                             <h4 class="title">{{ $category->title }}</h4>
                             <div class="posts row">

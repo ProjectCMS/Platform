@@ -3,7 +3,7 @@
     <div class="widget">
         <div class="title">Posts <span>recentes</span></div>
         <ul class="list-inline posts-list">
-            @forelse($outherPosts as $post)
+            @forelse($recentsPosts as $post)
                 <li title="{{ $post->title }}">
                     <a href="{{ route('web.posts.'.$post->slug) }}" title="{{ $post->title }}">
                         <figure class="box-image">

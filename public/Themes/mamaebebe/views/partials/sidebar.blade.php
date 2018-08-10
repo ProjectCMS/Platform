@@ -8,7 +8,7 @@
             <div class="widget">
                 <div class="title">Categorias <span>populares</span></div>
                 <ul class="categories list-inline">
-                    @foreach($postsCategory as $category)
+                    @foreach($categoryPosts as $category)
                         <li>
                             <a href="{{ route('web.posts.category', $category->slug) }}" title="{{ $category->title }}">
                                 <span>{{ $category->title }}</span>
