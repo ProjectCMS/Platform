@@ -56,6 +56,11 @@
             return $this->belongsTo('Modules\Users\Entities\User');
         }
 
+        public function timeline ()
+        {
+            return $this->hasOne('Modules\Timeline\Entities\Timeline');
+        }
+
         public function categories ()
         {
             return $this->belongsToMany('Modules\Posts\Entities\Category', 'post_categories');
@@ -156,7 +161,7 @@
             return $posts;
         }
 
-        public function getRouteKeyName()
+        public function getRouteKeyName ()
         {
             return 'slug';
         }

@@ -15,11 +15,11 @@ class TimelineRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'POST':
-                $title = 'required|unique:timelines,title';
+                $title = 'required|unique:timelines,post_id|unique:timelines,title';
                 break;
             case 'PUT':
                 $id    = $this->route()->parameter('id');
-                $title = 'required|unique:timelines,title,' . $id;
+                $title = 'required|unique:timelines,post_id|unique:timelines,title,' . $id;
                 break;
         }
 

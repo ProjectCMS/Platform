@@ -16,6 +16,8 @@
     use Modules\Posts\Entities\Tag;
     use Modules\Posts\Http\Requests\PostRequest;
     use Modules\Seo\Entities\Seo;
+    use Modules\Timeline\Entities\Timeline;
+    use Modules\Timeline\Http\Requests\TimelineRequest;
 
     class PostsController extends Controller {
 
@@ -47,8 +49,12 @@
          * @var PostImage
          */
         private $postImage;
+        /**
+         * @var Timeline
+         */
+        private $timeline;
 
-        public function __construct (Post $post, Category $category, PostCategory $postCategory, PostTag $postTag, PostImage $postImage, Seo $seo, Status $status)
+        public function __construct (Post $post, Category $category, PostCategory $postCategory, PostTag $postTag, PostImage $postImage, Seo $seo, Timeline $timeline, Status $status)
         {
             $this->post         = $post;
             $this->category     = $category;
@@ -57,6 +63,7 @@
             $this->postCategory = $postCategory;
             $this->postTag      = $postTag;
             $this->postImage    = $postImage;
+            $this->timeline     = $timeline;
         }
 
         /**
@@ -80,8 +87,9 @@
         public function create ()
         {
             $status = $this->status->pluck('title', 'id');
+            $posts  = $this->post->whereStatusId(4)->pluck('title', 'id')->prepend('Todos os posts', '');
 
-            return view('posts::admin.posts.create', compact('status'));
+            return view('posts::admin.posts.create', compact('status', 'posts'));
         }
 
         /**
@@ -103,6 +111,15 @@
                 'seo_keywords' => $request->seo_keywords,
                 'seo_content'  => $request->seo_content,
             ]);
+
+            // Verifica se é pra cadastrar uma nova timeline
+            if ($request->status_id == 4) {
+                $this->timeline->create([
+                    'title'   => $request->timeline_title ? $request->timeline_title : $request->title,
+                    'content' => $request->timeline_content,
+                    'post_id' => $insert->id,
+                ]);
+            }
 
             $this->postTag->managerItems($insert->id, $request->tag);
             $this->postCategory->managerItems($insert->id, $request->category);
@@ -126,7 +143,9 @@
          */
         public function edit ($id)
         {
-            $data   = $this->post->withTrashed()->with(['categories', 'tags', 'images', 'status'])->find($id);
+            $data   = $this->post->withTrashed()
+                                 ->with(['categories', 'tags', 'images', 'status', 'timeline', 'seo'])
+                                 ->find($id);
             $status = $this->status->pluck('title', 'id');
 
             if (!$data) {
@@ -156,6 +175,16 @@
                 'seo_keywords'    => $request->seo_keywords,
                 'seo_description' => $request->seo_description,
             ]);
+
+            // Verifica se é pra cadastrar uma nova timeline
+            if ($request->status_id == 4) {
+                $this->timeline->updateOrCreate([
+                    'post_id' => $id,
+                ], [
+                    'title'   => $request->timeline_title ? $request->timeline_title : $request->title,
+                    'content' => $request->timeline_content,
+                ]);
+            }
 
             $this->postTag->managerItems($id, $request->tag);
             $this->postCategory->managerItems($id, $request->category);

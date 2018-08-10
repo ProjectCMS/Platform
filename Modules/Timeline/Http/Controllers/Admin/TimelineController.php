@@ -42,9 +42,9 @@
          */
         public function create ()
         {
-            $post = $this->post->whereStatusId(4)->pluck('title', 'id');
+            $posts = $this->post->whereStatusId(4)->pluck('title', 'id');
 
-            return view('timeline::admin.create', compact('post'));
+            return view('timeline::admin.create', compact('posts'));
         }
 
         /**
@@ -77,13 +77,13 @@
         public function edit ($id)
         {
             $data = $this->timeline->find($id);
-            $post = $this->post->whereStatusId(4)->where([["id", "!=", $id]])->pluck('title', 'id');
+            $posts = $this->post->whereStatusId(4)->where([["id", "!=", $id]])->pluck('title', 'id');
 
             if (!$data) {
                 return redirect()->route('admin.timeline');
             }
 
-            return view('timeline::admin.edit', compact('data', 'post'));
+            return view('timeline::admin.edit', compact('data', 'posts'));
         }
 
         /**

@@ -16,7 +16,7 @@ class CreateTimelinesTable extends Migration
         Schema::create('timelines', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->integer('post_id')->unsigned();
             $table->timestamps();
         });

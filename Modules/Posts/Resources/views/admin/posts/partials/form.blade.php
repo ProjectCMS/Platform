@@ -38,9 +38,11 @@
     </div>
 </div>
 
+@include('timeline::admin.partials.form_post', ['post_id' => @$data->id, 'prefix' => 'timeline', 'timeline' => @$data->timeline])
+
 <div class="card m-b-20">
     <div class="card-body">
-        @include('posts::admin.posts.partials.list_images', ["images" => @$data->images])
+        @include('posts::admin.posts.partials.list_images', ['images' => @$data->images])
     </div>
 </div>
 
