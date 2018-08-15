@@ -123,7 +123,7 @@
 
             $this->postTag->managerItems($insert->id, $request->tag);
             $this->postCategory->managerItems($insert->id, $request->category);
-            $this->postImage->managerItems($insert->id, $request->images);
+            $this->postImage->managerItems($insert->id, $request->files_items);
 
             return redirect(route('admin.posts.edit', $insert->id))->with('status-success', 'Postagem criada com sucesso');
         }

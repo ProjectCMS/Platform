@@ -3,9 +3,9 @@
     <div class="page-title">
         <div class="container">
             @yield('post_categories')
-            <h1>@yield('post_title')</h1>
+            <h1 title="@yield('post_title')">@yield('post_title')</h1>
             <div class="meta">
-                <span class="date"><i class="fa fa-clock-o"></i> @yield('post_date')</span>
+                <span class="date" date="@yield('post_date_html')"><i class="fa fa-clock-o"></i> @yield('post_date')</span>
             </div>
         </div>
     </div>

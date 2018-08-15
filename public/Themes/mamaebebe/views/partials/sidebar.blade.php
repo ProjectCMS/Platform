@@ -1,4 +1,4 @@
-<div class="col">
+<div class="col-lg-4">
     <aside class="sidebar">
         <div class="widgets">
             <div class="mb-3">

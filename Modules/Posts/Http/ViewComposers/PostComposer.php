@@ -39,15 +39,32 @@
          */
         public function compose (View $view)
         {
+            $recentsPosts = $this->post->whereStatusId(1)
+                                       ->with('images')
+                                       ->limit(4)
+                                       ->orderBy('created_at', 'DESC')
+                                       ->get();
+
+            $postsFixed = $this->post->with(['images', 'categories'])->where('status_id', 2)->get();
+
+            $postsMain = $this->post->with(['images', 'categories'])
+                                    ->where('status_id', 1)
+                                    ->orderBy('created_at', 'DESC')
+                                    ->take(14)
+                                    ->get();
+
             $categoryPosts = $this->category->withCount('posts')->with([
                 'posts.images',
                 'posts.categories'
             ])->orderBy('posts_count', 'DESC')->take(3)->get();
-            $recentsPosts   = $this->post->whereStatusId(1)->with('images')->limit(4)->orderBy('updated_at', 'DESC')->get();
-            $tags          = $this->tag->withCount('posts')->limit(20)->orderBy('posts_count', 'DESC')->get();
 
-            $view->with('categoryPosts', $categoryPosts);
+            $tags = $this->tag->withCount('posts')->limit(20)->orderBy('posts_count', 'DESC')->get();
+
+
             $view->with('recentsPosts', $recentsPosts);
+            $view->with('postsFixed', $postsFixed);
+            $view->with('postsMain', $postsMain);
+            $view->with('categoryPosts', $categoryPosts);
             $view->with('tags', $tags);
 
         }

@@ -1,6 +1,4 @@
 let mix           = require('laravel-mix').mix;
-const nodeModules = 'node_modules/';
-const themeInfo   = require('./theme.json');
 
 mix.sass('resources/scss/theme.scss', 'assets/css').options(
     {

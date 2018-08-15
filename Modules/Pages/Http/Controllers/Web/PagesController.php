@@ -44,14 +44,8 @@
         public function index ()
         {
             $seo        = $this->seo->setData();
-            $postsFixed = $this->post->with(['images', 'categories'])->where('status_id', 2)->get();
-            $postsMain  = $this->post->with(['images', 'categories'])
-                                     ->where('status_id', 1)
-                                     ->orderBy('updated_at', 'DESC')
-                                     ->take(14)
-                                     ->get();
 
-            return view('pages::web.index', compact('postsFixed', 'postsMain', 'seo'));
+            return view('pages::web.index', compact('seo'));
         }
 
         /**

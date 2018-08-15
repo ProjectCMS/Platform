@@ -12,12 +12,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="posts row" id="sub">
-                        @foreach($posts as $post)
-                            <article>
-                                @include('partials.posts.item', compact('post'))
-                            </article>
-                        @endforeach
+                    <div class="posts" data-posts="sub">
+                        <div class="row">
+                            @foreach($posts as $post)
+                                <article>
+                                    @include('partials.posts.item', compact('post'))
+                                </article>
+                            @endforeach
+                        </div>
                     </div>
                     {{ $posts->links() }}
                 </div>

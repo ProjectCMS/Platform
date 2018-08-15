@@ -30,7 +30,7 @@
             @if($tags->count())
                 <div class="post-tags">
                     @foreach($tags as $tag)
-                        <span data-count="{{ $tag->posts_count }}"><a href="{{ route('web.posts.tag', $tag->slug) }}"># {{ $tag->title }}</a></span>
+                        <span data-count="{{ $tag->posts_count }}"><a href="{{ route('web.posts.tag', $tag->slug) }}" title="{{ $tag->title }}"># {{ $tag->title }}</a></span>
                     @endforeach
                 </div>
             @endif

@@ -29,7 +29,7 @@
                         @endif
                     </ul>
                     <ul class="nav justify-content-end pull-right d-none">
-                        @if($client)
+                        @auth('client')
                             <li class="nav-item"><a class="nav-link btn btn-link" href="#">Minha conta</a></li>
                             <li class="nav-item">
                                 <a class="nav-link btn btn-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
@@ -44,7 +44,7 @@
                             <li class="nav-item">
                                 <a class="nav-link btn btn-link" href="{{ route('web.clients.login') }}">Login</a>
                             </li>
-                        @endif
+                        @endauth
                     </ul>
                 </div>
             </div>

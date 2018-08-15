@@ -1,6 +1,7 @@
 @extends('layouts.post')
 @section('post_title', $seo->title)
-@section('post_date', $post->updated_at_cm)
+@section('post_date', $post->created_at_cm)
+@section('post_date_html', $post->created_at)
 @section('post_content')
     {!! $post->content !!}
 @stop
@@ -20,7 +21,7 @@
     @if($post->categories->count())
         <div class="post-categories">
             @foreach($post->categories as $category)
-                <span><a href="{{ route('web.posts.category', $category->slug) }}">{{ $category->title }}</a></span>
+                <span><a href="{{ route('web.posts.category', $category->slug) }}" title="{{ $category->title }}">{{ $category->title }}</a></span>
             @endforeach
         </div>
     @endif
