@@ -18,6 +18,13 @@
          */
         Route::post('/enviar-email-contato', 'ContactController@sendMailContact')->name('contact.send');
 
+        /**
+         * Sitemap
+         */
+        Route::get('/feed', 'PagesController@feed')->name('feed');
+        Route::get('/sitemap', 'PagesController@sitemap')->name('sitemap');
+        Route::get('/sitemap.xml', 'PagesController@sitemap');
+
         try{
 
             $pages = \Modules\Pages\Entities\Page::all();

@@ -54,7 +54,7 @@
                         $item  = $items->where('id', $item)->first();
                         $order = $key + 1;
                         $data  = [
-                            'order'      => $order,
+                            'order' => $order,
                         ];
 
                         $dd = $this->find($item->id);
