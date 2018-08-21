@@ -230,7 +230,7 @@
          * A cookie may be created on your visitor device, so you can have information
          * on everything made using that device on your site.	 *
          */
-        'store_cookie_tracker'     => TRUE,
+        'store_cookie_tracker'     => FALSE,
 
         /*
          * If you are storing cookies, you better change it to a name you of your own.
