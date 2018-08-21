@@ -63,6 +63,13 @@
                 Route::delete('/delete', 'TagsController@destroy')->name('tags.delete');
             });
 
+            ///**** Posts ****///
+            Route::group([
+                'prefix' => 'images',
+            ], function() {
+                Route::get('/optimizer', 'PostImagesController@optimizer')->name('images.optimizer');
+            });
+
         });
 
     });
