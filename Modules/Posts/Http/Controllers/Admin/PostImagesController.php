@@ -43,6 +43,9 @@
                     $extension = ['png', 'jpg', 'jpeg'];
 
                     if (in_array($info['extension'], $extension)) {
+                        if (file_exists($item)) {
+                            dump(ImageOptimizer::optimize($item));
+                        }
                     }
                 }
             }
