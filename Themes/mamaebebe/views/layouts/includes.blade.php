@@ -63,8 +63,8 @@
 
 </script>
 
-<script type="text/javascript" src="{{ Theme::assets('js/core.min.js') }}?v={{ time() }}"></script>
-<script type="text/javascript" src="{{ Theme::assets('js/modules.min.js') }}?v={{ time() }}"></script>
+<script type="text/javascript" src="{{ Theme::assets('js/core.min.js') }}?v={{ time() }}" async></script>
+<script type="text/javascript" src="{{ Theme::assets('js/modules.min.js') }}?v={{ time() }}" async></script>
 
 <!-- Custom js -->
 @yield('js')
