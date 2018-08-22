@@ -18,6 +18,13 @@
             \App\Http\Middleware\TrimStrings::class,
             \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
             \App\Http\Middleware\TrustProxies::class,
+            \RenatoMarinho\LaravelPageSpeed\Middleware\InlineCss::class,
+            \RenatoMarinho\LaravelPageSpeed\Middleware\ElideAttributes::class,
+            \RenatoMarinho\LaravelPageSpeed\Middleware\InsertDNSPrefetch::class,
+            \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveComments::class,
+            \RenatoMarinho\LaravelPageSpeed\Middleware\TrimUrls::class,
+            \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveQuotes::class,
+            \RenatoMarinho\LaravelPageSpeed\Middleware\CollapseWhitespace::class,
         ];
 
         /**
@@ -53,13 +60,14 @@
          * @var array
          */
         protected $routeMiddleware = [
-            'auth'          => \Illuminate\Auth\Middleware\Authenticate::class,
-            'auth.basic'    => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-            'bindings'      => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-            'can'           => \Illuminate\Auth\Middleware\Authorize::class,
-            'guest'         => \App\Http\Middleware\RedirectIfAuthenticated::class,
-            'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-            'cors'          => \App\Http\Middleware\Cors::class,
+            'auth'           => \Illuminate\Auth\Middleware\Authenticate::class,
+            'auth.basic'     => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+            'bindings'       => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'cache.headers'  => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+            'can'            => \Illuminate\Auth\Middleware\Authorize::class,
+            'guest'          => \App\Http\Middleware\RedirectIfAuthenticated::class,
+            'throttle'       => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+            'cors'           => \App\Http\Middleware\Cors::class,
+            'optimizeImages' => \Spatie\LaravelImageOptimizer\Middlewares\OptimizeImages::class,
         ];
     }

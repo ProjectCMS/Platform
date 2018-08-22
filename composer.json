@@ -27,6 +27,7 @@
     "mohd-isa/laravel-settings": "^2.2",
     "nwidart/laravel-modules": "^3.1",
     "pragmarx/tracker": "^3.3",
+    "renatomarinho/laravel-page-speed": "^1.8",
     "roumen/sitemap": "^2.8",
     "shipu/themevel": "^1.6",
     "spatie/laravel-image-optimizer": "^1.3",
