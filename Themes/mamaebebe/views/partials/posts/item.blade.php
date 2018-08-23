@@ -2,8 +2,8 @@
     <a href="{{ route('web.posts.'.$post->slug) }}">
         <div class="box-image">
             @if($post->images->count())
-                <img src="{{ \Image::url(asset('storage/'.$post->images->first()->path),300,300) }}" class="no-image">
-                {{--<img src="{{ asset('storage/'.$post->images->first()->path) }}" class="no-image">--}}
+                {{--<img src="{{ \Image::url(asset('storage/'.$post->images->first()->path),300,300) }}" class="no-image">--}}
+                <img src="{{ asset('storage/'.$post->images->first()->path) }}" class="no-image">
             @else
                 <img src class="no-image">
             @endif
