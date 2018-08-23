@@ -6,6 +6,7 @@
     use Illuminate\Http\Response;
     use Illuminate\Routing\Controller;
     use Illuminate\Support\Facades\Storage;
+    use Modules\Core\Libs\ImageCompress;
     use Modules\Posts\Entities\PostImage;
     use ImageOptimizer;
 
@@ -15,10 +16,15 @@
          * @var PostImage
          */
         private $postImage;
+        /**
+         * @var ImageCompress
+         */
+        private $compress;
 
-        public function __construct (PostImage $postImage)
+        public function __construct (PostImage $postImage, ImageCompress $compress)
         {
             $this->postImage = $postImage;
+            $this->compress  = $compress;
         }
 
 
@@ -44,7 +50,9 @@
 
                     if (in_array($info['extension'], $extension)) {
                         if (file_exists($item)) {
-                            dump(ImageOptimizer::optimize($item));
+                            $image_compress = $this->compress->set($item, 60, 9);
+                            dump($image_compress->compress());
+
                         }
                     }
                 }

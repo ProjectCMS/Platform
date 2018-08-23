@@ -4,6 +4,8 @@ run.config:
     runtime: php-7.2
     apache_version: '2.2'
     document_root: public
+    apache_modules:
+      - headers
     extensions:
       - pdo
       - mbstring
@@ -19,6 +21,15 @@ run.config:
       - fileinfo
       - redis
       - curl
+      - gd
+      - imagick
+      - exif
+  extra_packages:
+  - nodejs
+  - jpegoptim
+  - optipng
+  - gifsicle
+
 deploy.config:
   before_live:
     web.site:
@@ -41,3 +52,4 @@ data.db:
 
 data.storage:
   image: nanobox/unfs:0.9
+
