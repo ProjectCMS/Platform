@@ -85,7 +85,8 @@
          */
         public function showRegistrationForm ()
         {
-            $seo  = $this->seo->setData('page', null, ['title' => 'Novo registro']);
+            $seo = $this->seo->setData('page', NULL, ['title' => 'Novo registro']);
+
             return view('clients::web.auth.register', compact('seo'));
         }
 
@@ -116,7 +117,9 @@
          */
         public function redirectTo ()
         {
-            $this->redirectTo = $this->request->session()->get('url.intended');
+            $intended         = $this->request->session()->get('url.intended');
+            $this->redirectTo = $intended ? $intended : $this->redirectTo;
+
             return $this->redirectTo;
         }
     }

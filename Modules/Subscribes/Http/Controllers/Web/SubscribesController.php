@@ -34,19 +34,7 @@
                 return redirect()->back();
             }
 
-            return redirect(route('web.subscribes.payment'));
+            return redirect(route('web.payment'));
         }
 
-        public function payment (Request $request)
-        {
-            $cicle     = $request->session()->get('subscribe_cicle');
-            $auth      = auth()->guard('client')->user();
-            $subscribe = $this->subscribe->whereClientId($auth->id)->with(['cicle'])->get();
-
-            if (!$cicle) {
-                return redirect('/');
-            }
-
-            return view('payments::web.list');
-        }
     }

@@ -28,7 +28,7 @@
                             </li>
                         @endif
                     </ul>
-                    <ul class="nav justify-content-end pull-right d-none">
+                    <ul class="nav justify-content-end pull-right">
                         @auth('client')
                             <li class="nav-item"><a class="nav-link btn btn-link" href="#">Minha conta</a></li>
                             <li class="nav-item">

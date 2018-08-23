@@ -7,7 +7,7 @@
     use Illuminate\Routing\Controller;
     use Illuminate\Support\Facades\Storage;
     use Modules\Posts\Entities\PostImage;
-    use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
+    use ImageOptimizer;
 
     class PostImagesController extends Controller {
 
@@ -49,13 +49,5 @@
                     }
                 }
             }
-
-            //            foreach ($this->postImage->all() as $image){
-            //                $file = public_path('storage/'.$image->path);
-            //                if(file_exists($file)) {
-            //                    dump(ImageOptimizer::optimize($file));
-            //                }
-            //            }
         }
-
     }

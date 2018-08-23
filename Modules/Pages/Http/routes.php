@@ -1,5 +1,5 @@
 <?php
-    Breadcrumbs::for ('page', function($trail, $page) {
+    Breadcrumbs::for('page', function($trail, $page) {
         $trail->push('Home', ('/'));
         $trail->push($page->title, route('web.pages.' . $page->slug));
     });
@@ -9,7 +9,7 @@
         'middleware' => ['web', 'tracker', 'theme_web'],
         'namespace'  => 'Modules\Pages\Http\Controllers\Web',
         'as'         => 'web.'
-    ], function(){
+    ], function() {
 
         Route::get('/', 'PagesController@index');
 
@@ -25,18 +25,18 @@
         Route::get('/sitemap', 'PagesController@sitemap')->name('sitemap');
         Route::get('/sitemap.xml', 'PagesController@sitemap');
 
-        try{
+        try {
 
             $pages = \Modules\Pages\Entities\Page::all();
             $pages->each(function(\Modules\Pages\Entities\Page $page) {
-                if($page->slug != 'blog') {
+                if ($page->slug != 'blog') {
                     Route::get($page->slug, 'PagesController@show')
                          ->name('pages.' . $page->slug)
                          ->defaults('page', $page);
                 }
             });
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
 
         }
 

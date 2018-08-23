@@ -6,7 +6,7 @@
 
         <header class="header-simple">
             <div class="container">
-                <a href="" class="logo pull-left">
+                <a href="{{ url('/') }}" class="logo pull-left">
                     <img src="{{ asset('storage/filemanager/logo.png') }}">
                 </a>
                 <div class="content">

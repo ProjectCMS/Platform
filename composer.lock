@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f582520e7d3cc5cac68295bd24a1316b",
+    "content-hash": "98d05345db45d5fe213d0852e7389665",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -959,6 +959,71 @@
             "time": "2018-02-07T20:20:57+00:00"
         },
         {
+            "name": "folklore/image",
+            "version": "v0.3.22",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Folkloreatelier/laravel-image.git",
+                "reference": "06a7e5ced5cd6eb5b7f7da6b5af84715d77beb82"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Folkloreatelier/laravel-image/zipball/06a7e5ced5cd6eb5b7f7da6b5af84715d77beb82",
+                "reference": "06a7e5ced5cd6eb5b7f7da6b5af84715d77beb82",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "5.3|~6.0",
+                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*",
+                "imagine/imagine": "0.6.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.4",
+                "mockery/mockery": "0.9.*",
+                "orchestra/testbench": "3.1.*|3.2.*|3.3.*|3.4.*|3.5.*|3.6.*",
+                "phpunit/phpunit": "~4.0|~5.0|~5.7|~6.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Folklore\\Image\\": "src/",
+                    "Folklore\\Image\\Tests": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Folklore",
+                    "email": "info@atelierfolklore.ca",
+                    "homepage": "http://atelierfolklore.ca"
+                },
+                {
+                    "name": "David Mongeau-Petitpas",
+                    "email": "dmp@atelierfolklore.ca",
+                    "homepage": "http://mongo.ca",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Image manipulation library for Laravel 5 based on Imagine and inspired by Croppa for easy url based manipulation",
+            "homepage": "http://github.com/Folkloreatelier/laravel-image",
+            "keywords": [
+                "gd",
+                "gmagick",
+                "image",
+                "imagick",
+                "imagine",
+                "laravel",
+                "thumbnail",
+                "watermark"
+            ],
+            "time": "2018-03-01T15:15:04+00:00"
+        },
+        {
             "name": "genealabs/laravel-model-caching",
             "version": "0.2.64",
             "source": {
@@ -1436,6 +1501,63 @@
             "description": "iLovePDF Php Api",
             "homepage": "https://ilovepdf.com/",
             "time": "2018-03-27T14:01:41+00:00"
+        },
+        {
+            "name": "imagine/imagine",
+            "version": "v0.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine.git",
+                "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/149041d2a1b517107bfe270ca2b1a17aa341715d",
+                "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "dev-master"
+            },
+            "suggest": {
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2015-09-19T16:54:05+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -3239,63 +3361,6 @@
             "time": "2018-07-19T23:38:55+00:00"
         },
         {
-            "name": "renatomarinho/laravel-page-speed",
-            "version": "1.8.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/renatomarinho/laravel-page-speed.git",
-                "reference": "5ea5fe7721a6658a2b8d8816cb9c0f25e2dac844"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/renatomarinho/laravel-page-speed/zipball/5ea5fe7721a6658a2b8d8816cb9c0f25e2dac844",
-                "reference": "5ea5fe7721a6658a2b8d8816cb9c0f25e2dac844",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "mockery/mockery": ">=0.9.4",
-                "orchestra/testbench": "^3.2",
-                "phpunit/phpunit": "^5.7 || ^6.0",
-                "squizlabs/php_codesniffer": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "RenatoMarinho\\LaravelPageSpeed\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "RenatoMarinho\\LaravelPageSpeed\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Renato Marinho",
-                    "email": "renato.marinho@s2move.com"
-                }
-            ],
-            "description": "Laravel Page Speed",
-            "keywords": [
-                "html",
-                "laravel",
-                "minify",
-                "optmize",
-                "page speed"
-            ],
-            "time": "2018-02-11T21:33:58+00:00"
-        },
-        {
             "name": "roumen/sitemap",
             "version": "v2.8.1",
             "source": {
@@ -3455,114 +3520,6 @@
             ],
             "description": "Snowplow Refer(r)er parser for PHP",
             "time": "2016-01-29T16:43:00+00:00"
-        },
-        {
-            "name": "spatie/image-optimizer",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/image-optimizer.git",
-                "reference": "1530d6cf72070068eecab150ffb73466c3806bdd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/1530d6cf72070068eecab150ffb73466c3806bdd",
-                "reference": "1530d6cf72070068eecab150ffb73466c3806bdd",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "psr/log": "^1.0",
-                "symfony/process": "^2.8|^3.0|^4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.2|^7.0",
-                "symfony/var-dumper": "^3.0|^4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\ImageOptimizer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Easily optimize images using PHP",
-            "homepage": "https://github.com/spatie/image-optimizer",
-            "keywords": [
-                "image-optimizer",
-                "spatie"
-            ],
-            "time": "2018-06-05T07:36:17+00:00"
-        },
-        {
-            "name": "spatie/laravel-image-optimizer",
-            "version": "1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-image-optimizer.git",
-                "reference": "b40f5accb41b385dcc62ca17c25283e5db11d9a3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-image-optimizer/zipball/b40f5accb41b385dcc62ca17c25283e5db11d9a3",
-                "reference": "b40f5accb41b385dcc62ca17c25283e5db11d9a3",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.5.0|~5.6.0",
-                "php": "^7.0",
-                "spatie/image-optimizer": "^1.1.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.5.0|~3.6.0",
-                "phpunit/phpunit": "^6.3|^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Spatie\\LaravelImageOptimizer\\ImageOptimizerServiceProvider"
-                    ],
-                    "aliases": {
-                        "ImageOptimizer": "Spatie\\LaravelImageOptimizer\\Facades\\ImageOptimizer"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\LaravelImageOptimizer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Optimize images in your Laravel app",
-            "homepage": "https://github.com/spatie/laravel-image-optimizer",
-            "keywords": [
-                "laravel-image-optimizer",
-                "spatie"
-            ],
-            "time": "2018-06-05T07:37:24+00:00"
         },
         {
             "name": "spatie/laravel-permission",

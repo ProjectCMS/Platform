@@ -7,5 +7,4 @@
         'namespace'  => 'Modules\Subscribes\Http\Controllers\Web'
     ], function() {
         Route::get('/{id}', 'SubscribesController@plan')->name('subscribes.plan')->where('id', '[0-9]+');
-        Route::get('/pagamento', 'SubscribesController@payment')->name('subscribes.payment');
     });

@@ -91,7 +91,9 @@
          */
         public function redirectTo ()
         {
-            $this->redirectTo = $this->request->session()->get('url.intended');
+            $intended         = $this->request->session()->get('url.intended');
+            $this->redirectTo = $intended ? $intended : $this->redirectTo;
+
             return $this->redirectTo;
         }
 
