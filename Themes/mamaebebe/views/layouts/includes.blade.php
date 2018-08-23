@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {!! SEO::generate() !!}
+{!! SEO::generate() !!}
 
-    <link href="{{ Theme::assets('css/libs.min.css') }}?v={{ time() }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ Theme::assets('css/core.min.css') }}?v={{ time() }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ Theme::assets('css/modules.min.css') }}?v={{ time() }}" rel="stylesheet" type="text/css"/>
-
-    <!-- Custom css -->
+<!-- Custom css -->
     @yield('css')
 
 </head>
@@ -23,6 +19,11 @@
 </div>
 
 @yield('layout')
+
+<link href="{{ Theme::assets('css/libs.min.css') }}?v={{ time() }}" rel="stylesheet" type="text/css"/>
+<link href="{{ Theme::assets('css/core.min.css') }}?v={{ time() }}" rel="stylesheet" type="text/css"/>
+<link href="{{ Theme::assets('css/modules.min.css') }}?v={{ time() }}" rel="stylesheet" type="text/css"/>
+
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b28232fa7603d0012fa8517&product=inline-share-buttons' async='async'></script>
@@ -45,7 +46,11 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-82823579-1"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag () {
+        dataLayer.push(arguments);
+    }
+
     gtag('js', new Date());
 
     gtag('config', 'UA-82823579-1');
