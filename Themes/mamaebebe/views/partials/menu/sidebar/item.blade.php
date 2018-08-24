@@ -9,7 +9,7 @@
 
 <nav class="sidebar-menu">
     <div class="sidebar-header">
-        <img src="{{ asset('storage/filemanager/logo.png') }}" width="100%">
+        <img src="{{ image_resize('filemanager/logo.png', 60, null, 100) }}" width="100%">
     </div>
     <div class="content">
         <ul class="list-unstyled components">
