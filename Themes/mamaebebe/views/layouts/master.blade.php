@@ -141,7 +141,7 @@
             </div>
         </div>
 
-        <img src="{{ asset('storage/filemanager/logo-w.png') }}" height="50">
+        <img src="{{ image_resize('filemanager/logo-w.png', 60, null, 100) }}" height="50">
         <div class="copyright">
             <div class="container">
                 <span>© {{ date('Y') }} - {!! config('dashboard.logo', '') !!} - Todos os direitos reservados</span>

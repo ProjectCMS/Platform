@@ -7,7 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! SEO::generate() !!}
 
-    <link href="{{ Theme::assets('css/libs.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ Theme::assets('css/core.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ Theme::assets('css/modules.min.css') }}" rel="stylesheet" type="text/css"/>
 
@@ -23,6 +22,8 @@
 </div>
 
 @yield('layout')
+
+<link href="{{ Theme::assets('css/libs.min.css') }}" rel="stylesheet" type="text/css"/>
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b28232fa7603d0012fa8517&product=inline-share-buttons' async='async'></script>
