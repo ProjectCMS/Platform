@@ -78,14 +78,19 @@
 
         function image_resize ($url, $quality = 60, $w = NULL, $h = 400, $options = [])
         {
-            return asset('storage/' . $url);
-            $url = public_path('storage/' . $url);
-            $img = \Image::make($url)->resize($w, $h, function($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
+//            return asset('storage/' . $url);
 
-            return $img->encode('data-url', $quality);
+            $url = public_path('storage/' . $url);
+
+            $img = Image::cache(function($image) use($url, $quality, $w, $h) {
+                $image->make($url)->resize($w, $h, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                return $image->encode('data-url', $quality);
+            });
+            return $img;
+
         }
     }
 
