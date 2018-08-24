@@ -73,4 +73,19 @@
         }
     }
 
+    //** Image **//
+    if (!function_exists('image_resize')) {
+
+        function image_resize ($url, $quality = 60, $w = 360, $h = 250, $options = [])
+        {
+            $url = public_path('storage/' . $url);
+            $img = \Image::make($url)->resize(NULL, $h, function($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+
+            return $img->encode('data-url', $quality);
+        }
+    }
+
 

@@ -50,8 +50,12 @@
 
                     if (in_array($info['extension'], $extension)) {
                         if (file_exists($item)) {
-                            $image_compress = $this->compress->set($item, 60, 9);
-                            dump($image_compress->compress());
+                            //                            $image_compress = $this->compress->set($item, 60, 9);
+                            //                            dump($image_compress->compress());
+                            \Tinify\setKey("TINIFY_DEVELOPER_KEY");
+                            $source = \Tinify\fromFile($filepath);
+                            $source->toFile($filepath);
+
 
                         }
                     }

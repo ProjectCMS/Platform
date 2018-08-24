@@ -17,10 +17,10 @@
 </head>
 <body>
 
-<div class="overlay"></div>
-<div class="loader-content">
-    <div class="loader"></div>
-</div>
+{{--<div class="overlay"></div>--}}
+{{--<div class="loader-content">--}}
+    {{--<div class="loader"></div>--}}
+{{--</div>--}}
 
 @yield('layout')
 
