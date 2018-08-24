@@ -24,13 +24,13 @@
 
 @yield('layout')
 
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src='https://www.google.com/recaptcha/api.js' async defer></script>
 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b28232fa7603d0012fa8517&product=inline-share-buttons' async='async'></script>
 <!-- jQuery  -->
 <script type="text/javascript" src="{{ Theme::assets('js/libs.min.js') }}"></script>
 
 <div id="fb-root"></div>
-<script>
+<script async defer>
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
@@ -63,8 +63,8 @@
 
 </script>
 
-<script type="text/javascript" src="{{ Theme::assets('js/core.min.js') }}"></script>
-<script type="text/javascript" src="{{ Theme::assets('js/modules.min.js') }}"></script>
+<script type="text/javascript" src="{{ Theme::assets('js/core.min.js') }}" async defer></script>
+<script type="text/javascript" src="{{ Theme::assets('js/modules.min.js') }}" async defer></script>
 
 <!-- Custom js -->
 @yield('js')
