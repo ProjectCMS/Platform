@@ -76,10 +76,10 @@
     //** Image **//
     if (!function_exists('image_resize')) {
 
-        function image_resize ($url, $quality = 60, $w = 360, $h = 250, $options = [])
+        function image_resize ($url, $quality = 60, $w = null, $h = 300, $options = [])
         {
             $url = public_path('storage/' . $url);
-            $img = \Image::make($url)->resize(NULL, $h, function($constraint) {
+            $img = \Image::make($url)->resize($w, $h, function($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });

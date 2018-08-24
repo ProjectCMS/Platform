@@ -31,7 +31,7 @@
 <a class="navbar-brand" href="{{ url('/') }}" title="{{ setting('site_name') }}">
     <div class="logo">
         <div class="container">
-            <img src="{{ asset('storage/filemanager/logo.png') }}" height="50">
+            <img src="{{ image_resize('filemanager/logo.png', 60, null, 100) }}" height="50">
         </div>
     </div>
 </a>

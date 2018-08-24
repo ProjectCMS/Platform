@@ -53,7 +53,7 @@
                 <div id="app" class="container">
                     <div class="mobile">
                         <a href="{{ url('/') }}" title="{{ setting('site_name') }}" class="logo">
-                            <img src="{{ asset('storage/filemanager/logo.png') }}" height="50">
+                            <img src="{{ image_resize('filemanager/logo.png') }}" height="50">
                         </a>
                         <a href="#" class="nav sidebar-collapse">
                             <i class="fa fa-bars" aria-hidden="true"></i>
