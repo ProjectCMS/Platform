@@ -4,7 +4,6 @@
         $trail->push($page->title, route('web.pages.' . $page->slug));
     });
 
-
     Route::group([
         'middleware' => ['web', 'tracker', 'theme_web'],
         'namespace'  => 'Modules\Pages\Http\Controllers\Web',

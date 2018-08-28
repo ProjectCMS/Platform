@@ -43,17 +43,8 @@
                     </div>
 
                     @if($item["type"] == 'image')
-                        @php
-                            list($width, $height) = getimagesize($item["path"]);
-                            if ($width > $height) {
-                                 $orientation = "landscape";
-                             } else {
-                                 $orientation = "portrait";
-                             }
-                        @endphp
-
-                        <figure>
-                            <img src="{{ $item["path"] }}" data-orientation="{{ $orientation }}">
+                          <figure>
+                            <img src="{{ $item["path"] }}" data-orientation="{{ $item["orientation"] }}">
                         </figure>
                     @endif
 

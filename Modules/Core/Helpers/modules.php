@@ -78,17 +78,35 @@
 
         function image_resize ($url, $quality = 60, $w = NULL, $h = 400, $options = [])
         {
-//            return asset('storage/' . $url);
+            //            return asset('storage/' . $url);
 
-            $url = public_path('storage/' . $url);
+            $extension = ['png', 'jpeg', 'jpg'];
+            $path      = public_path('storage/' . $url);
+            $info      = pathinfo($path);
 
-            $img = Image::cache(function($image) use($url, $quality, $w, $h) {
-                $image->make($url)->resize($w, $h, function($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-                return $image->encode('data-url', $quality);
-            });
+            if (in_array($info['extension'], $extension) && file_exists($path)) {
+
+                try {
+
+                    $img = Image::cache(function($image) use ($path, $quality, $w, $h) {
+                        $image->make($path)->resize($w, $h, function($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+
+                        return $image->encode('data-url', $quality);
+                    });
+
+                } catch (Exception $e) {
+
+                    $img = asset('storage/' . $url);
+
+                }
+
+            } else {
+                $img = asset('storage/' . $url);
+            }
+
             return $img;
 
         }

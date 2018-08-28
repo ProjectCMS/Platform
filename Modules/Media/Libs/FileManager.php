@@ -279,14 +279,26 @@
 
                         $types = $this->mimeTypes(mime_content_type($file->getPathname()));
 
+                        /** Orientation */
+                        list($width, $height) = getimagesize($this->storagePath . $src);
+
+                        if ($width > $height) {
+                            $orientation = "landscape";
+                        } else {
+                            $orientation = "portrait";
+                        }
+
+                        $path = asset($this->storagePath . $src);
+
                         $list[$key] = [
-                            'type'     => $types[0],
-                            'group'    => 2,
-                            'path'     => asset($this->storagePath . $src),
-                            'download' => route('admin.media.download', base64_encode($src)),
-                            'name'     => strtolower($file->getBasename('.' . $file->getExtension())),
-                            'ext'      => strtolower($file->getExtension()),
-                            'mime'     => mime_content_type($file->getPathname()),
+                            'type'        => $types[0],
+                            'group'       => 2,
+                            'path'        => $path,
+                            'download'    => route('admin.media.download', base64_encode($src)),
+                            'name'        => strtolower($file->getBasename('.' . $file->getExtension())),
+                            'ext'         => strtolower($file->getExtension()),
+                            'mime'        => mime_content_type($file->getPathname()),
+                            'orientation' => $orientation,
                         ];
                     }
 
