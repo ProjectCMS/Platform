@@ -11,7 +11,7 @@
                     @foreach($categoryPosts as $category)
                         <li>
                             <a href="{{ route('web.posts.category', $category->slug) }}" title="{{ $category->title }}">
-                                {{ $category->title }}<span></span>
+                                {{ $category->title }}<span> {{ $category->posts_count }}</span>
                             </a>
                         </li>
                     @endforeach

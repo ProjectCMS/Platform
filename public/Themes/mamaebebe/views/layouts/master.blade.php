@@ -9,25 +9,18 @@
         <header class="header">
             <div class="header-top">
                 <div class="container">
-                    <ul class="nav pull-left">
-                        @if(setting('social_network.facebook'))
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-link" href="{{ setting('social_network.facebook') }}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            </li>
-                        @endif
-
-                        @if(setting('social_network.twitter'))
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-link" href="{{ setting('social_network.twitter') }}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            </li>
-                        @endif
-
-                        @if(setting('social_network.gplus'))
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-link" href="{{ setting('social_network.gplus') }}" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                            </li>
-                        @endif
-                    </ul>
+                    <div class="pull-left">
+                        <div class="nav-search">
+                            {!! Form::open(['route' => 'web.posts', 'method' => 'get']) !!}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                </div>
+                                {{ Form::text('s', Request::get('s'), ['class' => 'form-control', 'placeholder' => 'Buscar', 'autocomplete' => 'off']) }}
+                            </div>
+                            {!! Form::close() !!}
+                           </div>
+                    </div>
                     <ul class="nav justify-content-end pull-right d-none">
                         @auth('client')
                             <li class="nav-item"><a class="nav-link btn btn-link" href="#">Minha conta</a></li>
@@ -141,7 +134,7 @@
             </div>
         </div>
 
-        <img src="{{ image_resize('filemanager/logo-w.png', 60, null, 100) }}" height="50">
+        <img src="{{ image_resize('filemanager/logo-w.png', 60, NULL, 100) }}" height="50">
         <div class="copyright">
             <div class="container">
                 <span>© {{ date('Y') }} - {!! config('dashboard.logo', '') !!} - Todos os direitos reservados</span>

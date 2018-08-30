@@ -24,11 +24,25 @@
 
 @yield('layout')
 
-<script src='https://www.google.com/recaptcha/api.js' async defer></script>
 <!-- jQuery  -->
 <script type="text/javascript" src="{{ Theme::assets('js/libs.min.js') }}"></script>
 
-<div id="fb-root"></div>
+<script type="text/javascript">
+
+    var web = {};
+
+    web.urlPublishers         = '{{ route('web.publishers') }}';
+    web.urlPublishersRedirect = '{{ route('web.publishers.redirect') }}';
+    web.request               = '{{ http_build_query(Request::all()) }}';
+    web.token                 = $('meta[name="csrf-token"]').attr('content');
+
+</script>
+
+<script type="text/javascript" src="{{ Theme::assets('js/core.min.js') }}" async defer></script>
+<script type="text/javascript" src="{{ Theme::assets('js/modules.min.js') }}" async defer></script>
+
+<script src='https://www.google.com/recaptcha/api.js' async defer></script>
+
 <script async defer>
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -49,21 +63,6 @@
 
     gtag('config', 'UA-82823579-1');
 </script>
-
-
-<script type="text/javascript">
-
-    var web = {};
-
-    web.urlPublishers         = '{{ route('web.publishers') }}';
-    web.urlPublishersRedirect = '{{ route('web.publishers.redirect') }}';
-    web.request               = '{{ http_build_query(Request::all()) }}';
-    web.token                 = $('meta[name="csrf-token"]').attr('content');
-
-</script>
-
-<script type="text/javascript" src="{{ Theme::assets('js/core.min.js') }}" async defer></script>
-<script type="text/javascript" src="{{ Theme::assets('js/modules.min.js') }}" async defer></script>
 
 <!-- Custom js -->
 @yield('js')
