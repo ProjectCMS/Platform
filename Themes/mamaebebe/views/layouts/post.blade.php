@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-    <nav aria-label="breadcrumb" class="cm-breadcrumb">
+    <nav aria-label="breadcrumb" class="cm-breadcrumb d-none">
         <div class="container">
             @yield('post_breadcrumb')
         </div>

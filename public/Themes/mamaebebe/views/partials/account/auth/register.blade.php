@@ -21,7 +21,7 @@
     {{ Form::button('Cadastre-se', ['class' => 'btn btn-lg btn-block btn-info btn-loading', 'type' => 'submit', 'type' => 'submit', 'data-style' => 'zoom-in', 'data-spinner-size' => 30]) }}
     {!! Form::close() !!}
 
-    @if(!Request::secure())
+    @if(Request::secure())
         <div class="or"><span>Ou inscreva-se usando</span></div>
         @include('partials.account.auth.btn_social')
     @endif

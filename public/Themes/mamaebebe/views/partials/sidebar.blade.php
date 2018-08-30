@@ -11,12 +11,7 @@
                     @foreach($categoryPosts as $category)
                         <li>
                             <a href="{{ route('web.posts.category', $category->slug) }}" title="{{ $category->title }}">
-                                <span>{{ $category->title }}</span>
-                                @if($category->image != NULL)
-                                    <img src="{{ image_resize($category->image, 60, null, 200) }}" class="no-image">
-                                @else
-                                    <img src class="no-image">
-                                @endif
+                                {{ $category->title }}<span></span>
                             </a>
                         </li>
                     @endforeach

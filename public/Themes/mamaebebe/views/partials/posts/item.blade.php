@@ -1,8 +1,8 @@
-<div class="post" title="{{ $post->title }}">
-    <a href="{{ route('web.posts.'.$post->slug) }}">
+<div class="post">
+    <a href="{{ route('web.posts.'.$post->slug) }}" title="{{ $post->title }}">
         <div class="box-image">
             @if($post->images->count())
-                <img src="{{ image_resize($post->images->first()->path) }}" class="no-image">
+                <img src="" data-src="{{ image_resize($post->images->first()->path) }}" class="no-image lazy">
                 {{--<img src="{{ asset('storage/'.$post->images->first()->path) }}" class="no-image">--}}
             @else
                 <img src class="no-image">
@@ -11,11 +11,11 @@
     </a>
     <div class="content">
         @if($post->categories->count())
-            <div class="post-categories">
+            <ul class="post-categories">
                 @foreach($post->categories->slice(0, 1) as $category)
-                    <span><a href="{{ route('web.posts.category', $category->slug) }}">{{ $category->title }}</a></span>
+                    <li><a href="{{ route('web.posts.category', $category->slug) }}">{{ $category->title }}</a></li>
                 @endforeach
-            </div>
+            </ul>
         @endif
         <h3><a href="{{ route('web.posts.'.$post->slug) }}">{{ $post->title }}</a></h3>
         <p>{{ str_limit(strip_tags($post->content), 205, '[...]') }}</p>

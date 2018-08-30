@@ -5,9 +5,6 @@
 @section('post_content')
     {!! $post->content !!}
 @stop
-@section('post_breadcrumb')
-    {{ Breadcrumbs::render('post.item', $post) }}
-@stop
 @section('post_images')
     @if($post->images->count())
         <div class="owl-carousel carousel-posts">
@@ -19,11 +16,11 @@
 @stop
 @section('post_categories')
     @if($post->categories->count())
-        <div class="post-categories">
+        <ul class="post-categories">
             @foreach($post->categories as $category)
-                <span><a href="{{ route('web.posts.category', $category->slug) }}" title="{{ $category->title }}">{{ $category->title }}</a></span>
+                <li><a href="{{ route('web.posts.category', $category->slug) }}" title="{{ $category->title }}">{{ $category->title }}</a></li>
             @endforeach
-        </div>
+        </ul>
     @endif
 @stop
 @section('post_tags')
@@ -34,23 +31,6 @@
             @endforeach
         </div>
     @endif
-@stop
-
-@section('post_outhers')
-    <div class="post-nav d-none">
-        @if($prev)
-            <a href="{{ route('web.posts.'.$prev->slug) }}" class="item pull-left">
-                <span class="text-left">Artigo anterior</span>
-                <p>{{ str_limit($prev->title, 80, '...') }}</p>
-            </a>
-        @endif
-        @if($next)
-            <a href="{{ route('web.posts.'.$next->slug) }}" class="item pull-right">
-                <span class="text-right">Artigo seguinte</span>
-                <p>{{ str_limit($next->title, 80, '...') }}</p>
-            </a>
-        @endif
-    </div>
 @stop
 
 @section('js')
