@@ -18,7 +18,7 @@
 
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}" data-form="email">
-                {{ Form::label('email', 'Nome') }}
+                {{ Form::label('email', 'E-mail') }}
                 {{ Form::text('email', NULL, ['class' => 'form-control']) }}
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             </div>
