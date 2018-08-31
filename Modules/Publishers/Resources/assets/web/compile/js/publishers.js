@@ -57,7 +57,7 @@
     Publishers.prototype.init = function () {
         $self = this;
 
-        this.initAds();
+        // this.initAds();
 
     }
 
