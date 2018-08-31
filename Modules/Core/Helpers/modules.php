@@ -76,7 +76,7 @@
     //** Image **//
     if (!function_exists('image_resize')) {
 
-        function image_resize ($url, $quality = 60, $w = NULL, $h = 400, $options = [])
+        function image_resize ($url, $quality = 70, $w = NULL, $h = 500, $options = [])
         {
             //            return asset('storage/' . $url);
 

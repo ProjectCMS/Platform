@@ -7,6 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! SEO::generate() !!}
 
+    <link href="{{ Theme::assets('css/libs.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ Theme::assets('css/modules.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ Theme::assets('css/core.min.css') }}" rel="stylesheet" type="text/css"/>
 
     <!-- Custom css -->
@@ -21,9 +23,6 @@
 {{--</div>--}}
 
 @yield('layout')
-
-<link href="{{ Theme::assets('css/libs.min.css') }}" rel="stylesheet" type="text/css"/>
-<link href="{{ Theme::assets('css/modules.min.css') }}" rel="stylesheet" type="text/css"/>
 
 <!-- jQuery  -->
 <script type="text/javascript" src="{{ Theme::assets('js/libs.min.js') }}"></script>
