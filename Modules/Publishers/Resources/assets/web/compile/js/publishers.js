@@ -57,7 +57,10 @@
     Publishers.prototype.init = function () {
         $self = this;
 
-        // this.initAds();
+        setTimeout(function () {
+            $self.initAds();
+        }, 10000);
+
 
     }
 
