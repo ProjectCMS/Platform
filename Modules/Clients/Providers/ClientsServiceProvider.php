@@ -2,8 +2,8 @@
 
     namespace Modules\Clients\Providers;
 
+    use Illuminate\Support\Facades\View;
     use Illuminate\Routing\Router;
-    use Illuminate\Support\Facades\Gate;
     use Illuminate\Support\ServiceProvider;
     use Illuminate\Database\Eloquent\Factory;
     use Illuminate\Contracts\Events\Dispatcher;
@@ -195,9 +195,8 @@
          */
         public function registerComposers ()
         {
-            $client = auth('client');
-            view()->composer('*', function($view) use ($client) {
-                $view->with('client', $client->user());
-            });
+            View::composer([
+                'clients::web.account.*',
+            ], 'Modules\Clients\Http\ViewComposers\ClientComposer');
         }
     }

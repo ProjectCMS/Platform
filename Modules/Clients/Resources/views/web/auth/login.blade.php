@@ -1,1 +1,1 @@
-@extends($theme.'::partials.account.auth.login')
+@extends($theme.'::partials.client.auth.login')

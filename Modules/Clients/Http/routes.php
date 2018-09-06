@@ -3,7 +3,7 @@
     Route::group([
         'middleware' => ['web', 'tracker', 'theme_web'],
         'as'         => 'web.',
-        'prefix'    => 'clientes',
+        'prefix'     => 'clientes',
     ], function() {
 
         Route::group([
@@ -19,8 +19,7 @@
             Route::post('/senha/email', 'ForgotPasswordController@sendResetLinkEmail')
                  ->name('clients.password.request');
             Route::post('/senha/reset', 'ResetPasswordController@reset')->name('clients.password.email');
-            Route::get('/senha/reset', 'ForgotPasswordController@showLinkRequestForm')
-                 ->name('clients.password.reset');
+            Route::get('/senha/reset', 'ForgotPasswordController@showLinkRequestForm')->name('clients.password.reset');
             Route::get('/senha/reset/{token}', 'ResetPasswordController@showResetForm')
                  ->name('clients.password.reset.token');
         });
@@ -31,6 +30,21 @@
             Route::get('social/login/{provider}', 'SocialController@login')->name('clients.social.login');
             Route::get('social/redirect/{provider}', 'SocialController@redirect')->name('clients.social.redirect');
         });
+    });
 
 
+    Route::group([
+        'middleware' => ['web', 'tracker', 'theme_web', 'client', 'auth:client'],
+        'as'         => 'web.clients.account.',
+        'prefix'     => 'clientes/painel',
+        'namespace'  => 'Modules\Clients\Http\Controllers\Web\Account',
+    ], function() {
+        Route::get('/', 'AccountController@index')->name('home');
+        Route::get('/assinatura', 'AccountController@subscribe')->name('subscribe');
+
+        Route::get('/perfil', 'AccountController@profile')->name('profile');
+        Route::post('/perfil', 'AccountController@profileUpdate')->name('profile.update');
+
+        Route::get('/senha', 'AccountController@password')->name('password');
+        Route::post('/senha', 'AccountController@passwordUpdate')->name('password.update');
     });

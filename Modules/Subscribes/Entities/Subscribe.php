@@ -13,4 +13,8 @@
             return $this->belongsTo('Modules\Subscribes\Entities\SubscribeCicles');
         }
 
+        public function teste(){
+
+        }
+
     }

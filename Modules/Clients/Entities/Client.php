@@ -50,6 +50,16 @@
             return $this->hasMany('Modules\Clients\Entities\SocialAccount');
         }
 
+        public function subscribe ()
+        {
+            return $this->hasOne('Modules\Subscribes\Entities\Subscribe');
+        }
+
+        public function subscribePayments ()
+        {
+            return $this->hasMany('Modules\Subscribes\Entities\SubscribePayments');
+        }
+
         public static function check ()
         {
             return Auth::guard('client')->check();
