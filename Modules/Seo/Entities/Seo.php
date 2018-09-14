@@ -23,7 +23,7 @@
 
         public function createPolymorphic ($request, $model, $id)
         {
-            $this->seo->updateOrCreate([
+            $this->updateOrCreate([
                 'model_type' => $model,
                 'model_id'   => $id,
             ], [
