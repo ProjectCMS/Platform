@@ -6,7 +6,7 @@
     use Illuminate\Http\Response;
     use Illuminate\Routing\Controller;
     use Modules\Clients\Entities\Client;
-    use Modules\Clients\Http\Requests\ClientRequest;
+    use Modules\Clients\Http\Requests\Admin\ClientRequest;
 
     class ClientsController extends Controller {
         /**

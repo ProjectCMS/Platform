@@ -24,7 +24,7 @@
          */
         public function index ()
         {
-            $paginate = $this->paymentMethod->paginate(10);
+            $paginate = $this->paymentMethod->whereDisplay(1)->paginate(10);
 
             return view('payments::admin.index', compact('paginate'));
         }

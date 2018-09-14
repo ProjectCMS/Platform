@@ -22,7 +22,7 @@
 
     @if(Request::secure())
         <div class="or"><span>Ou faça o login usando</span></div>
-        @include('partials.account.auth.btn_social')
+        @include('partials.client.auth.btn_social')
     @endif
     <div class="text-center my-4">
         <a href="{{ route('web.clients.register') }}">Ainda não tenho minha conta</a>

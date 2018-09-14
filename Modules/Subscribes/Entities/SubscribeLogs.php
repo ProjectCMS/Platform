@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubscribeLogs extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['subscribe_id', 'cicle_id', 'validate_at'];
 }

@@ -26,7 +26,13 @@
             'status_id',
             'template_id'
         ];
+        protected $appends  = ['model_type'];
         protected $dates    = ['deleted_at'];
+
+        public function getModelTypeAttribute ()
+        {
+            return 'pages';
+        }
 
         public function setTitleAttribute ($value)
         {
@@ -63,11 +69,9 @@
             return $this->belongsTo('Modules\Seo\Entities\Seo', 'seo_token', 'seo_token');
         }
 
-        public function menuItem ()
+        public function menu_item ()
         {
-            return $this->belongsTo('Modules\Menus\Entities\MenuItem', 'id', 'provider_id')->where(function($query) {
-                return $query->whereProviderModel('\Modules\Pages\Entities\Page');
-            });
+            return $this->morphMany('Modules\Menus\Entities\MenuItem', 'model');
         }
 
         public function status ()

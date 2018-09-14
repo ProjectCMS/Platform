@@ -21,6 +21,7 @@
             'name',
             'email',
             'password',
+            'avatar'
         ];
 
         /**
@@ -62,12 +63,20 @@
 
         public static function check ()
         {
-            return Auth::guard('client')->check();
+            try {
+                return Auth::guard('client')->check();
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
         }
 
         public static function user ()
         {
-            return Auth::guard('client')->user();
+            try {
+                return Auth::guard('client')->user();
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
         }
 
     }

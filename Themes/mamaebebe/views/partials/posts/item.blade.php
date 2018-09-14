@@ -13,11 +13,11 @@
         @if($post->categories->count())
             <ul class="post-categories">
                 @foreach($post->categories->slice(0, 1) as $category)
-                    <li><a href="{{ route('web.posts.category', $category->slug) }}">{{ $category->title }}</a></li>
+                    <li><a href="{{ route('web.posts.category', $category->slug) }}" title="{{ $category->title }}">{{ $category->title }}</a></li>
                 @endforeach
             </ul>
         @endif
-        <h3><a href="{{ route('web.posts.'.$post->slug) }}">{{ $post->title }}</a></h3>
+        <h3><a href="{{ route('web.posts.'.$post->slug) }}" title="{{ $post->title }}">{{ $post->title }}</a></h3>
         <p>{{ str_limit(strip_tags($post->content), 205, '[...]') }}</p>
         <div class="meta">
             <span class="date"><i class="fa fa-clock-o"></i> {{ $post->created_at_cm }}</span>

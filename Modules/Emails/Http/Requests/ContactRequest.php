@@ -37,7 +37,7 @@
         public function messages ()
         {
             return [
-                'g-recaptcha-response.required' => 'Por favor, certifique-se de que você é um ser humano!',
+                'g-recaptcha-response.required' => 'Por favor, certifique-se de que você é um ser humano.',
             ];
         }
     }

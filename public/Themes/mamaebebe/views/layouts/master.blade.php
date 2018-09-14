@@ -22,10 +22,9 @@
                            </div>
                     </div>
 
-                    <div class="account pull-right">
-
+                    <div class="account pull-right d-none">
                         @auth('client')
-                            @include('layouts.account_menu')
+                            @include('partials.client.account_menu')
                         @else
                             <ul class="nav justify-content-end">
                                 <li class="nav-item">

@@ -1,4 +1,4 @@
-@if($item->provider_type == 'link')
+@if($item->model_type == null)
     <div class="form-group">
         {{ Form::label('link-url', 'URL') }}
         {{ Form::text('', $item->url, ['class' => 'form-control', 'data-link' => 'url']) }}
@@ -11,22 +11,22 @@
 </div>
 
 @if(isset($new))
-    @if(isset($item->provider))
+    @if(isset($item->model))
         <p class="link-original">
-            <i>Original:</i> <a href="{{ url($item->provider->slug) }}">{{ $item->provider->title }}</a>
+            <i>Original:</i> <a href="{{ url($item->model->slug) }}">{{ $item->model->title }}</a>
         </p>
-        {{ Form::hidden('', $item->provider->id, ['class' => 'form-control', 'data-link' => 'provider_id']) }}
+        {{ Form::hidden('', $item->model->id, ['class' => 'form-control', 'data-link' => 'model_id']) }}
     @endif
 @else
-    @if($item->provider())
+    @if(isset($item->model))
         <p class="link-original">
-        <i>Original:</i> <a href="{{ url($item->provider->slug) }}">{{ $item->provider->title }}</a>
+            <i>Original:</i> <a href="{{ url($item->model->slug) }}">{{ $item->model->title }}</a>
         </p>
-        {{ Form::hidden('', $item->provider->id, ['class' => 'form-control', 'data-link' => 'provider_id']) }}
+        {{ Form::hidden('', $item->model->id, ['class' => 'form-control', 'data-link' => 'model_id']) }}
     @endif
 @endif
 
-{{ Form::hidden('', $item->provider_type, ['class' => 'form-control', 'data-link' => 'provider_type']) }}
+{{ Form::hidden('', $item->model_type, ['class' => 'form-control', 'data-link' => 'model_type']) }}
 
 
 <a href="" class="text-danger remove-item">Remover</a>

@@ -1,6 +1,6 @@
 @inject('category', '\Modules\Posts\Entities\Category')
 
-<div class="parent-menu" data-type="categories">
+<div class="parent-menu" data-type="Modules\Posts\Entities\Category">
     <ul class="list-unstyled list-checks">
         @foreach($category->where("parent_id", 0)->with('children')->get() as $cat)
             <li>

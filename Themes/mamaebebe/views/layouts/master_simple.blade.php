@@ -11,7 +11,7 @@
                     </a>
                     <div class="content">
                         <div class="account ml-auto">
-                        @include('layouts.account_menu')
+                        @include('partials.client.account_menu')
                         </div>
                     </div>
                 </div>

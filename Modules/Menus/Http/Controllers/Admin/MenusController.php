@@ -93,7 +93,7 @@
          */
         public function edit ($id)
         {
-            $data = $this->menu->with(['items', 'items.children'])->find($id);
+            $data = $this->menu->with(['items', 'items.children', 'items.model'])->find($id);
 
             if (!$data) {
                 return redirect()->route('admin.settings.menus.create');

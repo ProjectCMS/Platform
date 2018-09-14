@@ -3,7 +3,7 @@
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="myAccount">
         <a class="dropdown-item" href="{{ route('web.clients.account.home') }}">
             <span>Meu Peril</span>
-            {{ $client->email }}
+            {{ auth('client')->user()->email }}
             <i class="fa fa-user"></i></a>
         <a class="dropdown-item" href="{{ route('web.clients.account.profile') }}">Configurações <i class="fa fa-cogs"></i></a>
         <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout <i class="fa fa-sign-out"></i></a>

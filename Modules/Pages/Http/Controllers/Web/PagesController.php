@@ -60,7 +60,7 @@
          */
         public function show (Page $page)
         {
-            $page = $this->page->with('seo', 'template')->findOrFail($page->id);
+            $page = $this->page->with(['seo', 'template'])->findOrFail($page->id);
             $seo  = $this->seo->setData('page', $page);
 
             return view('pages::web.show', compact('page', 'seo'));

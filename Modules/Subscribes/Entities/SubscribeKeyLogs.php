@@ -4,7 +4,7 @@ namespace Modules\Subscribes\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SubscribePayments extends Model
+class subscribeKeyLogs extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['key_id', 'client_id'];
 }

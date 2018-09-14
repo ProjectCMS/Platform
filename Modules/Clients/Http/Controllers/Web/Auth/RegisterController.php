@@ -29,7 +29,7 @@
          *
          * @var string
          */
-        protected $redirectTo = '/client/home';
+        protected $redirectTo = '/';
         /**
          * @var Manager
          */

@@ -38,7 +38,7 @@
 
         function get_menus ($location = NULL)
         {
-            $value = \Modules\Menus\Entities\MenuLocation::with(['items', 'items.children'])->get();
+            $value = \Modules\Menus\Entities\MenuLocation::with(['items', 'items.children', 'items.model'])->get();
             if ($location) {
                 $value = $value->where('location', $location)->first();
             }

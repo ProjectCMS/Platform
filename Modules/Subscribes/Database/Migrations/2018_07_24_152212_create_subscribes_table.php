@@ -18,7 +18,7 @@ class CreateSubscribesTable extends Migration
             $table->integer('client_id')->unsigned();
             $table->integer('cicle_id')->unsigned();
             $table->integer('status');
-            $table->dateTime('next_renovation');
+            $table->dateTime('renovation_at');
             $table->timestamps();
         });
 

@@ -7,18 +7,10 @@
 <div class="grid" data-columns="7">
     @if(isset($images))
         @foreach($images as $image)
-            @php
-                list($width, $height) = getimagesize(asset('storage/'.$image->path));
-                if ($width > $height) {
-                     $orientation = "landscape";
-                 } else {
-                     $orientation = "portrait";
-                 }
-            @endphp
             <div class="item sortable @if($image->order == 0)main @endif" id="{{ $image->id }}" data-image="{{ $image->path }}">
                 <div class="item-content" data-id="{{ $image->id }}" data-path="{{ $image->path }}">
                     <div class="delete-image"></div>
-                    <img src="{{ asset('storage/'.$image->path) }}" data-orientation="{{ $orientation }}">
+                    <img src="{{ asset('storage/'.$image->path) }}" data-orientation="{{ $image->orientation }}">
                 </div>
             </div>
         @endforeach

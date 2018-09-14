@@ -5,6 +5,7 @@
     use GeneaLabs\LaravelModelCaching\Traits\Cachable;
     use Illuminate\Database\Eloquent\Model;
     use Modules\Core\Traits\FormatDates;
+
     class Category extends Model {
 
         use FormatDates;
@@ -14,6 +15,12 @@
         protected static $logName       = 'Categorias';
 
         protected $fillable = ['title', 'slug', 'image', 'parent_id'];
+        protected $appends  = ['model_type'];
+
+        public function getModelTypeAttribute ()
+        {
+            return 'categories';
+        }
 
         public function setTitleAttribute ($value)
         {
@@ -38,30 +45,30 @@
             return $this->belongsToMany('Modules\Posts\Entities\Post', 'post_categories', 'category_id', 'post_id');
         }
 
-        public function menuItem ()
+        public function menu_item ()
         {
-            return $this->belongsTo('Modules\Menus\Entities\MenuItem', 'id', 'provider_id')->where(function ($query) {
-                return $query->whereProviderModel('\Modules\Posts\Entities\Category');
-            });
+            return $this->morphMany('Modules\Menus\Entities\MenuItem', 'model');
         }
 
         public function search (Array $request)
         {
-            $categories = $this->withCount('posts')->with(['parent', 'children'])->when($request, function($query) use ($request) {
+            $categories = $this->withCount('posts')
+                               ->with(['parent', 'children'])
+                               ->when($request, function($query) use ($request) {
 
-                if (isset($request["sort"]) && $request["sort"] != NULL) {
-                    switch ($request["sort"]) {
-                        default:
-                            $query->orderBy($request["sort"], $request["order"]);
-                            break;
-                    }
-                }
-            });
+                                   if (isset($request["sort"]) && $request["sort"] != NULL) {
+                                       switch ($request["sort"]) {
+                                           default:
+                                               $query->orderBy($request["sort"], $request["order"]);
+                                               break;
+                                       }
+                                   }
+                               });
 
             return $categories;
         }
 
-        public function getRouteKeyName()
+        public function getRouteKeyName ()
         {
             return 'slug';
         }

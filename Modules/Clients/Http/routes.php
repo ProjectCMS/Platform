@@ -3,7 +3,7 @@
     Route::group([
         'middleware' => ['web', 'tracker', 'theme_web'],
         'as'         => 'web.',
-        'prefix'     => 'clientes',
+        'prefix'     => 'cliente',
     ], function() {
 
         Route::group([
@@ -36,15 +36,19 @@
     Route::group([
         'middleware' => ['web', 'tracker', 'theme_web', 'client', 'auth:client'],
         'as'         => 'web.clients.account.',
-        'prefix'     => 'clientes/painel',
+        'prefix'     => 'cliente/conta',
         'namespace'  => 'Modules\Clients\Http\Controllers\Web\Account',
     ], function() {
         Route::get('/', 'AccountController@index')->name('home');
         Route::get('/assinatura', 'AccountController@subscribe')->name('subscribe');
 
         Route::get('/perfil', 'AccountController@profile')->name('profile');
-        Route::post('/perfil', 'AccountController@profileUpdate')->name('profile.update');
+        Route::put('/perfil/atualizar', 'AccountController@profileEdit')->name('profile.update');
 
         Route::get('/senha', 'AccountController@password')->name('password');
-        Route::post('/senha', 'AccountController@passwordUpdate')->name('password.update');
+        Route::put('/senha', 'AccountController@passwordEdit')->name('password.update');
+
+        Route::put('/avatar', 'AccountController@clientAvatar')->name('avatar');
+
+        Route::get('/historico', 'AccountController@historic')->name('historic');
     });

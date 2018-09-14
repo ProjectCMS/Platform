@@ -1,6 +1,6 @@
 @inject('page', '\Modules\Pages\Entities\Page')
 
-<div class="parent-menu" data-type="pages">
+<div class="parent-menu" data-type="Modules\Pages\Entities\Page">
     <ul class="list-unstyled list-checks">
         @foreach($page->where("parent_id", 0)->with('children')->get() as $pg)
             <li>

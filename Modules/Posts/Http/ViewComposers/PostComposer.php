@@ -45,7 +45,7 @@
                                        ->orderBy('created_at', 'DESC')
                                        ->get();
 
-            $postsFixed = $this->post->with(['images', 'categories'])->where('status_id', 2)->get();
+            $postsFixed = $this->post->with(['images', 'categories'])->where('status_id', 2)->limit(6)->orderBy('created_at', 'DESC')->get();
 
             $postsMain = $this->post->with(['images', 'categories'])
                                     ->where('status_id', 1)

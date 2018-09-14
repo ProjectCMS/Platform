@@ -20,11 +20,11 @@
                         <a href="#{{ $item->id }}" data-toggle="collapse" class="" aria-expanded="true" title="{{ $item->title }}">{{ $item->title }}</a>
                         @include('partials.menu.sidebar.submenu-item', ['items' => $item->children])
                     @else
-                        @if(isset($item->provider) && $item->provider())
-                            @if($item->provider_type == 'categories')
-                                <a href="{{ route('web.posts.category', $item->provider->slug) }}" title="{{ $item->title }}">{{ $item->title }}</a>
+                        @if(isset($item->model))
+                            @if($item->model->model_type == 'categories')
+                                <a href="{{ route('web.posts.category', $item->model->slug) }}" title="{{ $item->title }}">{{ $item->title }}</a>
                             @else
-                                <a href="{{ url($item->provider->slug) }}" title="{{ $item->title }}">{{ $item->title }}</a>
+                                <a href="{{ url($item->model->slug) }}" title="{{ $item->title }}">{{ $item->title }}</a>
                             @endif
                         @else
                             <a href="{{ $item->url }}" title="{{ $item->title }}">{{ $item->title }}</a>

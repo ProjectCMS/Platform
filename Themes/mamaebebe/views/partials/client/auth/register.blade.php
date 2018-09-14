@@ -23,7 +23,7 @@
 
     @if(Request::secure())
         <div class="or"><span>Ou inscreva-se usando</span></div>
-        @include('partials.account.auth.btn_social')
+        @include('partials.client.auth.btn_social')
     @endif
 
     <div class="text-center my-4">

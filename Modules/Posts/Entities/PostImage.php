@@ -10,6 +10,20 @@
         use Cachable;
 
         protected $fillable = ['post_id', 'path', 'order'];
+        protected $appends  = ['orientation'];
+
+        public function getOrientationAttribute ()
+        {
+            list($width, $height) = getimagesize(storage_path('app/public/' . $this->path));
+
+            if ($width > $height) {
+                $orientation = "landscape";
+            } else {
+                $orientation = "portrait";
+            }
+
+            return $orientation;
+        }
 
         public function managerItems ($post_id, $items)
         {

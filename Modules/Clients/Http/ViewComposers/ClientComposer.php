@@ -15,7 +15,7 @@
          */
         public function compose (View $view)
         {
-            $view->with('client', auth('client')->user()->load(['subscribe.cicle.period', 'subscribePayments']));
+            $view->with('client', auth('client')->user()->load(['subscribe']));
         }
 
     }
