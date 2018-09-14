@@ -22,7 +22,6 @@
             'slug',
             'order',
             'content',
-            'seo_token',
             'status_id',
             'template_id'
         ];
@@ -66,7 +65,7 @@
 
         public function seo ()
         {
-            return $this->belongsTo('Modules\Seo\Entities\Seo', 'seo_token', 'seo_token');
+            return $this->morphOne('Modules\Seo\Entities\Seo', 'model');
         }
 
         public function menu_item ()
@@ -81,7 +80,7 @@
 
         public function search (Array $request)
         {
-            $pages = $this->with(['parent', 'children'])->when($request, function($query) use ($request) {
+            $pages = $this->with(['seo', 'parent', 'children'])->when($request, function($query) use ($request) {
 
                 if (isset($request["status"]) && $request["status"] != NULL) {
                     switch ($request["status"]) {

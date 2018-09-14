@@ -73,16 +73,12 @@
          */
         public function store (PageRequest $request)
         {
-            $request->request->add(['seo_token' => bcrypt(date('Y-m-d H:i:s'))]);
             $request->request->add(['order' => $this->page->max('order') + 1]);
 
             $insert = $this->page->create($request->all());
-            $this->seo->create([
-                'seo_token'    => $request->seo_token,
-                'seo_title'    => $request->seo_title ? $request->seo_title : $request->title,
-                'seo_keywords' => $request->seo_keywords,
-                'seo_content'  => $request->seo_content,
-            ]);
+
+            // Cria ou Edita a tabela SEO
+            $this->seo->createPolymorphic($request, $insert->getMorphClass(), $insert->id);
 
             return redirect(route('admin.pages.edit', $insert->id))->with('status-success', 'Página criada com sucesso');
 
@@ -129,13 +125,8 @@
             $data = $this->page->findOrFail($id);
             $data->update($request->all());
 
-            $this->seo->updateOrCreate([
-                'seo_token' => $data->seo_token,
-            ], [
-                'seo_title'    => $request->seo_title ? $request->seo_title : $request->title,
-                'seo_keywords' => $request->seo_keywords,
-                'seo_content'  => $request->seo_content,
-            ]);
+            // Cria ou Edita a tabela SEO
+            $this->seo->createPolymorphic($request, $data->getMorphClass(), $id);
 
             return back()->with('status-success', 'Dados atualizado com sucesso');
         }

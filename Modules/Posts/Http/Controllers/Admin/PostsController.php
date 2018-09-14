@@ -77,6 +77,13 @@
             $data       = $this->post->search($request->all());
             $paginate   = $data->paginate(10);
 
+
+            foreach ($data->get() as $page) {
+                dump($page->toArray());
+            }
+
+            dd("teste");
+
             return view('posts::admin.posts.index', compact('paginate', 'dates', 'categories'));
         }
 
@@ -102,15 +109,11 @@
         public function store (PostRequest $request)
         {
             $request->request->add(['author_id' => auth()->user()->id]);
-            $request->request->add(['seo_token' => bcrypt(date('Y-m-d H:i:s'))]);
 
             $insert = $this->post->create($request->all());
-            $this->seo->create([
-                'seo_token'    => $request->seo_token,
-                'seo_title'    => $request->seo_title ? $request->seo_title : $request->title,
-                'seo_keywords' => $request->seo_keywords,
-                'seo_content'  => $request->seo_content,
-            ]);
+
+            // Cria ou Edita a tabela SEO
+            $this->seo->createPolymorphic($request, $insert->getMorphClass(), $insert->id);
 
             // Verifica se é pra cadastrar uma nova timeline
             if ($request->status_id == 4) {
@@ -168,13 +171,8 @@
 
             $data->update($request->all());
 
-            $this->seo->updateOrCreate([
-                'seo_token' => $data->seo_token,
-            ], [
-                'seo_title'       => $request->seo_title ? $request->seo_title : $request->title,
-                'seo_keywords'    => $request->seo_keywords,
-                'seo_description' => $request->seo_description,
-            ]);
+            // Cria ou Edita a tabela SEO
+            $this->seo->createPolymorphic($request, $data->getMorphClass(), $id);
 
             // Verifica se é pra cadastrar uma nova timeline
             if ($request->status_id == 4) {

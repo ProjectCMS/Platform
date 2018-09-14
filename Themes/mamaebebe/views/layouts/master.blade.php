@@ -22,7 +22,7 @@
                            </div>
                     </div>
 
-                    <div class="account pull-right d-none">
+                    <div class="account pull-right">
                         @auth('client')
                             @include('partials.client.account_menu')
                         @else

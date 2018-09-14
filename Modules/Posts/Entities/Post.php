@@ -25,7 +25,6 @@
             'content',
             'author_id',
             'status_id',
-            'seo_token',
             'created_at',
             'updated_at'
         ];
@@ -51,7 +50,7 @@
 
         public function seo ()
         {
-            return $this->belongsTo('Modules\Seo\Entities\Seo', 'seo_token', 'seo_token');
+            return $this->morphOne('Modules\Seo\Entities\Seo', 'model');
         }
 
         public function status ()
@@ -99,7 +98,7 @@
 
         public function search (Array $request)
         {
-            $posts = $this->with(['status', 'author', 'categories', 'tags'])
+            $posts = $this->with(['seo', 'status', 'author', 'categories', 'tags'])
                           ->when($request, function($query) use ($request) {
 
                               if (isset($request["status"]) && $request["status"] != NULL) {
