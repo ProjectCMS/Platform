@@ -77,13 +77,6 @@
             $data       = $this->post->search($request->all());
             $paginate   = $data->paginate(10);
 
-
-            foreach ($data->get() as $page) {
-                dump($page->toArray());
-            }
-
-            dd("teste");
-
             return view('posts::admin.posts.index', compact('paginate', 'dates', 'categories'));
         }
 
