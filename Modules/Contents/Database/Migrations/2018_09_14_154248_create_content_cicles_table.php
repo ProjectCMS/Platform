@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContentSubscribesTable extends Migration
+class CreateContentCiclesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateContentSubscribesTable extends Migration
      */
     public function up()
     {
-        Schema::create('content_subscribes', function (Blueprint $table) {
+        Schema::create('content_cicles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('content_id')->unsigned();
-            $table->integer('subscribe_id')->unsigned();
+            $table->integer('subscribe_cicle_id')->unsigned();
             $table->integer('votes');
         });
 
-        Schema::table('content_subscribes', function (Blueprint $table) {
-            $table->foreign('content_id')->references('id')->on('contents');
-            $table->foreign('subscribe_id')->references('id')->on('subscribes');
+        Schema::table('content_cicles', function (Blueprint $table) {
+            $table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade');
+            $table->foreign('subscribe_cicle_id')->references('id')->on('subscribe_cicles')->onDelete('cascade');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateContentSubscribesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('content_subscribes');
+        Schema::dropIfExists('content_cicles');
     }
 }

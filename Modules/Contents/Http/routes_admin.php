@@ -16,4 +16,7 @@
         Route::put('/update/{id}', 'ContentsController@update')->name('contents.update');
 
         Route::delete('/delete', 'ContentsController@destroy')->name('contents.delete');
+
+        Route::post('/cicle', 'ContentsController@cicle')->name('contents.cicle');
+
     });

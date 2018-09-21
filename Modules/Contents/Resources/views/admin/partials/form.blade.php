@@ -3,7 +3,7 @@
 
         @include ('core::status-messages')
 
-        <h4 class="mt-0 header-title">Página
+        <h4 class="mt-0 header-title">Concurso
             <small>Informações</small>
         </h4>
 
@@ -16,29 +16,28 @@
                     <span class="text-danger">{{ $errors->first('status_id') }}</span>
                 </div>
             </div>
-            <div class="clearfix"></div>
-
-            <div class="col-md-6">
-                <div class="form-group {{ $errors->has('parent_id') ? 'has-error' : '' }}">
-                    {{ Form::label('parent_id', 'Grupo') }}
-                    {{ Form::select('parent_id', $parent, NULL, ['class' => 'form-control select2']) }}
-                    <span class="text-danger">{{ $errors->first('parent_id') }}</span>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group {{ $errors->has('template_id') ? 'has-error' : '' }}">
-                    {{ Form::label('template_id', 'Template') }}
-                    {{ Form::select('template_id', $template, NULL, ['class' => 'form-control select2']) }}
-                    <span class="text-danger">{{ $errors->first('template_id') }}</span>
-                </div>
-            </div>
 
             <div class="col-md-6">
                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                    {{ Form::label('title', 'Título da página') }}
+                    {{ Form::label('title', 'Título do concurso') }}
                     {{ Form::text('title', NULL, ['class' => 'form-control']) }}
                     <span class="text-danger">{{ $errors->first('title') }}</span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group {{ $errors->has('starts_at') ? 'has-error' : '' }}">
+                    {{ Form::label('starts_at', 'Data de inicio') }}
+                    {{ Form::date('starts_at', \Carbon\Carbon::parse(@$data->starts_at)->format('Y-m-d'), ['class' => 'form-control']) }}
+                    <span class="text-danger">{{ $errors->first('starts_at') }}</span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group {{ $errors->has('finalized_at') ? 'has-error' : '' }}">
+                    {{ Form::label('finalized_at', 'Data de finalização') }}
+                    {{ Form::date('finalized_at', \Carbon\Carbon::parse(@$data->finalized_at)->format('Y-m-d'), ['class' => 'form-control']) }}
+                    <span class="text-danger">{{ $errors->first('finalized_at') }}</span>
                 </div>
             </div>
 
@@ -56,9 +55,9 @@
 
 <div class="card m-b-20">
     <div class="card-body">
-        {{-- SEO FORM --}}
-        {!! Form::setModel(@$data->seo) !!}
-        @include('seo::admin.form')
+
+        @include('contents::admin.partials.votes')
+
     </div>
     <div class="card-footer">
         {{ Form::button('<i class="fa fa-check"></i> '.trans('dashboard::dashboard.form.save'), ['class' => 'btn btn-success pull-right waves-effect waves-light', 'type' => 'submit']) }}

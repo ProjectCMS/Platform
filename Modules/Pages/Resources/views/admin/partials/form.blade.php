@@ -16,7 +16,7 @@
                     <span class="text-danger">{{ $errors->first('status_id') }}</span>
                 </div>
             </div>
-            <div class="clearfix"></div>
+            <div class="col-md-12"></div>
 
             <div class="col-md-6">
                 <div class="form-group {{ $errors->has('parent_id') ? 'has-error' : '' }}">

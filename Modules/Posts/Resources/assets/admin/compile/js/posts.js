@@ -1,4 +1,4 @@
-var tags      = $('.tags'),
+let tags      = $('.tags'),
     tagList   = tags.find('li'),
     tagSelect = $('.tag-select'),
     tagInput  = $('.tag-input'),
@@ -7,15 +7,14 @@ var tags      = $('.tags'),
     tagsJson  = [];
 
 !function ($) {
-    "use strict";
-    var Posts = function () {
+    let Posts = function () {
         },
         $self,
         $app;
 
     Posts.prototype.initTags = function () {
         $.each(tagList, function (index) {
-            var $this = $(this);
+            let $this = $(this);
             $self.pushTags($this.data('name'));
         });
 
@@ -31,7 +30,7 @@ var tags      = $('.tags'),
         });
 
         tags.on('click', 'li span', function () {
-            var li   = $(this).closest('li'),
+            let li   = $(this).closest('li'),
                 name = li.data('name');
 
             tagsJson.splice(tagsJson.indexOf(name), 1)
@@ -50,7 +49,7 @@ var tags      = $('.tags'),
                 minLength: 0,
                 maxResults: 10,
                 source: function (request, response) {
-                    var results = $.ui.autocomplete.filter(tagsData.data('tags'), $self.extractLast(request.term));
+                    let results = $.ui.autocomplete.filter(tagsData.data('tags'), $self.extractLast(request.term));
                     response(results.slice(0, this.options.maxResults));
 
                 },
@@ -58,7 +57,7 @@ var tags      = $('.tags'),
                     return false;
                 },
                 select: function (event, ui) {
-                    var terms = $self.split(this.value);
+                    let terms = $self.split(this.value);
                     terms.pop();
                     terms.push(ui.item.value);
                     terms.push("");
@@ -81,7 +80,7 @@ var tags      = $('.tags'),
                     complete: function (data) {
                         if (data.length) {
                             $.each(data, function (index, val) {
-                                var orientation = $app.imageOrientation(val.url),
+                                let orientation = $app.imageOrientation(val.url),
                                     id          = Math.floor((Math.random() * 9999999) + 1);
                                 // $app.filesInput.append('<option value="' + val.path + '" selected>' + val.path + '</option>');
                                 $app.grid.append('<div class="item sortable" id="' + id + '">' +
@@ -133,7 +132,6 @@ var tags      = $('.tags'),
 
     //initializing
     function ($) {
-        "use strict";
         $.Posts.init();
     }(window.jQuery);
 

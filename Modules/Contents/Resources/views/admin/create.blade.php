@@ -1,4 +1,4 @@
-@extends('pages::admin.layouts.master')
+@extends('contents::admin.layouts.master')
 
 @section('title_icon', 'dripicons-copy')
 @section('title_prefix', trans('dashboard::dashboard.page.create'))

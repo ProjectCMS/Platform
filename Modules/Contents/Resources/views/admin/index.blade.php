@@ -22,6 +22,7 @@
                             <th data-sort="title">Título</th>
                             <th width="150">Inicia</th>
                             <th width="150">Finaliza</th>
+                            <th width="150">Participantes</th>
                             <th width="130">Opções</th>
                         </tr>
                         </thead>
@@ -29,15 +30,11 @@
                         @forelse($paginate as $data)
                             <tr>
                                 <td><a href="{{ route('admin.contents.edit', $data->id) }}"><b>{{ $data->title }}</b></a></td>
-                                <td></td>
-                                <td></td>
+                                <td><abbr title="{{ $data->starts_at_full }}">{{ $data->starts_at_cm }}</abbr></td>
+                                <td><abbr title="{{ $data->finalized_at_full }}">{{ $data->finalized_at_cm }}</abbr></td>
+                                <td>{{ $data->participants->count() }}</td>
                                 <td>
                                     <div class="btn-group-sm">
-                                        @if($data->deleted_at == NULL)
-                                            <a href="{{ route('admin.contents.trash') }}" title="{{ trans('dashboard::dashboard.form.trash') }}" class="btn btn-secondary ajax-action waves-effect waves-light" data-method="delete" data-id="{{ $data->id }}"><i class="fa fa-trash"></i></a>
-                                        @else
-                                            <a href="{{ route('admin.contents.restore') }}" title="{{ trans('dashboard::dashboard.form.restore') }}" class="btn btn-warning ajax-action waves-effect waves-light" data-method="put" data-id="{{ $data->id }}"><i class="fa fa-refresh"></i></a>
-                                        @endif
                                         <a href="{{ route('admin.contents.edit', $data->id) }}" title="{{ trans('dashboard::dashboard.form.edit') }}" class="btn btn-success waves-effect waves-light"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('admin.contents.delete') }}" title="{{ trans('dashboard::dashboard.form.delete') }}" class="btn btn-danger ajax-action waves-effect waves-light" data-method="delete" data-id="{{ $data->id }}"><i class="fa fa-close"></i></a>
                                     </div>

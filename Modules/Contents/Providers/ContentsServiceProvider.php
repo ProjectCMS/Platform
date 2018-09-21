@@ -2,6 +2,7 @@
 
 namespace Modules\Contents\Providers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -25,6 +26,7 @@ class ContentsServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
+        $this->registerCustomsValidators();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
@@ -99,6 +101,14 @@ class ContentsServiceProvider extends ServiceProvider
         if (! app()->environment('production')) {
             app(Factory::class)->load(__DIR__ . '/../Database/factories');
         }
+    }
+
+    /**
+     * Register custom validators
+     */
+    public function registerCustomsValidators ()
+    {
+        Validator::extend('dates_db', 'Modules\\Contents\\Validators\\Dates@validate');
     }
 
     /**

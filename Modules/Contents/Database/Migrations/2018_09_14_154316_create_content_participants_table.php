@@ -19,15 +19,13 @@ class CreateContentParticipantsTable extends Migration
             $table->text('content')->nullable();
             $table->integer('content_id')->unsigned();
             $table->integer('client_id')->unsigned();
-            $table->integer('votes')->default(0);
-            $table->integer('votes_subscribe')->default(0);
             $table->string('image');
             $table->timestamps();
         });
 
         Schema::table('content_participants', function (Blueprint $table) {
-            $table->foreign('content_id')->references('id')->on('contents');
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });
     }
 

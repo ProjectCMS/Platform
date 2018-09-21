@@ -39,6 +39,18 @@
             return Date::parse($this->attributes['publish_at'])->format($this->cDateFormat);
         }
 
+        public function getStartsAtCmAttribute ($value)
+        {
+            $this->setVariables();
+            return Date::parse($this->attributes['starts_at'])->format($this->cDateFormat);
+        }
+
+        public function getFinalizedAtCmAttribute ($value)
+        {
+            $this->setVariables();
+            return Date::parse($this->attributes['finalized_at'])->format($this->cDateFormat);
+        }
+
         public function getcreatedAtFullAttribute ()
         {
             $this->setVariables();
@@ -61,6 +73,18 @@
         {
             $this->setVariables();
             return Date::parse($this->attributes['publish_at'])->format($this->cDateFormat . ' ' . $this->cTimeFormat);
+        }
+
+        public function getStartsAtFullAttribute ()
+        {
+            $this->setVariables();
+            return Date::parse($this->attributes['starts_at'])->format($this->cDateFormat . ' ' . $this->cTimeFormat);
+        }
+
+        public function getFinalizedAtFullAttribute ()
+        {
+            $this->setVariables();
+            return Date::parse($this->attributes['finalized_at'])->format($this->cDateFormat . ' ' . $this->cTimeFormat);
         }
 
     }

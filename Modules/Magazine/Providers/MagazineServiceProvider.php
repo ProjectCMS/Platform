@@ -38,6 +38,20 @@
                             'text' => 'Adicionar nova',
                             'url'  => route('admin.magazine.create'),
                         ],
+                        [
+                            'text' => 'Concurso',
+                            'url'  => route('admin.contents'),
+                            'submenu' => [
+                                [
+                                    'text' => 'Listar tudo',
+                                    'url'  => route('admin.contents'),
+                                ],
+                                [
+                                    'text' => 'Adicionar novo',
+                                    'url'  => route('admin.contents.create'),
+                                ],
+                            ],
+                        ],
                     ],
                 ]);
             });
