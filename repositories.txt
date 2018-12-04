@@ -1,16 +1,20 @@
-chumper/zipper
+viewablechumper/zipper *
+mohd-isa/laravel-settings *
+shipu/themevel *
 hesto/multi-auth
 ilovepdf/ilovepdf-php
 jenssegers/date
 laravelcollective/html
 nwidart/laravel-modules
-shipu/themevel
 barryvdh/laravel-debugbar
 predis/predis
 genealabs/laravel-model-caching
 artesaos/seotools
 laravel/socialite
-davejamesmiller/laravel-breadcrumbs:5.x
-mohd-isa/laravel-settings
+davejamesmiller/laravel-breadcrumbs
 pragmarx/tracker
 spatie/laravel-permission
+geoip2/geoip2
+intervention/image
+intervention/imagecache
+roumen/sitemap
